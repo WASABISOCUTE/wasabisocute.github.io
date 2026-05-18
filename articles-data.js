@@ -1,9 +1,45 @@
+const authorConfigs = {
+  "wasabisocute": "picture/avatar/WASABISOCUTE.jpg"
+};
+
+function getAuthorAvatar(authorName, customAvatar) {
+  if (!authorName) return customAvatar || '';
+  const key = authorName.trim().toLowerCase();
+  if (authorConfigs[key]) {
+    return authorConfigs[key];
+  }
+  return customAvatar || '';
+}
+
 const presetArticles = [
+  {
+    id: "childrens-day-origin",
+    title: "儿童节的由来",
+    subtitle: "关于6月1日国际儿童节的历史",
+    author: "WASABISOCUTE",
+    authorAvatar: "",
+    email: "wasabi9487@gmail.com",
+    category: "fun facts",
+    coverType: "preset",
+    coverValue: "emerald-glow",
+    tags: ["Children", "Days", "June", "1st"],
+    date: "May 18, 2026",
+    readTime: "1 min read",
+    lang: "zh",
+    content: `每年的6月1日是国际儿童节。这一天是为了庆祝儿童拥有快乐成长的权利，也提醒大家关心儿童的健康、教育和幸福。
+
+儿童节的由来和第二次世界大战有关。当时有很多儿童因为战争而失去家园、食物和亲人，生活非常困难。为了保护世界上的儿童，让他们能够安全成长，许多国家开始重视儿童福利。后来，国际组织决定把6月1日定为儿童节，希望全世界的人都能够关爱儿童。
+
+在不同国家，儿童节的庆祝方式也不一样。有些学校会举办表演、游戏和比赛，也有家长会带孩子出去游玩，让孩子们度过快乐的一天。对于小朋友来说，儿童节是一个充满欢笑和回忆的节日。
+
+值得一提的是，6月1日这一天也是我的生日。所以我可以每年庆祝儿童节哦。`
+  },
   {
     id: "meta-cosmic-design",
     title: "The Future of Web Design: Cosmic Aesthetics & Micro-interactions",
     subtitle: "How standard flat designs are giving way to glowing glassmorphism, responsive grids, and delightful cosmic spaces.",
     author: "Antigravity",
+    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Antigravity",
     email: "[EMAIL_ADDRESS]",
     category: "tech",
     coverType: "preset",
@@ -41,6 +77,7 @@ By positioning the center off-screen, you create a soft lighting source that mak
     title: "Getting Started with GitHub Pages: A Developer's Handbook",
     subtitle: "Learn how to build, optimize, and launch a gorgeous personal profile or blog directly on GitHub for free.",
     author: "Antigravity",
+    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Antigravity",
     email: "[EMAIL_ADDRESS]",
     category: "tech",
     coverType: "preset",
@@ -72,6 +109,7 @@ Within minutes, your site will be live across the globe. You can further expand 
     title: "Exploring the Wonders of Astrophotography",
     subtitle: "Capturing the light of distant galaxies and nebulas from a backyard observatory setup.",
     author: "Antigravity",
+    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Antigravity",
     email: "[EMAIL_ADDRESS]",
     category: "science",
     coverType: "preset",

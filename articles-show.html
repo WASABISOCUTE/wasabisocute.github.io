@@ -1032,8 +1032,14 @@
         // Tags markup
         const tagsMarkup = art.tags ? art.tags.map(t => `<span class="tag-pill">#${t}</span>`).join('') : '';
 
-        // Author handle first letter
-        const handleLetter = art.author ? art.author.charAt(0).toUpperCase() : '?';
+        // Author Avatar Markup
+        const resolvedAvatar = getAuthorAvatar(art.author, art.authorAvatar);
+        let avatarMarkup = '';
+        if (resolvedAvatar) {
+          avatarMarkup = `<img src="${resolvedAvatar}" alt="${art.author}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+        } else {
+          avatarMarkup = art.author ? art.author.charAt(0).toUpperCase() : '?';
+        }
 
         // Language label flag
         const langLabel = (art.lang === 'zh') ? '🇨🇳 中文' : '🇬🇧 EN';
@@ -1045,7 +1051,7 @@
           ${langBadgeHtml}
           <div class="article-body">
             <div class="article-meta">
-              <div class="article-author-avatar">${handleLetter}</div>
+              <div class="article-author-avatar" style="${resolvedAvatar ? 'background: none;' : ''}">${avatarMarkup}</div>
               <span>${art.author}</span>
               <span>•</span>
               <span>${art.date}</span>
@@ -1155,7 +1161,17 @@
       document.getElementById('modal-title').innerText = art.title;
       document.getElementById('modal-subtitle').innerText = art.subtitle || '';
       document.getElementById('modal-author-name').innerText = art.author;
-      document.getElementById('modal-author-avatar').innerText = art.author.charAt(0).toUpperCase();
+      
+      const modalAvatarContainer = document.getElementById('modal-author-avatar');
+      const resolvedAvatar = getAuthorAvatar(art.author, art.authorAvatar);
+      if (resolvedAvatar) {
+        modalAvatarContainer.style.background = 'none';
+        modalAvatarContainer.innerHTML = `<img src="${resolvedAvatar}" alt="${art.author}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+      } else {
+        modalAvatarContainer.style.background = 'var(--accent-color)';
+        modalAvatarContainer.innerHTML = art.author.charAt(0).toUpperCase();
+      }
+      
       document.getElementById('modal-category').innerText = art.category.toUpperCase();
 
       const langLabel = (art.lang === 'zh') ? '🇨🇳 中文专栏' : '🇬🇧 ENGLISH COLUMN';
