@@ -49,33 +49,5 @@ body {
 \`\`\`
 
 By positioning the center off-screen, you create a soft lighting source that makes the page feel alive and illuminated.`
-  },
-  {
-    id: "astrophotography-exploring",
-    title: "Exploring the Wonders of Astrophotography",
-    subtitle: "Capturing the light of distant galaxies and nebulas from a backyard observatory setup.",
-    author: "Antigravity",
-    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Antigravity",
-    email: "[EMAIL_ADDRESS]",
-    category: "science",
-    coverType: "preset",
-    coverValue: "aurora-borealis",
-    tags: ["Space", "Astrophotography", "Science", "Optics"],
-    date: "April 28, 2026",
-    readTime: "5 min read",
-    lang: "en",
-    content: `Capturing objects millions of light-years away is one of the most challenging yet profoundly rewarding pursuits in science and photography. Modern digital sensors have democratized astrophotography, allowing amateur stargazers to reveal structures completely invisible to the naked human eye.
-
-## The Essential Backyard Kit
-
-To get started with deep-space imaging, you need more than a standard camera:
-
-- **Equatorial Mount**: The Earth rotates, causing stars to trail in long exposures. An equatorial mount aligns with the Earth's rotational axis and tracks the sky perfectly.
-- **Apochromatic Refractor**: A specialized telescope using low-dispersion glass to prevent chromatic aberration, focusing all light wavelengths to the exact same point.
-- **Dedicated Cooled CMOS Camera**: These cameras cool their sensors up to 40°C below ambient temperature to eliminate thermal noise in long-exposure frames.
-
-> "When you look at a photograph of the Andromeda Galaxy, you are looking at light that left its source 2.5 million years ago, long before early humans walked the Earth."
-
-Whether you are capturing wide fields of the Milky Way with a basic camera and tracker or peering deep into supernova remnants, the cosmos is a canvas of infinite beauty waiting to be explored.`
   }
 ];
