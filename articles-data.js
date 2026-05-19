@@ -13,7 +13,7 @@ function getAuthorAvatar(authorName, customAvatar) {
 
 const presetArticles = [
   {
-    id: "childrens-day-origin",
+    id: "meta-cosmic-design",
     title: "儿童节的由来",
     subtitle: "关于6月1日国际儿童节的历史",
     author: "Antigravity",
@@ -26,21 +26,6 @@ const presetArticles = [
     date: "May 18, 2026",
     readTime: "1 min read",
     lang: "zh",
-  },
-  {
-    id: "meta-cosmic-design",
-    title: "The Future of Web Design: Cosmic Aesthetics & Micro-interactions",
-    subtitle: "How standard flat designs are giving way to glowing glassmorphism, responsive grids, and delightful cosmic spaces.",
-    author: "Antigravity",
-    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Antigravity",
-    email: "[EMAIL_ADDRESS]",
-    category: "tech",
-    coverType: "preset",
-    coverValue: "neon-dusk",
-    tags: ["Design", "Aesthetics", "WebDev", "Cosmic"],
-    date: "May 18, 2026",
-    readTime: "4 min read",
-    lang: "en",
     content: `Web design is undergoing a stellar shift. The sterile, flat, and monochrome layouts that dominated the last decade are rapidly making way for richer, more dimensional, and visually expressive systems. We call this the era of **Cosmic Aesthetics**.
 
 ## What defines Cosmic Aesthetics?
