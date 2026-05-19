@@ -51,38 +51,6 @@ body {
 By positioning the center off-screen, you create a soft lighting source that makes the page feel alive and illuminated.`
   },
   {
-    id: "github-pages-guide",
-    title: "Getting Started with GitHub Pages: A Developer's Handbook",
-    subtitle: "Learn how to build, optimize, and launch a gorgeous personal profile or blog directly on GitHub for free.",
-    author: "Antigravity",
-    authorAvatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Antigravity",
-    email: "[EMAIL_ADDRESS]",
-    category: "tech",
-    coverType: "preset",
-    coverValue: "cosmic-abyss",
-    tags: ["GitHub", "Hosting", "Tutorial", "CI-CD"],
-    date: "May 12, 2026",
-    readTime: "3 min read",
-    lang: "en",
-    content: `Building a presence online shouldn't require maintaining a complex database or paying steep hosting fees. **GitHub Pages** remains one of the most powerful, frictionless ways to showcase your profile, code repos, and articles directly from a repository.
-
-## Why GitHub Pages?
-
-- **Completely Free**: High-speed, global CDN hosting provided by GitHub.
-- **Git Integration**: Push your code, and the updates are automatically built and deployed.
-- **Custom Domains**: Easily bind your personal domain name with HTTPS support out of the box.
-
-### Setting Up a Custom Repository
-
-To host a personal site (like \`username.github.io\`), simply create a public repository exactly matching that name:
-
-1. Create a repo called \`WASABISOCUTE.github.io\`
-2. Add an \`index.html\` page
-3. Commit and push your changes!
-
-Within minutes, your site will be live across the globe. You can further expand your static site by using client-side JavaScript to fetch your public repositories from the GitHub API or persist user data via \`localStorage\`.`
-  },
-  {
     id: "astrophotography-exploring",
     title: "Exploring the Wonders of Astrophotography",
     subtitle: "Capturing the light of distant galaxies and nebulas from a backyard observatory setup.",
