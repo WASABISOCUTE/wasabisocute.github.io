@@ -932,7 +932,6 @@
   </footer>
 
   <!-- SCRIPT LOGIC -->
-  <script src="articles-data.js"></script>
   <script>
     // APPLICATION STATE
     let articles = [];
@@ -941,20 +940,43 @@
 
     // INITIALIZATION
     window.onload = function () {
-      initStorage();
-      renderArticlesList();
+      // Dynamically load articles-data.js with cache-busting parameter to prevent caching issues
+      const script = document.createElement('script');
+      script.src = 'articles-data.js?v=' + Date.now();
+      script.onload = function () {
+        initStorage();
+        renderArticlesList();
+      };
+      script.onerror = function () {
+        console.error('Failed to load articles-data.js');
+        initStorage();
+        renderArticlesList();
+      };
+      document.head.appendChild(script);
     };
 
     function initStorage() {
       const stored = localStorage.getItem('local_articles');
+      const currentPresets = typeof presetArticles !== 'undefined' ? presetArticles : [];
       if (!stored) {
-        localStorage.setItem('local_articles', JSON.stringify(presetArticles));
-        articles = [...presetArticles];
+        localStorage.setItem('local_articles', JSON.stringify(currentPresets));
+        articles = [...currentPresets];
       } else {
-        articles = JSON.parse(stored);
+        try {
+          const storedArticles = JSON.parse(stored);
+          const presetIds = new Set(currentPresets.map(art => art.id));
+          
+          // Keep user custom articles (articles not present in current presets)
+          const userArticles = storedArticles.filter(art => art.id && !presetIds.has(art.id));
+          
+          // Merge fresh presets with user custom articles
+          articles = [...currentPresets, ...userArticles];
+        } catch (e) {
+          articles = [...currentPresets];
+        }
+        
         // Normalize older categories to the new allowed set
         const allowed = ['tech', 'science', 'video edit', 'life', 'fun facts'];
-        let updated = false;
         articles.forEach(art => {
           if (!art.category || !allowed.includes(art.category.toLowerCase())) {
             if (art.category === 'design') {
@@ -964,16 +986,12 @@
             } else {
               art.category = 'tech';
             }
-            updated = true;
           }
           if (!art.lang) {
             art.lang = 'en';
-            updated = true;
           }
         });
-        if (updated) {
-          localStorage.setItem('local_articles', JSON.stringify(articles));
-        }
+        localStorage.setItem('local_articles', JSON.stringify(articles));
       }
     }
 
