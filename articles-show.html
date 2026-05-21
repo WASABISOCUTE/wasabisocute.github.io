@@ -342,6 +342,51 @@
       gap: 30px;
     }
 
+    /* List View styling */
+    .article-grid.list-view {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .article-grid.list-view .article-card {
+      flex-direction: row;
+      height: 200px;
+    }
+
+    @media (max-width: 768px) {
+      .article-grid.list-view .article-card {
+        flex-direction: column;
+        height: auto;
+      }
+      .article-grid.list-view .article-cover {
+        width: 100% !important;
+        height: 180px !important;
+      }
+    }
+
+    .article-grid.list-view .article-cover {
+      width: 300px;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .article-grid.list-view .article-body {
+      padding: 20px 24px;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .article-grid.list-view .article-title {
+      margin-bottom: 6px;
+      -webkit-line-clamp: 1;
+    }
+
+    .article-grid.list-view .article-excerpt {
+      margin-bottom: 12px;
+      -webkit-line-clamp: 2;
+    }
+
     .article-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -862,6 +907,17 @@
             <button class="lang-btn" onclick="setLanguageFilter('en')">🇬🇧 English</button>
           </div>
 
+          <div class="language-filter-group" id="view-filters">
+            <button class="lang-btn active" onclick="setViewMode('grid')" id="view-btn-grid">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              Grid
+            </button>
+            <button class="lang-btn" onclick="setViewMode('list')" id="view-btn-list">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              List
+            </button>
+          </div>
+
           <div class="filter-buttons" id="category-filters">
             <button class="filter-btn active" onclick="setCategoryFilter('all')">All Articles</button>
             <button class="filter-btn" onclick="setCategoryFilter('tech')">Tech</button>
@@ -937,6 +993,7 @@
     let articles = [];
     let currentCategoryFilter = 'all';
     let currentLanguageFilter = 'all';
+    let currentViewMode = localStorage.getItem('articles_view_mode') || 'grid';
 
     // INITIALIZATION
     window.onload = function () {
@@ -946,11 +1003,13 @@
       script.onload = function () {
         initStorage();
         renderArticlesList();
+        setViewMode(currentViewMode);
       };
       script.onerror = function () {
         console.error('Failed to load articles-data.js');
         initStorage();
         renderArticlesList();
+        setViewMode(currentViewMode);
       };
       document.head.appendChild(script);
     };
@@ -995,6 +1054,29 @@
       }
     }
 
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      localStorage.setItem('articles_view_mode', mode);
+      
+      const container = document.getElementById('articles-container');
+      if (container) {
+        if (mode === 'list') {
+          container.classList.add('list-view');
+        } else {
+          container.classList.remove('list-view');
+        }
+      }
+      
+      // Update UI active state on view toggles
+      document.querySelectorAll('#view-filters button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const activeBtn = document.getElementById(`view-btn-${mode}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+    }
+
     // ARTICLE RENDERING & FILTERING
     function renderArticlesList() {
       const container = document.getElementById('articles-container');
@@ -1029,9 +1111,16 @@
         return;
       }
 
-      // Sort: newest first
-      // Since seeded ones are first, let's just reverse the array to display latest added first
-      [...filtered].reverse().forEach(art => {
+      // Sort: newest first (by date)
+      const sorted = [...filtered].sort((a, b) => {
+        const dateA = new Date(a.date || 0);
+        const dateB = new Date(b.date || 0);
+        const timeA = isNaN(dateA.getTime()) ? 0 : dateA.getTime();
+        const timeB = isNaN(dateB.getTime()) ? 0 : dateB.getTime();
+        return timeB - timeA;
+      });
+
+      sorted.forEach(art => {
         const card = document.createElement('div');
         card.className = 'article-card';
         card.onclick = () => openReaderModal(art.id);
