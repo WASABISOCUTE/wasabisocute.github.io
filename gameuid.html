@@ -285,7 +285,7 @@
             flex-direction: column;
             position: relative;
             cursor: pointer;
-            overflow: hidden;
+            overflow: show;
             backdrop-filter: blur(8px);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -757,6 +757,86 @@
             height: 16px;
             fill: currentColor;
         }
+
+        /* Card Warning Icon */
+        .card-note-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: rgba(251, 191, 36, 0.15);
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            border-radius: 50%;
+            color: #fbbf24;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: default;
+            flex-shrink: 0;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .card-note-badge:hover {
+            background: rgba(251, 191, 36, 0.25);
+            border-color: rgba(251, 191, 36, 0.7);
+        }
+
+        .card-note-badge .note-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 240px;
+            background: rgba(10, 10, 24, 0.97);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #e2e8f0;
+            text-align: left;
+            white-space: normal;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        .card-note-badge .note-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(251, 191, 36, 0.35);
+        }
+
+        .card-note-badge:hover .note-tooltip {
+            display: block;
+        }
+
+        /* Modal Note Box */
+        .modal-note-box {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #fde68a;
+        }
+
+        .modal-note-icon {
+            font-size: 15px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
     </style>
 </head>
 
@@ -836,6 +916,11 @@
                                 <span class="info-val" id="modalJoinDate"></span>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="modal-note-box" id="modalNoteBox" style="display:none;">
+                        <span class="modal-note-icon">⚠️</span>
+                        <span id="modalNoteText"></span>
                     </div>
 
                     <div class="modal-copy-section">
@@ -1106,6 +1191,7 @@
                 genre: "rhythm",
                 dateJoined: "2024/05/31",
                 installed: true,
+                note: "Rotaeno 的好友机制为单向添加：你只需输入对方ID即可直接添加对方为好友，并能看到对方的成绩——但对方不会得知有谁添加了他，也看不到你的成绩。如果你想让我也能看见你的成绩，请使用任意社交媒体(如IG,Whatsapp等)告诉我你的ID。",
                 web: "https://www.rotaeno.com/",
                 download: {
                     android: "https://play.google.com/store/apps/details?id=com.dreamengine.rotaeno",
@@ -1529,9 +1615,14 @@
                 card.innerHTML = `
           <div class="card-header">
             <span class="badge badge-platform">${game.platform.split(' / ')[0]}</span>
+            ${game.note ? `<span class="card-note-badge" title="">
+              !
+              <span class="note-tooltip">${game.note}</span>
+            </span>` : ''}
             <span class="badge badge-status ${game.installed ? 'status-active' : 'status-inactive'}">
               ${game.installed ? 'Active' : 'Inactive'}
             </span>
+            
           </div>
           <h3 class="game-title">${game.name}</h3>
           <p class="game-server">${game.server}</p>
@@ -1639,6 +1730,16 @@
                 modalJoinDate.textContent = game.dateJoined;
             } else {
                 modalJoinDateContainer.style.display = "none";
+            }
+
+            // Note box
+            const modalNoteBox = document.getElementById("modalNoteBox");
+            const modalNoteText = document.getElementById("modalNoteText");
+            if (game.note) {
+                modalNoteBox.style.display = "flex";
+                modalNoteText.textContent = game.note;
+            } else {
+                modalNoteBox.style.display = "none";
             }
 
             // Installation status badge
