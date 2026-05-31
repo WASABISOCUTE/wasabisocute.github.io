@@ -433,9 +433,10 @@
             backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             padding: 20px;
+            overflow-y: auto;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -451,11 +452,12 @@
             border: 1px solid rgba(120, 140, 255, 0.3);
             border-radius: 24px;
             width: 100%;
-            max-width: 780px;
+            max-width: 860px;
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px var(--theme-glow, rgba(99, 102, 241, 0.2));
             display: flex;
             flex-direction: column;
+            margin: auto;
             transform: scale(0.9) translateY(20px);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -465,40 +467,25 @@
         }
 
         .modal-container {
-            display: grid;
-            grid-template-columns: 1fr;
-        }
-
-        @media (min-width: 680px) {
-            .modal-container {
-                grid-template-columns: 1.1fr 1fr;
-            }
+            display: flex;
+            flex-direction: column;
         }
 
         .modal-left {
             position: relative;
-            height: 220px;
+            width: 100%;
             background: var(--theme-gradient, linear-gradient(135deg, #1e1e3f, #070712));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        @media (min-width: 680px) {
-            .modal-left {
-                height: 100%;
-                min-height: 380px;
-            }
+            min-height: 200px;
+            /* only used when no screenshot (fallback) */
         }
 
         .modal-screenshot {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            inset: 0;
-            opacity: 0.85;
+            height: auto;
+            display: block;
+            opacity: 0.92;
+            position: relative;
+            z-index: 0;
         }
 
         .modal-left-fallback {
@@ -905,28 +892,6 @@
         // Game Database
         const games = [
             {
-                id: "hsr",
-                name: "Honkai: Star Rail",
-                uid: "829489975",
-                ign: "WASABISOCUTE",
-                server: "Asia",
-                platform: "Mobile / PC / PS5",
-                dateJoined: "2023/11/26",
-                installed: true,
-                web: "https://hsr.hoyoverse.com/",
-                download: {
-                    android: "https://play.google.com/store/apps/details?id=com.HoYoverse.hkrpg",
-                    ios: "https://apps.apple.com/app/honkai-star-rail/id1599719154",
-                    pc: "https://hsr.hoyoverse.com/"
-                },
-                theme: {
-                    gradient: "linear-gradient(135deg, #1b213b, #4a3475)",
-                    color: "#9061f9",
-                    glow: "rgba(144, 97, 249, 0.4)",
-                    logo: "HSR"
-                }
-            },
-            {
                 id: "genshin",
                 name: "Genshin Impact",
                 uid: "890809370",
@@ -947,6 +912,28 @@
                     color: "#06b6d4",
                     glow: "rgba(6, 182, 212, 0.4)",
                     logo: "GI"
+                }
+            },
+            {
+                id: "hsr",
+                name: "Honkai: Star Rail",
+                uid: "829489975",
+                ign: "WASABISOCUTE",
+                server: "Asia",
+                platform: "Mobile / PC / PS5",
+                dateJoined: "2023/11/26",
+                installed: true,
+                web: "https://hsr.hoyoverse.com/",
+                download: {
+                    android: "https://play.google.com/store/apps/details?id=com.HoYoverse.hkrpg",
+                    ios: "https://apps.apple.com/app/honkai-star-rail/id1599719154",
+                    pc: "https://hsr.hoyoverse.com/"
+                },
+                theme: {
+                    gradient: "linear-gradient(135deg, #1b213b, #4a3475)",
+                    color: "#9061f9",
+                    glow: "rgba(144, 97, 249, 0.4)",
+                    logo: "HSR"
                 }
             },
             {
@@ -993,6 +980,29 @@
                     color: "#eab308",
                     glow: "rgba(234, 179, 8, 0.3)",
                     logo: "ZZZ"
+                }
+            },
+            {
+                id: "pjsekai-en",
+                name: "Hatsune Miku: Colorful Stage (EN)",
+                uid: "557473370690953223",
+                ign: "WASABI",
+                server: "EN Server (Global)",
+                platform: "Mobile",
+                genre: "rhythm",
+                dateJoined: "2024/12/02",
+                installed: false,
+                web: "https://www.colorfulstage.com/",
+                download: {
+                    android: "https://play.google.com/store/apps/details?id=com.sega.ColorfulStage.en",
+                    ios: "https://apps.apple.com/app/hatsune-miku-colorful-stage/id1587326231",
+                    pc: "https://www.colorfulstage.com/"
+                },
+                theme: {
+                    gradient: "linear-gradient(135deg, #4f46e5, #39c5bb)",
+                    color: "#4f46e5",
+                    glow: "rgba(79, 70, 229, 0.4)",
+                    logo: "PJSK"
                 }
             },
             {
@@ -1087,29 +1097,6 @@
                 }
             },
             {
-                id: "pjsekai-en",
-                name: "Hatsune Miku: Colorful Stage (EN)",
-                uid: "557473370690953223",
-                ign: "WASABI",
-                server: "EN Server (Global)",
-                platform: "Mobile",
-                genre: "rhythm",
-                dateJoined: "2024/12/02",
-                installed: false,
-                web: "https://www.colorfulstage.com/",
-                download: {
-                    android: "https://play.google.com/store/apps/details?id=com.sega.ColorfulStage.en",
-                    ios: "https://apps.apple.com/app/hatsune-miku-colorful-stage/id1587326231",
-                    pc: "https://www.colorfulstage.com/"
-                },
-                theme: {
-                    gradient: "linear-gradient(135deg, #4f46e5, #39c5bb)",
-                    color: "#4f46e5",
-                    glow: "rgba(79, 70, 229, 0.4)",
-                    logo: "PJSK"
-                }
-            },
-            {
                 id: "rotaeno",
                 name: "Rotaeno",
                 uid: "YUPQMY",
@@ -1133,72 +1120,26 @@
                 }
             },
             {
-                id: "arcaea",
-                name: "Arcaea",
-                uid: "WASABISOCUTE",
+                id: "phi",
+                name: "Phigros",
+                uid: "",
                 ign: "WASABISOCUTE",
                 server: "Global",
                 platform: "Mobile",
                 genre: "rhythm",
-                dateJoined: "2025",
-                installed: false,
-                web: "https://arcaea.lowiro.com/",
+                dateJoined: "2024",
+                installed: true,
+                web: "https://phigros.com/",
                 download: {
-                    android: "https://play.google.com/store/apps/details?id=moe.low.arcaea",
-                    ios: "https://apps.apple.com/app/arcaea/id1205555643",
-                    pc: "https://arcaea.lowiro.com/"
+                    android: "https://play.google.com/store/apps/details?id=com.PigeonGames.Phigros",
+                    ios: "https://apps.apple.com/us/app/phigros/id1538870641",
+                    pc: "https://phigros.com/"
                 },
                 theme: {
-                    gradient: "linear-gradient(135deg, #e879f9, #38bdf8)",
-                    color: "#f472b6",
-                    glow: "rgba(244, 114, 182, 0.4)",
-                    logo: "ARC"
-                }
-            },
-            {
-                id: "kalpa",
-                name: "KALPA",
-                uid: "WASABI_",
-                ign: "WASABI_",
-                server: "Global",
-                platform: "Mobile",
-                genre: "rhythm",
-                dateJoined: "2025",
-                installed: false,
-                web: "https://www.queseragames.com/",
-                download: {
-                    android: "https://play.google.com/store/apps/details?id=com.quesera.Kalpa",
-                    ios: "https://apps.apple.com/app/kalpa-original-rhythm-game/id1541014902",
-                    pc: "https://www.queseragames.com/"
-                },
-                theme: {
-                    gradient: "linear-gradient(135deg, #451a03, #dc2626)",
-                    color: "#ef4444",
-                    glow: "rgba(239, 68, 68, 0.4)",
-                    logo: "KLP"
-                }
-            },
-            {
-                id: "deemo2",
-                name: "DEEMO II",
-                uid: "WASABISOCUTE",
-                ign: "WASABISOCUTE",
-                server: "Global",
-                platform: "Mobile",
-                genre: "rhythm",
-                dateJoined: "2025",
-                installed: false,
-                web: "https://www.rayark.com/g/deemo2/",
-                download: {
-                    android: "https://play.google.com/store/apps/details?id=com.rayark.deemo2",
-                    ios: "https://apps.apple.com/app/deemo-ii/id1492019910",
-                    pc: "https://www.rayark.com/g/deemo2/"
-                },
-                theme: {
-                    gradient: "linear-gradient(135deg, #1e293b, #475569)",
-                    color: "#64748b",
-                    glow: "rgba(100, 116, 139, 0.3)",
-                    logo: "DM2"
+                    gradient: "linear-gradient(135deg, #ff0080, #7928ca)",
+                    color: "#ff0080",
+                    glow: "rgba(255, 0, 128, 0.4)",
+                    logo: "PHI"
                 }
             },
             {
@@ -1384,29 +1325,6 @@
                 }
             },
             {
-                id: "phi",
-                name: "Phigros",
-                uid: "",
-                ign: "WASABISOCUTE",
-                server: "Global",
-                platform: "Mobile",
-                genre: "rhythm",
-                dateJoined: "2024",
-                installed: true,
-                web: "https://phigros.com/",
-                download: {
-                    android: "https://play.google.com/store/apps/details?id=com.PigeonGames.Phigros",
-                    ios: "https://apps.apple.com/us/app/phigros/id1538870641",
-                    pc: "https://phigros.com/"
-                },
-                theme: {
-                    gradient: "linear-gradient(135deg, #ff0080, #7928ca)",
-                    color: "#ff0080",
-                    glow: "rgba(255, 0, 128, 0.4)",
-                    logo: "PHI"
-                }
-            },
-            {
                 id: "sonolus",
                 name: "Sonolus",
                 uid: "",
@@ -1449,7 +1367,77 @@
                     glow: "rgba(255, 0, 128, 0.4)",
                     logo: "PHIRA"
                 }
-            }
+            },
+
+            {
+                id: "arcaea",
+                name: "Arcaea",
+                uid: "WASABISOCUTE",
+                ign: "WASABISOCUTE",
+                server: "Global",
+                platform: "Mobile",
+                genre: "rhythm",
+                dateJoined: "2025",
+                installed: false,
+                web: "https://arcaea.lowiro.com/",
+                download: {
+                    android: "https://play.google.com/store/apps/details?id=moe.low.arcaea",
+                    ios: "https://apps.apple.com/app/arcaea/id1205555643",
+                    pc: "https://arcaea.lowiro.com/"
+                },
+                theme: {
+                    gradient: "linear-gradient(135deg, #e879f9, #38bdf8)",
+                    color: "#f472b6",
+                    glow: "rgba(244, 114, 182, 0.4)",
+                    logo: "ARC"
+                }
+            },
+            {
+                id: "kalpa",
+                name: "KALPA",
+                uid: "WASABI_",
+                ign: "WASABI_",
+                server: "Global",
+                platform: "Mobile",
+                genre: "rhythm",
+                dateJoined: "2025",
+                installed: false,
+                web: "https://www.queseragames.com/",
+                download: {
+                    android: "https://play.google.com/store/apps/details?id=com.quesera.Kalpa",
+                    ios: "https://apps.apple.com/app/kalpa-original-rhythm-game/id1541014902",
+                    pc: "https://www.queseragames.com/"
+                },
+                theme: {
+                    gradient: "linear-gradient(135deg, #451a03, #dc2626)",
+                    color: "#ef4444",
+                    glow: "rgba(239, 68, 68, 0.4)",
+                    logo: "KLP"
+                }
+            },
+            {
+                id: "deemo2",
+                name: "DEEMO II",
+                uid: "WASABISOCUTE",
+                ign: "WASABISOCUTE",
+                server: "Global",
+                platform: "Mobile",
+                genre: "rhythm",
+                dateJoined: "2025",
+                installed: false,
+                web: "https://www.rayark.com/g/deemo2/",
+                download: {
+                    android: "https://play.google.com/store/apps/details?id=com.rayark.deemo2",
+                    ios: "https://apps.apple.com/app/deemo-ii/id1492019910",
+                    pc: "https://www.rayark.com/g/deemo2/"
+                },
+                theme: {
+                    gradient: "linear-gradient(135deg, #1e293b, #475569)",
+                    color: "#64748b",
+                    glow: "rgba(100, 116, 139, 0.3)",
+                    logo: "DM2"
+                }
+            },
         ];
 
         // Cache DOM Elements
