@@ -358,6 +358,7 @@
         flex-direction: column;
         height: auto;
       }
+
       .article-grid.list-view .article-cover {
         width: 100% !important;
         height: 180px !important;
@@ -869,14 +870,20 @@
         <span>WASABISOCUTE</span>
       </a>
 
-      <a href="index.html" class="back-home">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-          stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        Back Profile
-      </a>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="gameuid.html" class="back-home"
+          style="gap: 4px; border: 1px solid rgba(120, 140, 255, 0.2); background: rgba(10, 10, 20, 0.4); padding: 5px 12px; border-radius: 8px;">
+          Game UIDs 🎮
+        </a>
+        <a href="index.html" class="back-home">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back Profile
+        </a>
+      </div>
     </div>
   </header>
 
@@ -909,11 +916,25 @@
 
           <div class="language-filter-group" id="view-filters">
             <button class="lang-btn active" onclick="setViewMode('grid')" id="view-btn-grid">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
               Grid
             </button>
             <button class="lang-btn" onclick="setViewMode('list')" id="view-btn-list">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
               List
             </button>
           </div>
@@ -925,6 +946,7 @@
             <button class="filter-btn" onclick="setCategoryFilter('video edit')">Video Edit</button>
             <button class="filter-btn" onclick="setCategoryFilter('life')">Life</button>
             <button class="filter-btn" onclick="setCategoryFilter('fun facts')">Fun Facts</button>
+            <button class="filter-btn" onclick="setCategoryFilter('news')">News</button>
           </div>
         </div>
       </div>
@@ -1024,18 +1046,18 @@
         try {
           const storedArticles = JSON.parse(stored);
           const presetIds = new Set(currentPresets.map(art => art.id));
-          
+
           // Keep user custom articles (articles not present in current presets)
           const userArticles = storedArticles.filter(art => art.id && !presetIds.has(art.id));
-          
+
           // Merge fresh presets with user custom articles
           articles = [...currentPresets, ...userArticles];
         } catch (e) {
           articles = [...currentPresets];
         }
-        
+
         // Normalize older categories to the new allowed set
-        const allowed = ['tech', 'science', 'video edit', 'life', 'fun facts'];
+        const allowed = ['tech', 'science', 'video edit', 'life', 'fun facts', 'news'];
         articles.forEach(art => {
           if (!art.category || !allowed.includes(art.category.toLowerCase())) {
             if (art.category === 'design') {
@@ -1057,7 +1079,7 @@
     function setViewMode(mode) {
       currentViewMode = mode;
       localStorage.setItem('articles_view_mode', mode);
-      
+
       const container = document.getElementById('articles-container');
       if (container) {
         if (mode === 'list') {
@@ -1066,7 +1088,7 @@
           container.classList.remove('list-view');
         }
       }
-      
+
       // Update UI active state on view toggles
       document.querySelectorAll('#view-filters button').forEach(btn => {
         btn.classList.remove('active');
@@ -1268,7 +1290,7 @@
       document.getElementById('modal-title').innerText = art.title;
       document.getElementById('modal-subtitle').innerText = art.subtitle || '';
       document.getElementById('modal-author-name').innerText = art.author;
-      
+
       const modalAvatarContainer = document.getElementById('modal-author-avatar');
       const resolvedAvatar = getAuthorAvatar(art.author, art.authorAvatar);
       if (resolvedAvatar) {
@@ -1278,7 +1300,7 @@
         modalAvatarContainer.style.background = 'var(--accent-color)';
         modalAvatarContainer.innerHTML = art.author.charAt(0).toUpperCase();
       }
-      
+
       document.getElementById('modal-category').innerText = art.category.toUpperCase();
 
       const langLabel = (art.lang === 'zh') ? '🇨🇳 中文专栏' : '🇬🇧 ENGLISH COLUMN';

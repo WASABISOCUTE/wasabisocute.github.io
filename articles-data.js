@@ -23,7 +23,7 @@ const presetArticles = [
     coverType: "preset",
     coverValue: "emerald-glow",
     tags: ["Children", "Days", "June", "1st"],
-    date: "May 18, 2026",
+    date: "June 1 2026",
     readTime: "1 min read",
     lang: "zh",
     content: `每年的6月1日是国际儿童节。这一天是为了庆祝儿童拥有快乐成长的权利，也提醒大家关心儿童的健康、教育和幸福。
@@ -32,7 +32,7 @@ const presetArticles = [
 
 在不同国家，儿童节的庆祝方式也不一样。有些学校会举办表演、游戏和比赛，也有家长会带孩子出去游玩，让孩子们度过快乐的一天。对于小朋友来说，儿童节是一个充满欢笑和回忆的节日。
 
-值得一提的是，6月1日这一天也是我的生日。所以我可以每年庆祝儿童节哦。`
+顺带一提，6月1日这一天也是我的生日。所以我可以每年庆祝儿童节哦。`
   },
   {
     id: "meta-cosmic-design",
