@@ -1033,43 +1033,25 @@
     };
 
     function initStorage() {
-      const stored = localStorage.getItem('local_articles');
       const currentPresets = typeof presetArticles !== 'undefined' ? presetArticles : [];
-      if (!stored) {
-        localStorage.setItem('local_articles', JSON.stringify(currentPresets));
-        articles = [...currentPresets];
-      } else {
-        try {
-          const storedArticles = JSON.parse(stored);
-          const presetIds = new Set(currentPresets.map(art => art.id));
+      articles = [...currentPresets];
 
-          // Keep user custom articles (articles not present in current presets)
-          const userArticles = storedArticles.filter(art => art.id && !presetIds.has(art.id));
-
-          // Merge fresh presets with user custom articles
-          articles = [...currentPresets, ...userArticles];
-        } catch (e) {
-          articles = [...currentPresets];
+      // Normalize older categories to the new allowed set
+      const allowed = ['tech', 'science', 'video edit', 'life', 'fun facts', 'news'];
+      articles.forEach(art => {
+        if (!art.category || !allowed.includes(art.category.toLowerCase())) {
+          if (art.category === 'design') {
+            art.category = 'tech';
+          } else if (art.category === 'thoughts') {
+            art.category = 'life';
+          } else {
+            art.category = 'tech';
+          }
         }
-
-        // Normalize older categories to the new allowed set
-        const allowed = ['tech', 'science', 'video edit', 'life', 'fun facts', 'news'];
-        articles.forEach(art => {
-          if (!art.category || !allowed.includes(art.category.toLowerCase())) {
-            if (art.category === 'design') {
-              art.category = 'tech';
-            } else if (art.category === 'thoughts') {
-              art.category = 'life';
-            } else {
-              art.category = 'tech';
-            }
-          }
-          if (!art.lang) {
-            art.lang = 'en';
-          }
-        });
-        localStorage.setItem('local_articles', JSON.stringify(articles));
-      }
+        if (!art.lang) {
+          art.lang = 'en';
+        }
+      });
     }
 
     function setViewMode(mode) {
