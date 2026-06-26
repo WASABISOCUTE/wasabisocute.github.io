@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OST Collection | WASABISOCUTE</title>
+
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #1e1e3f, #070712 70%, #020205);
+            --card-bg: rgba(12, 12, 28, 0.6);
+            --card-border: rgba(120, 140, 255, 0.2);
+            --card-border-glow: rgba(120, 140, 255, 0.6);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-color: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --success-color: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.4);
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 20, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(120, 140, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(120, 140, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Cosmic Background Stars */
+        .stars {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.05) 3px, transparent 3px);
+            background-size: 250px 250px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+            animation: spacetwinkle 60s linear infinite;
+        }
+
+        @keyframes spacetwinkle {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 500px 1000px;
+            }
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 25, 0.7);
+            border-bottom: 1px solid rgba(120, 140, 255, 0.15);
+            padding: 15px 30px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-symbol {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-color), #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Main Layout */
+        main {
+            flex: 1;
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .page-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: left;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            text-align: left;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            font-size: 14px;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-subtitle::before {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        /* Quest UI Layout (Sidebar + Content) */
+        .quest-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* Quest Sidebar */
+        .quest-sidebar {
+            position: sticky;
+            top: 100px;
+            width: 240px;
+            flex-shrink: 0;
+            background: rgba(15, 15, 30, 0.4);
+            border: 1px solid rgba(120, 140, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .sidebar-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .quest-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quest-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-left: 2px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quest-item a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+            border-left-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .quest-item.active a {
+            color: #fff;
+            border-left-color: var(--accent-color);
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), transparent);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .quest-lock {
+            font-size: 10px;
+            opacity: 0.5;
+        }
+
+        .quest-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Chapter Sections */
+        .chapter-section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+            /* For anchor links */
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(120, 140, 255, 0.15);
+            padding-bottom: 12px;
+            position: relative;
+        }
+
+        .chapter-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 150px;
+            height: 2px;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .chapter-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 15px var(--accent-glow);
+            letter-spacing: 1px;
+        }
+
+        .chapter-title {
+            font-size: 16px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .chapter-status {
+            margin-left: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chapter-status.in-progress {
+            color: var(--warning-color);
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .chapter-status.locked {
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .chapter-status.locked::before {
+            display: none;
+        }
+
+        .chapter-status::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--success-color);
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--success-glow);
+        }
+
+        .chapter-status.in-progress::before {
+            background: var(--warning-color);
+            box-shadow: 0 0 5px rgba(245, 158, 11, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Game Card Grid (OST Grid) */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Tech borders */
+            border-left: 3px solid rgba(120, 140, 255, 0.3);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* HUD Overlays on Card */
+        .card-decor-line {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 3px;
+            background: var(--accent-color);
+            opacity: 0.5;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-border-glow);
+            border-left-color: var(--accent-color);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-card:hover .card-decor-line {
+            opacity: 1;
+            box-shadow: 0 0 10px var(--accent-glow);
+            width: 50px;
+            transition: width 0.3s;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            z-index: 1;
+        }
+
+        .platform-badges {
+            display: flex;
+            gap: 5px;
+        }
+
+        .badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .badge-travel {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .badge-event {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-activity {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .memory-date {
+            font-family: 'Fira Code', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .game-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            z-index: 1;
+            line-height: 1.3;
+        }
+
+        .composer-name {
+            font-size: 13px;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        .song-description {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: auto;
+            flex-grow: 1;
+            padding-left: 12px;
+            border-left: 2px solid rgba(120, 140, 255, 0.3);
+            z-index: 1;
+        }
+
+        .embed-container {
+            z-index: 1;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            z-index: 1;
+            margin-top: auto;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            flex: 1;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-ig {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .btn-ig:hover {
+            background: rgba(225, 48, 108, 0.15);
+            border-color: #e1306c;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-ig svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Locked Card State */
+        .locked-card {
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            text-align: center;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0.7;
+        }
+
+        .locked-card:hover {
+            transform: none;
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        .locked-card:hover::before {
+            opacity: 0;
+        }
+
+        .locked-icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .locked-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .locked-subtitle {
+            font-family: 'Fira Code', monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .quest-layout {
+                flex-direction: column;
+            }
+
+            .quest-sidebar {
+                width: 100%;
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <div class="stars"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-symbol">♪</div>
+                WASABISOCUTE
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title">MEMORY ARCHIVE</h1>
+        <p class="page-subtitle">SYSTEM // SOUNDTRACK_SYNC_INITIATED</p>
+
+        <div class="quest-layout">
+            <!-- Game UI Sidebar Navigation -->
+            <aside class="quest-sidebar">
+                <div class="sidebar-title">CHAPTER SELECT</div>
+                <ul class="quest-list">
+                    <li class="quest-item active"><a href="#ch1">Chapter 01 / 2023 <span
+                                class="quest-lock">🔒</span></a></li>
+                    <li class="quest-item"><a href="#ch2">Chapter 02 / 2024 <span class="quest-lock">🔒</span></a></li>
+                    <li class="quest-item"><a href="#ch3">Chapter 03 / 2025</a></li>
+                    <li class="quest-item"><a href="#ch4">Chapter 04 / 2026</a></li>
+                </ul>
+            </aside>
+
+            <!-- Chapters Content -->
+            <div class="quest-content">
+
+                <!-- Chapter 1 -->
+                <div class="chapter-section" id="ch1">
+                    <div class="chapter-header">
+                        <div class="chapter-num">Chapter 01</div>
+                        <div class="chapter-title">2023</div>
+                        <div class="chapter-status locked">LOCKED 🔒</div>
+                    </div>
+
+                    <div class="game-grid">
+                        <div class="game-card locked-card">
+                            <div class="locked-icon">🔒</div>
+                            <div class="locked-title">CHAPTER LOCKED</div>
+                            <div class="locked-subtitle">SOUNDTRACK DATA NOT FOUND // AWAITING SYNC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 2 -->
+                <div class="chapter-section" id="ch2">
+                    <div class="chapter-header">
+                        <div class="chapter-num">Chapter 02</div>
+                        <div class="chapter-title">2024</div>
+                        <div class="chapter-status locked">LOCKED 🔒</div>
+                    </div>
+
+                    <div class="game-grid">
+                        <div class="game-card locked-card">
+                            <div class="locked-icon">🔒</div>
+                            <div class="locked-title">CHAPTER LOCKED</div>
+                            <div class="locked-subtitle">SOUNDTRACK DATA NOT FOUND // AWAITING SYNC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 3 -->
+                <div class="chapter-section" id="ch3">
+                    <div class="chapter-header">
+                        <div class="chapter-num">Chapter 03</div>
+                        <div class="chapter-title">2025</div>
+                        <div class="chapter-status">CLEAR</div>
+                    </div>
+
+                    <div class="game-grid">
+                        <!-- Card 3 -->
+                        <div class="game-card category-activity">
+                            <div class="card-decor-line"></div>
+
+                            <div class="card-header">
+                                <div class="platform-badges">
+                                    <span class="badge badge-activity">Game - Genshin Impact</span>
+                                </div>
+                                <span class="memory-date">JAN 2025</span>
+                            </div>
+                            <h3 class="game-title">Vitas Corrodens Pestis</h3>
+                            <div class="composer-name">HOYO-MiX</div>
+                            <div class="song-description">
+                                Chapter 5 Art 5
+                            </div>
+
+                            <!-- Embedded Spotify Player -->
+                            <div class="embed-container">
+                                <iframe style="border-radius:8px"
+                                    src="https://youtu.be/Z-jDPf9sDWI?si=09lek-7Z2q9PVb_s&t=3470" title="YouTube video
+                                    player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                                    gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537309540074394582_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw=="
+                                    target="_blank" class="btn-action btn-ig">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                    IG Story
+                                </a>
+                            </div>
+                        </div>
+                        <div class="game-card category-activity">
+                            <div class="card-decor-line"></div>
+
+                            <div class="card-header">
+                                <div class="platform-badges">
+                                    <span class="badge badge-activity">Game - Genshin Impact</span>
+                                </div>
+                                <span class="memory-date">JAN 2025</span>
+                            </div>
+                            <h3 class="game-title">Ode of Resurrection : Recapitulation</h3>
+                            <div class="composer-name">HOYO-MiX</div>
+                            <div class="song-description">
+                                Chapter 5 Art 5
+                            </div>
+
+                            <!-- Embedded Spotify Player -->
+                            <div class="embed-container">
+                                <iframe style="border-radius:8px"
+                                    src="https://www.youtube.com/embed/B1FUeACyqbI?si=pabrob5xFFNW7PS7" title="YouTube video
+                                    player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                                    gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537176221278097451_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw=="
+                                    target="_blank" class="btn-action btn-ig">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                    IG Story
+                                </a>
+                            </div>
+                        </div>
+                        <div class="game-card category-activity">
+                            <div class="card-decor-line"></div>
+
+                            <div class="card-header">
+                                <div class="platform-badges">
+                                    <span class="badge badge-activity">Out-zone exploration - Tokto, Japan</span>
+                                </div>
+                                <span class="memory-date">FEB 2025</span>
+                            </div>
+                            <h3 class="game-title">Anthem of Era</h3>
+                            <div class="composer-name">HOYO-MiX</div>
+                            <div class="song-description">
+                                Changi Airport Theme
+                            </div>
+
+                            <div class="embed-container">
+                                <iframe style="border-radius:8px" src="https://youtu.be/f_53L9xa9GE?si=xG77cR5yayKz2l4h"
+                                    title="YouTube video
+                                    player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                                    gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54"
+                                    target="_blank" class="btn-action btn-ig">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                    IG Story
+                                </a>
+                            </div>
+                        </div>
+                        <div class="game-card category-activity">
+                            <div class="card-decor-line"></div>
+
+                            <div class="card-header">
+                                <div class="platform-badges">
+                                    <span class="badge badge-activity">Out-zone exploration - Tokto, Japan</span>
+                                </div>
+                                <span class="memory-date">FEB 2025</span>
+                            </div>
+                            <h3 class="game-title">フロムトーキョー</h3>
+                            <div class="composer-name">Leo/need</div>
+                            <div class="song-description">
+                                Tokyo Theme
+                            </div>
+
+                            <div class="embed-container">
+                                <iframe style="border-radius:8px" src="https://youtu.be/tpc9wH_JPfk?si=tlpFYd2v91N6nNA6"
+                                    title="YouTube video
+                                    player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                                    gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54"
+                                    target="_blank" class="btn-action btn-ig">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                    IG Story
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 4 -->
+                <div class="chapter-section" id="ch4">
+                    <div class="chapter-header">
+                        <div class="chapter-num">Chapter 04</div>
+                        <div class="chapter-title">2026</div>
+                        <div class="chapter-status in-progress">IN PROGRESS...</div>
+                    </div>
+
+                    <div class="game-grid">
+                        <!-- Card 4 -->
+                        <div class="game-card category-event">
+                            <div class="card-decor-line"></div>
+
+                            <div class="card-header">
+                                <div class="platform-badges">
+                                    <span class="badge badge-event">EVENT</span>
+                                </div>
+                                <span class="memory-date">SEP 2025</span>
+                            </div>
+                            <h3 class="game-title">We Are The Champions</h3>
+                            <div class="composer-name">Queen</div>
+                            <div class="song-description">
+                                [在此输入选择这首音乐的理由或回忆...]
+                            </div>
+
+                            <!-- Embedded YouTube Player -->
+                            <div class="embed-container">
+                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/04854XqcfCY"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen style="border-radius: 8px;"></iframe>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="https://instagram.com/your_username" target="_blank" class="btn-action btn-ig">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                    IG Post
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Update active chapter in sidebar on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('.chapter-section');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.quest-item').forEach(li => {
+                li.classList.remove('active');
+                if (li.querySelector('a').getAttribute('href').substring(1) === current) {
+                    li.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
