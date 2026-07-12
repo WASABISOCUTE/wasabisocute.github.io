@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Collection | WASABISOCUTE</title>
+
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #050505;
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --accent: #fff;
+            --glass-bg: rgba(25, 25, 35, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* HEADER */
+        header {
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .header-actions a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .header-actions a:hover {
+            color: #fff;
+        }
+
+        /* MAIN COLLECTION GRID */
+        main {
+            padding: 0 60px 100px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .chapter-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chapter-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .track-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .track-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .track-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .track-cover-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .track-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .track-card:hover .track-cover {
+            transform: scale(1.05);
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .track-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-overlay i {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.9);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .track-card:hover .play-overlay i {
+            transform: scale(1);
+        }
+
+        .track-info {
+            padding: 20px;
+        }
+
+        .track-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .track-artist {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .track-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            padding-top: 12px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* LOCKED STATE */
+        .locked-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin-bottom: 80px;
+            opacity: 0.5;
+        }
+
+        .locked-card {
+            background: transparent;
+            border: 2px dashed var(--glass-border);
+            border-radius: 16px;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .locked-card i {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+
+        /* ========================================= */
+        /* NOW PLAYING OVERLAY */
+        /* ========================================= */
+        .now-playing-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
+        }
+
+        .now-playing-overlay.active {
+            transform: translateY(0);
+        }
+
+        .np-background {
+            position: absolute;
+            inset: -50px;
+            background-size: cover;
+            background-position: center;
+            filter: blur(60px) brightness(0.4);
+            z-index: 0;
+            transition: background-image 1s ease;
+        }
+
+        .np-header {
+            position: relative;
+            z-index: 10;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s;
+        }
+
+        .btn-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .np-content {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            padding: 0 60px 40px;
+            gap: 60px;
+            align-items: stretch;
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
+            min-height: 0;
+            /* Enable shrinking */
+        }
+
+        /* Left Side: Video & Info */
+        .np-left {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            min-height: 0;
+            /* Enable shrinking */
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            background: #000;
+            position: relative;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .np-track-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .np-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .np-artist {
+            font-size: 20px;
+            color: var(--text-muted);
+        }
+
+        .np-options-wrapper {
+            position: relative;
+        }
+
+        .btn-options {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s;
+        }
+
+        .btn-options:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .np-options-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            width: 280px;
+            background: rgba(25, 25, 35, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all 0.2s;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .np-options-menu.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .menu-track-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .menu-track-artist {
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .menu-info-item {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .menu-ig-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .menu-ig-link:hover {
+            opacity: 0.9;
+        }
+
+        /* Right Side: Lyrics */
+        .np-right {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 0;
+            /* Enable shrinking */
+        }
+
+        .np-right::before,
+        .np-right::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .np-right::before {
+            top: 0;
+            background: linear-gradient(to bottom, var(--bg-base) 0%, transparent 100%);
+            /* We will dynamically update the mask color in JS based on background, but for now just use transparency */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+        }
+
+        .np-right::after {
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+        }
+
+        .lyrics-container {
+            flex: 1;
+            position: relative;
+            overflow-y: auto;
+            padding: 40px 30px;
+            scroll-behavior: smooth;
+        }
+
+        .lyrics-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .lyric-line {
+            font-size: 20px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+            transition: color 0.3s, transform 0.3s;
+            cursor: pointer;
+            word-break: break-word;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        .lyric-line:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .lyric-line.active {
+            color: #fff;
+            transform: scale(1.05);
+            transform-origin: left center;
+        }
+
+        /* Bottom: Controls & Visualizer */
+        .np-bottom {
+            position: relative;
+            z-index: 10;
+            padding: 0 60px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-variant-numeric: tabular-nums;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .progress-bar-bg {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: #fff;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 40px;
+            width: 100px;
+        }
+
+        .bar {
+            flex: 1;
+            background: var(--accent);
+            border-radius: 2px 2px 0 0;
+            height: 10%;
+            transition: height 0.5s ease-out;
+        }
+
+        .visualizer.playing .bar {
+            animation: bounce 0.5s infinite alternate ease-in;
+        }
+
+        .visualizer.playing .bar:nth-child(1) {
+            animation-delay: 0.1s;
+            animation-duration: 0.4s;
+        }
+
+        .visualizer.playing .bar:nth-child(2) {
+            animation-delay: 0.3s;
+            animation-duration: 0.6s;
+        }
+
+        .visualizer.playing .bar:nth-child(3) {
+            animation-delay: 0.0s;
+            animation-duration: 0.5s;
+        }
+
+        .visualizer.playing .bar:nth-child(4) {
+            animation-delay: 0.2s;
+            animation-duration: 0.7s;
+        }
+
+        .visualizer.playing .bar:nth-child(5) {
+            animation-delay: 0.4s;
+            animation-duration: 0.4s;
+        }
+
+        .visualizer.playing .bar:nth-child(6) {
+            animation-delay: 0.1s;
+            animation-duration: 0.4s;
+        }
+
+        .visualizer.playing .bar:nth-child(7) {
+            animation-delay: 0.3s;
+            animation-duration: 0.6s;
+        }
+
+        .visualizer.playing .bar:nth-child(8) {
+            animation-delay: 0.0s;
+            animation-duration: 0.5s;
+        }
+
+        .visualizer.playing .bar:nth-child(9) {
+            animation-delay: 0.3s;
+            animation-duration: 0.6s;
+        }
+
+        .visualizer.playing .bar:nth-child(10) {
+            animation-delay: 0.0s;
+            animation-duration: 0.5s;
+        }
+
+        @keyframes bounce {
+            0% {
+                height: 10%;
+            }
+
+            100% {
+                height: 100%;
+            }
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .ctrl-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .ctrl-btn:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .btn-play-pause {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fff;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            padding-left: 4px;
+            /* center play icon visually */
+        }
+
+        .btn-play-pause.is-playing {
+            padding-left: 0;
+        }
+
+        .btn-play-pause:hover {
+            transform: scale(1.05);
+            background: #f0f0f0;
+        }
+
+        /* NOW PLAYING TOAST */
+        .np-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(25, 25, 35, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 9000;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .np-toast.active {
+            transform: translateY(0);
+        }
+
+        .np-toast:hover {
+            background: rgba(40, 40, 55, 0.9);
+        }
+
+        .np-toast-cover {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .np-toast-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .np-toast-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .np-toast-artist {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .np-toast-icon {
+            font-size: 24px;
+            color: var(--accent);
+            margin-left: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .np-content {
+                flex-direction: column;
+                padding: 0 30px;
+                gap: 30px;
+            }
+
+            .np-right {
+                width: 100%;
+                height: 30vh;
+            }
+
+            .np-bottom {
+                padding: 0 30px 40px;
+            }
+
+            header,
+            main {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-compact-disc"></i> WASABISOCUTE
+        </a>
+        <div class="header-actions">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        </div>
+    </header>
+
+    <!-- MAIN GRID -->
+    <main>
+        <!-- Chapter 3 -->
+        <h2 class="chapter-title">Chapter 03</h2>
+        <div class="chapter-subtitle">2025 • Memories Unlocked</div>
+        <div class="track-grid" id="grid-ch3">
+            <!-- Populated via JS -->
+        </div>
+
+        <!-- Chapter 4 -->
+        <h2 class="chapter-title">Chapter 04</h2>
+        <div class="chapter-subtitle">2026 • In Progress</div>
+        <div class="track-grid" id="grid-ch4">
+            <!-- Populated via JS -->
+        </div>
+
+        <!-- Locked Chapters -->
+        <h2 class="chapter-title" style="opacity: 0.5;">Chapter 01 & 02</h2>
+        <div class="chapter-subtitle">2023 - 2024 • Awaiting Sync</div>
+        <div class="locked-grid">
+            <div class="locked-card">
+                <i class="fa-solid fa-lock"></i>
+                <div style="font-weight: 600;">DATA NOT FOUND</div>
+            </div>
+            <div class="locked-card">
+                <i class="fa-solid fa-lock"></i>
+                <div style="font-weight: 600;">DATA NOT FOUND</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- NOW PLAYING TOAST -->
+    <div class="np-toast" id="np-toast" onclick="openPlayer(currentTrackId)">
+        <img src="" class="np-toast-cover" id="toast-cover" alt="Cover">
+        <div class="np-toast-info">
+            <div class="np-toast-title" id="toast-title">Title</div>
+            <div class="np-toast-artist" id="toast-artist">Artist</div>
+        </div>
+        <i class="fa-solid fa-expand np-toast-icon"></i>
+    </div>
+
+    <!-- NOW PLAYING OVERLAY -->
+    <div class="now-playing-overlay" id="np-overlay">
+        <div class="np-background" id="np-bg"></div>
+
+        <div class="np-header">
+            <div class="logo"><i class="fa-solid fa-compact-disc"></i> NOW PLAYING</div>
+            <button class="btn-close" onclick="closePlayer()"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+
+        <div class="np-content">
+            <!-- Left: Video & Info -->
+            <div class="np-left">
+                <div class="video-container">
+                    <div id="youtube-player"></div>
+                </div>
+                <div class="np-track-details">
+                    <div>
+                        <div class="np-title" id="np-title">Track Title</div>
+                        <div class="np-artist" id="np-artist">Artist Name</div>
+                    </div>
+                    <div class="np-options-wrapper">
+                        <button class="btn-options" onclick="toggleOptionsMenu(event)">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <div class="np-options-menu" id="np-options-menu">
+                            <div class="menu-track-title" id="menu-title">Title</div>
+                            <div class="menu-track-artist" id="menu-artist">Artist</div>
+                            <div class="menu-info-item" id="menu-info">Info</div>
+                            <div class="menu-info-item" id="menu-date">Date</div>
+                            <a href="#" target="_blank" class="menu-ig-link" id="menu-ig">
+                                <i class="fa-brands fa-instagram"></i> IG Story
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Lyrics -->
+            <div class="np-right">
+                <div class="lyrics-container" id="lyrics-container">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom: Controls -->
+        <div class="np-bottom">
+            <div class="progress-container">
+                <span id="time-current">0:00</span>
+                <div class="progress-bar-bg" onclick="seekVideo(event)" id="progress-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <span id="time-total">0:00</span>
+            </div>
+
+            <div class="controls-row">
+                <div class="visualizer" id="visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+
+                </div>
+
+                <div class="player-controls">
+                    <button class="ctrl-btn"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="btn-play-pause" id="play-pause-btn" onclick="togglePlay()">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button class="ctrl-btn"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+
+                <!-- Spacer for flex alignment -->
+                <div style="width: 100px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // Track Data
+        const tracks = [
+            // Chapter 3
+            {
+                id: 0, chapter: 3,
+                title: 'Vitas Corrodens Pestis', artist: 'HOYO-MiX',
+                context: 'Game - Genshin Impact', desc: 'Chapter 5 Art 5',
+                date: 'JAN 2025', ytId: 'Z-jDPf9sDWI', start: 3470,
+                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537309540074394582_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw=='
+            },
+            {
+                id: 1, chapter: 3,
+                title: 'Ode of Resurrection : Recapitulation', artist: 'HOYO-MiX',
+                context: 'Game - Genshin Impact', desc: 'Chapter 5 Art 5',
+                date: 'JAN 2025', ytId: 'B1FUeACyqbI', start: 0,
+                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537176221278097451_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw=='
+            },
+            {
+                id: 2, chapter: 3,
+                title: 'Anthem of Era', artist: 'HOYO-MiX',
+                context: 'Out-zone exploration - Tokto, Japan', desc: 'Changi Airport Theme',
+                date: 'FEB 2025', ytId: 'f_53L9xa9GE', start: 0,
+                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54'
+            },
+            {
+                id: 3, chapter: 3,
+                title: 'フロムトーキョー', artist: 'Leo/need',
+                context: 'Out-zone exploration - Tokto, Japan', desc: 'Tokyo Theme',
+                date: 'FEB 2025', ytId: 'G-WN0ab-9ZI', start: 0,
+                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54',
+                lyrics: [
+                    "[00:01.18]不安ばっか知ってんだ 雨が降りそうな日",
+                    "[00:04.76]風の匂いで分かるから",
+                    "[00:08.10]誰だって気付いてんだ 僕には無理だと",
+                    "[00:12.12]それでも足掻いては転んだ",
+                    "[00:14.96]",
+                    "[00:15.34]友情×努力＝勝利の方程式",
+                    "[00:19.37]解けないまま過ごした僕らにも",
+                    "[00:22.96]いつか分かる日が来るよって",
+                    "[00:25.83]確証無く笑える自分が嫌いだ",
+                    "[00:29.43]",
+                    "[00:30.12]星が降るあの街に",
+                    "[00:33.34]置き去りにした思い出が",
+                    "[00:37.01]胸の奥で揺らめいてる",
+                    "[00:40.74]いつまでも焦がれていた",
+                    "[00:44.69]",
+                    "[00:46.03]それは雑踏の海の中で",
+                    "[00:49.95]踊るように燃えている誰かの声",
+                    "[00:53.62]ずっと探し続けてる",
+                    "[00:57.35]たとえそれが僕らのワガママでもいいさ",
+                    "[01:01.90]",
+                    "[01:09.49]好きな事選んだんだ",
+                    "[01:11.38]胸を張ればいいって",
+                    "[01:13.15]わかってるわかってる繰り返した",
+                    "[01:15.51]",
+                    "[01:16.33]結んだ指とかさねた呼吸",
+                    "[01:19.62]鳴り響く鼓動に耳を澄ました",
+                    "[01:22.76]",
+                    "[01:23.28]ホントは言いたくなかった",
+                    "[01:25.31]うざったいんだよ外野ばっか",
+                    "[01:27.13]ここで生きるってこと決めたんだから！",
+                    "[01:30.35]",
+                    "[01:30.59]きっとボクらの出会いだって",
+                    "[01:34.40]この空の下にある小さなセカイ",
+                    "[01:37.98]ずっと求め続けてる",
+                    "[01:41.70]たとえそれが誰かの気まぐれでもいいさ",
+                    "[01:49.56]",
+                    "[02:00.32]それは雑踏の海の中で",
+                    "[02:03.97]踊るように燃えているあの日の声",
+                    "[02:07.63]ずっと探し続けてる",
+                    "[02:11.71]たとえそれが僕らのワガママでも",
+                    "[02:14.92]",
+                    "[02:15.48]きっとボクらの出会いだって",
+                    "[02:19.09]この空の下にある小さなセカイ",
+                    "[02:22.90]ずっと求め続けてる",
+                    "[02:26.54]たとえそれが誰かの気まぐれでもいいさ",
+                    "[02:30.86]",
+                    "[02:38.31]不安ばっか知っていた あの日のボクらが",
+                    "[02:41.88]この街で僕らになれますように"
+                ]
+            },
+            // Chapter 4
+            {
+                id: 4, chapter: 4,
+                title: 'Ready Steady', artist: 'Giga',
+                context: 'Foon Yew Archive - the SUFFER accident', desc: 'Kamu satu orang make everyone SUFFER!!!',
+                date: 'APR 2026', ytId: 'XAg1jDDG49Y', start: 0,
+                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTYwNjA5MTY4NDI5OTEz?story_media_id=3872077968886066424_63008808258&igsh=MXJxOWgwODFmbmhpbA=='
+            },
+            {
+                id: 5, chapter: 4,
+                title: 'アリア', artist: 'ナナツカゼ',
+                context: 'In-zone exploration - Genting Highlands', desc: 'Resorts World Genting',
+                date: 'JUN 2026', ytId: 'P7ueDJG9IO4', start: 0,
+                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTE5NDk0MzU3NzUyODk0?story_media_id=3922679128558534096_63008808258&igsh=MWFhNTVpN2hzZmRjMw==',
+                lyrics: [
+                    "[00:11.04]眠れない夜",
+                    "[00:12.03]僕らは初めて繋がり合った気がした",
+                    "[00:16.08]どうしようもない",
+                    "[00:17.36]そんな日々を抱える僕らはどこか似ていた",
+                    "[00:21.16]",
+                    "[00:21.50]量産される音楽と命が",
+                    "[00:24.51]重なりあっても",
+                    "[00:25.75]時既に遅くて",
+                    "[00:27.13]不確かな音や言葉や数字に苛まれる",
+                    "[00:30.59]世界は傷だらけ",
+                    "[00:31.52]",
+                    "[00:31.67]誰だって",
+                    "[00:33.11]言葉にできない痛みを抱えてる",
+                    "[00:37.11]僕だって",
+                    "[00:38.31]痛い程知ってるよそんなこと",
+                    "[00:41.86]",
+                    "[00:42.11]だから",
+                    "[00:43.48]この歌は僕と君の",
+                    "[00:47.21]息を繋ぐため歌うアリア",
+                    "[00:53.45]",
+                    "[01:14.15]僕らいつの時代も",
+                    "[01:16.95]サヨナラに怯えて",
+                    "[01:19.21]命を持て余している",
+                    "[01:22.25]知る由もないのに",
+                    "[01:24.62]",
+                    "[01:25.03]僕らいつの未来も",
+                    "[01:27.59]普通を恐れて",
+                    "[01:29.79]天才に成りたがる",
+                    "[01:32.44]成る意味もないのに",
+                    "[01:36.32]",
+                    "[01:46.80]忘れられないんだ",
+                    "[01:49.52]淘汰された表情",
+                    "[01:51.94]それは嬉しい方じゃない",
+                    "[01:55.30]悲しい方の",
+                    "[01:57.06]",
+                    "[01:57.44]子どもの頃は",
+                    "[01:59.81]誰かを救いたいと",
+                    "[02:01.92]夢を綴ったはずなのに",
+                    "[02:07.94]",
+                    "[02:07.94]僕達は、最期を求めて生まれてきたんだ",
+                    "[02:13.22]今春もこの夏も死にがいを探している",
+                    "[02:18.45]この世界を作った神様に",
+                    "[02:23.91]バレない場所でこの歌を",
+                    "[02:28.79]歌わせて",
+                    "[02:30.29]",
+                    "[03:01.94]僕らいつの時代も",
+                    "[03:04.52]平和を保つため",
+                    "[03:06.89]兵器を買い安堵している",
+                    "[03:10.03]必要もないのに",
+                    "[03:11.88]",
+                    "[03:12.51]僕らいつの終いも",
+                    "[03:15.22]失くして気づいて",
+                    "[03:17.37]初めて大切にされる",
+                    "[03:20.07]それじゃもう遅いのに"
+                ]
+            }
+        ];
+
+        // Generate Grid
+        function renderGrid() {
+            const ch3Grid = document.getElementById('grid-ch3');
+            const ch4Grid = document.getElementById('grid-ch4');
+
+            tracks.forEach(track => {
+                const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+                const cardHTML = `
+                    <div class="track-card" onclick="openPlayer(${track.id})">
+                        <div class="track-cover-wrapper">
+                            <img src="${coverUrl}" class="track-cover" alt="Cover">
+                            <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                        <div class="track-info">
+                            <div class="track-title">${track.title}</div>
+                            <div class="track-artist">${track.artist}</div>
+                            <div class="track-meta">
+                                <span class="badge">${track.context}</span>
+                                <span>${track.date}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                if (track.chapter === 3) ch3Grid.innerHTML += cardHTML;
+                if (track.chapter === 4) ch4Grid.innerHTML += cardHTML;
+            });
+        }
+        renderGrid();
+
+        // YouTube Player Setup
+        let player;
+        let isPlayerReady = false;
+        let progressInterval;
+        let currentTrackId = 0;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '100%',
+                width: '100%',
+                videoId: '',
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0, // hide yt controls
+                    'disablekb': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            isPlayerReady = true;
+        }
+
+        function onPlayerStateChange(event) {
+            const playBtn = document.getElementById('play-pause-btn');
+            const visualizer = document.getElementById('visualizer');
+
+            if (event.data == YT.PlayerState.PLAYING) {
+                playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                playBtn.classList.add('is-playing');
+                // Clear any frozen inline styles and restart animation
+                visualizer.querySelectorAll('.bar').forEach(bar => {
+                    bar.style.height = '';
+                });
+                visualizer.classList.add('playing');
+                startProgressTracker();
+            } else {
+                playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                playBtn.classList.remove('is-playing');
+                // Capture current animated heights before removing animation
+                const bars = visualizer.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    const currentHeight = getComputedStyle(bar).height;
+                    bar.style.height = currentHeight;
+                });
+                visualizer.classList.remove('playing');
+                // Force reflow so browser registers the inline height, then transition to resting
+                void visualizer.offsetHeight;
+                bars.forEach(bar => {
+                    bar.style.height = '10%';
+                });
+                stopProgressTracker();
+            }
+            try {
+                // Disable captions completelly
+                player.unloadModule("captions");
+                player.unloadModule("cc");
+            } catch (exception) { }
+        }
+
+        // Overlay Controls
+        function openPlayer(trackId) {
+            const toast = document.getElementById('np-toast');
+            if (toast) toast.classList.remove('active');
+
+            const isReopening = (currentTrackId === trackId && isPlayerReady);
+            currentTrackId = trackId;
+            const track = tracks[trackId];
+
+            // UI Updates
+            document.getElementById('np-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden'; // prevent bg scrolling
+
+            const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+            document.getElementById('np-bg').style.backgroundImage = `url(${coverUrl})`;
+
+            document.getElementById('np-title').innerText = track.title;
+            document.getElementById('np-artist').innerText = track.artist;
+            // Update Options Menu
+            document.getElementById('menu-title').innerText = track.title;
+            document.getElementById('menu-artist').innerText = track.artist;
+            document.getElementById('menu-info').innerText = track.context + " • " + track.desc;
+            document.getElementById('menu-date').innerText = "Memory Date: " + track.date;
+            document.getElementById('menu-ig').href = track.ig;
+
+            // Only re-render lyrics if not reopening to save performance
+            if (!isReopening) {
+                const lyricsContainer = document.getElementById('lyrics-container');
+                lyricsContainer.innerHTML = ''; // clear
+
+                let renderLyrics = [];
+
+                if (track.lyrics && track.lyrics.length > 0) {
+                    renderLyrics = track.lyrics;
+                } else {
+                    renderLyrics = [
+                        "Lyrics not available",
+                    ];
+                }
+
+                renderLyrics.forEach((line, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'lyric-line';
+
+                    if (typeof line === 'string') {
+                        // Support LRC format
+                        const lrcMatch = line.match(/^\[(\d{2,}):(\d{2}(?:\.\d{1,3})?)\](.*)/);
+                        if (lrcMatch) {
+                            const minutes = parseInt(lrcMatch[1], 10);
+                            const seconds = parseFloat(lrcMatch[2]);
+                            div.dataset.time = (minutes * 60) + seconds;
+                            div.innerText = lrcMatch[3].trim();
+                        } else {
+                            div.innerText = line;
+                        }
+                    } else if (typeof line === 'object') {
+                        div.innerText = line.text;
+                        if (line.time !== undefined) {
+                            div.dataset.time = line.time;
+                        }
+                    }
+
+                    if (index === 1 && (!track.lyrics || track.lyrics.length === 0)) div.classList.add('active'); // highlight placeholder
+                    div.onclick = () => {
+                        if (div.dataset.time && isPlayerReady) {
+                            player.seekTo(parseFloat(div.dataset.time), true);
+                        } else {
+                            document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active'));
+                            div.classList.add('active');
+                        }
+                    };
+                    lyricsContainer.appendChild(div);
+                });
+            }
+
+            // Load Video
+            if (isPlayerReady) {
+                if (!isReopening) {
+                    player.loadVideoById({
+                        videoId: track.ytId,
+                        startSeconds: track.start
+                    });
+                }
+            } else {
+                // fallback if clicked before ready
+                setTimeout(() => openPlayer(trackId), 500);
+            }
+        }
+
+        function closePlayer() {
+            document.getElementById('np-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('np-options-menu').classList.remove('active'); // ensure menu closes
+
+            if (currentTrackId !== undefined && isPlayerReady) {
+                const track = tracks[currentTrackId];
+                document.getElementById('toast-title').innerText = track.title;
+                document.getElementById('toast-artist').innerText = track.artist;
+                document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+
+                document.getElementById('np-toast').classList.add('active');
+            }
+        }
+
+        function toggleOptionsMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('np-options-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Close options menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const menu = document.getElementById('np-options-menu');
+            const btn = document.querySelector('.btn-options');
+            if (menu && menu.classList.contains('active')) {
+                if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                    menu.classList.remove('active');
+                }
+            }
+        });
+
+        function togglePlay() {
+            if (!isPlayerReady) return;
+            const state = player.getPlayerState();
+            if (state == YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+
+        // Progress Tracking
+        function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return "0:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function startProgressTracker() {
+            progressInterval = setInterval(() => {
+                if (player && player.getCurrentTime) {
+                    const current = player.getCurrentTime();
+                    const total = player.getDuration();
+
+                    document.getElementById('time-current').innerText = formatTime(current);
+                    document.getElementById('time-total').innerText = formatTime(total);
+
+                    if (total > 0) {
+                        const pct = (current / total) * 100;
+                        document.getElementById('progress-fill').style.width = pct + '%';
+                    }
+
+                    // Auto-sync scrolling lyrics
+                    const lyrics = document.querySelectorAll('.lyric-line[data-time]');
+                    if (lyrics.length > 0) {
+                        let activeIndex = -1;
+                        for (let i = 0; i < lyrics.length; i++) {
+                            if (current >= parseFloat(lyrics[i].dataset.time)) {
+                                activeIndex = i;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (activeIndex !== -1) {
+                            const activeDiv = lyrics[activeIndex];
+                            if (!activeDiv.classList.contains('active')) {
+                                document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active'));
+                                activeDiv.classList.add('active');
+
+                                const container = document.getElementById('lyrics-container');
+                                // scroll calculation to center the active lyric
+                                const offset = activeDiv.offsetTop - container.offsetTop - (container.clientHeight / 2) + (activeDiv.clientHeight / 2);
+                                container.scrollTo({ top: offset, behavior: 'smooth' });
+                            }
+                        }
+                    }
+                }
+            }, 100);
+        }
+
+        function stopProgressTracker() {
+            clearInterval(progressInterval);
+        }
+
+        function seekVideo(e) {
+            if (!isPlayerReady) return;
+            const bg = document.getElementById('progress-bg');
+            const rect = bg.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const pct = clickX / width;
+
+            const total = player.getDuration();
+            if (total > 0) {
+                const seekTo = total * pct;
+                player.seekTo(seekTo, true);
+            }
+        }
+    </script>
+</body>
+
+</html>
