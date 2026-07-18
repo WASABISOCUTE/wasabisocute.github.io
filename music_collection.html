@@ -939,28 +939,28 @@
         const tracks = [
             // Chapter 3
             {
-                id: 0, chapter: 3,
+                chapter: 3,
                 title: 'Vitas Corrodens Pestis', artist: 'HOYO-MiX',
                 context: 'Game - Genshin Impact', desc: 'Chapter 5 Art 5',
                 date: 'JAN 2025', ytId: 'Z-jDPf9sDWI', start: 3470,
                 ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537309540074394582_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw=='
             },
             {
-                id: 1, chapter: 3,
+                chapter: 3,
                 title: 'Ode of Resurrection : Recapitulation', artist: 'HOYO-MiX',
                 context: 'Game - Genshin Impact', desc: 'Chapter 5 Art 5',
                 date: 'JAN 2025', ytId: 'B1FUeACyqbI', start: 0,
                 ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537176221278097451_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw=='
             },
             {
-                id: 2, chapter: 3,
+                chapter: 3,
                 title: 'Anthem of Era', artist: 'HOYO-MiX',
                 context: 'Out-zone exploration - Tokto, Japan', desc: 'Changi Airport Theme',
                 date: 'FEB 2025', ytId: 'f_53L9xa9GE', start: 0,
                 ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54'
             },
             {
-                id: 3, chapter: 3,
+                chapter: 3,
                 title: 'フロムトーキョー', artist: 'Leo/need',
                 context: 'Out-zone exploration - Tokto, Japan', desc: 'Tokyo Theme',
                 date: 'FEB 2025', ytId: 'G-WN0ab-9ZI', start: 0,
@@ -1017,7 +1017,7 @@
                 ]
             },
             {
-                id: 4, chapter: 3,
+                chapter: 3,
                 title: 'ザムザ', artist: '25時、ナイトコードで。',
                 context: '', desc: '',
                 date: 'Apr 2025', ytId: 'cchy8Tl5Oa8', start: 0,
@@ -1123,14 +1123,14 @@
             },
             // Chapter 4
             {
-                id: 5, chapter: 4,
+                chapter: 4,
                 title: 'Ready Steady', artist: 'Giga',
                 context: 'Foon Yew Archive - the SUFFER accident', desc: 'Kamu satu orang make everyone SUFFER!!!',
                 date: 'APR 2026', ytId: 'XAg1jDDG49Y', start: 0,
                 ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTYwNjA5MTY4NDI5OTEz?story_media_id=3872077968886066424_63008808258&igsh=MXJxOWgwODFmbmhpbA=='
             },
             {
-                id: 6, chapter: 4,
+                chapter: 4,
                 title: 'Beyond the way', artist: 'Giga',
                 context: 'In-zone exploration', desc: 'Toppen ACG Fest 2026',
                 date: 'APR 2026', ytId: 'SJcgOWsDwi4', start: 0,
@@ -1190,7 +1190,7 @@
                 ]
             },
             {
-                id: 7, chapter: 4,
+                chapter: 4,
                 title: 'アリア', artist: 'ナナツカゼ',
                 context: 'In-zone exploration - Genting Highlands', desc: 'Resorts World Genting',
                 date: 'JUN 2026', ytId: 'P7ueDJG9IO4', start: 0,
@@ -1259,10 +1259,10 @@
             const ch3Grid = document.getElementById('grid-ch3');
             const ch4Grid = document.getElementById('grid-ch4');
 
-            tracks.forEach(track => {
+            tracks.forEach((track, index) => {
                 const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
                 const cardHTML = `
-                    <div class="track-card" onclick="openPlayer(${track.id})">
+                    <div class="track-card" onclick="openPlayer(${index})">
                         <div class="track-cover-wrapper">
                             <img src="${coverUrl}" class="track-cover" alt="Cover">
                             <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
