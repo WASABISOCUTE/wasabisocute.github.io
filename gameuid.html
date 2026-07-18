@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game UID | WASABISOCUTE</title>
 
-    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -167,15 +166,49 @@
             position: relative;
         }
 
+        .page-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         .page-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 36px;
             font-weight: 700;
-            text-align: center;
-            margin-bottom: 30px;
             background: linear-gradient(135deg, #fff, var(--text-muted));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Language Selector Styling */
+        .lang-select-wrapper select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(120, 140, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .lang-select-wrapper select:hover {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .lang-select-wrapper select option {
+            background: #070712;
+            color: white;
         }
 
         /* Search & Filter Controls */
@@ -699,6 +732,18 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
         }
 
+        .btn-download.disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        .btn-download.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
         /* Toast Notification */
         .toast {
             position: fixed;
@@ -843,9 +888,17 @@
 <body>
     <div class="stars"></div>
 
-
     <main>
-        <h1 class="page-title">Game UID Centre</h1>
+        <div class="page-header-container">
+            <h1 class="page-title" id="pageMainTitle">Game UID Centre</h1>
+            <div class="lang-select-wrapper">
+                <select id="langSelect">
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="zh">简体中文</option>
+                </select>
+            </div>
+        </div>
 
         <div class="controls-container">
             <div class="search-box">
@@ -854,8 +907,7 @@
                         d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
                         fill="currentColor" />
                 </svg>
-                <input type="text" id="searchInput" class="search-input"
-                    placeholder="Search" />
+                <input type="text" id="searchInput" class="search-input" placeholder="Search" />
             </div>
 
             <div class="filter-row">
@@ -866,11 +918,9 @@
         </div>
 
         <div class="game-grid" id="gameGrid">
-            <!-- Cards populated by JS -->
         </div>
     </main>
 
-    <!-- Details Modal -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal-card" id="modalCard">
             <button class="modal-close-btn" id="modalCloseBtn">
@@ -882,7 +932,6 @@
             </button>
 
             <div class="modal-container">
-                <!-- Left Side: Screenshot or theme-colored gradient -->
                 <div class="modal-left" id="modalLeft">
                     <div class="modal-left-fallback" id="modalFallback">
                         <div class="fallback-logo" id="modalFallbackLogo">UID</div>
@@ -891,7 +940,6 @@
                     <img class="modal-screenshot" id="modalScreenshot" src="" alt="Game UI" style="display: none;" />
                 </div>
 
-                <!-- Right Side: Details & Actions -->
                 <div class="modal-right">
                     <div class="modal-game-info">
                         <div class="modal-title-row">
@@ -900,19 +948,19 @@
                         </div>
                         <div class="modal-subtitle">
                             <div class="info-item">
-                                <span class="info-label">Server:</span>
+                                <span class="info-label" id="lblServer">Server:</span>
                                 <span class="info-val" id="modalGameServer">Official Server</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Platform:</span>
+                                <span class="info-label" id="lblPlatform">Platform:</span>
                                 <span class="info-val" id="modalGamePlatform">PC / Mobile</span>
                             </div>
                             <div class="info-item" id="modalIgnContainer">
-                                <span class="info-label">In-Game Name:</span>
+                                <span class="info-label" id="lblIgn">In-Game Name:</span>
                                 <span class="info-val" id="modalGameIgn">WASABISOCUTE</span>
                             </div>
                             <div class="info-item" id="modalJoinDateContainer">
-                                <span class="info-label">Date Joined:</span>
+                                <span class="info-label" id="lblDateJoined">Date Joined:</span>
                                 <span class="info-val" id="modalJoinDate"></span>
                             </div>
                         </div>
@@ -924,7 +972,7 @@
                     </div>
 
                     <div class="modal-copy-section">
-                        <div class="modal-uid-label">Game UID</div>
+                        <div class="modal-uid-label" id="lblModalUidLabel">Game UID</div>
                         <div class="modal-uid-wrapper">
                             <span class="modal-uid-text" id="modalUidText">88888888</span>
                         </div>
@@ -934,7 +982,7 @@
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
                                     fill="currentColor" />
                             </svg>
-                            <span>Copy UID</span>
+                            <span id="txtCopyBtn">Copy UID</span>
                         </button>
                     </div>
 
@@ -945,7 +993,7 @@
                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
                                     fill="currentColor" />
                             </svg>
-                            Visit Official Website
+                            <span id="txtVisitWeb">Visit Official Website</span>
                         </a>
                         <a class="btn-action btn-download" id="modalDownloadBtn" href="#" target="_blank">
                             <svg class="svg-icon" id="downloadIcon" viewBox="0 0 24 24">
@@ -961,24 +1009,117 @@
         </div>
     </div>
 
-    <!-- Success Toast -->
     <div class="toast" id="copyToast">
         <svg class="toast-icon" viewBox="0 0 24 24">
             <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor" />
         </svg>
-        <span>UID copied!</span>
+        <span id="txtToast">UID copied!</span>
     </div>
 
-    <footer>
+    <footer id="pageFooter">
         <p>&copy; 2026 WASABISOCUTE <a href="index.html">Back to Profile</a></p>
     </footer>
 
     <script>
-        // Game Database
+        const i18n = {
+            en: {
+                pageTitle: "Game UID Centre",
+                searchPlaceholder: "Search",
+                loading: "Loading...",
+                statsText: "Showing {count} games",
+                noResults: "No results",
+                copyUid: "Copy UID",
+                copied: "Copied! ✓",
+                toastSuccess: "UID copied!",
+                server: "Server:",
+                platform: "Platform:",
+                ign: "In-Game Name:",
+                dateJoined: "Date Joined:",
+                visitWeb: "Visit Official Website",
+                getGame: "Get the Game",
+                notSupported: "Not supported",
+                screenshot: "Game Screenshot",
+                gameUid: "Game UID",
+                backToProfile: "Back to Profile",
+                active: "Active",
+                inactive: "Inactive",
+                dataMap: {
+                    "Asia": "Asia",
+                    "EN Server (Global)": "EN Server (Global)",
+                    "TW Server": "TW Server",
+                    "JP Server": "JP Server",
+                    "CN Server": "CN Server",
+                    "Mobile / PC / PS5": "Mobile / PC / PS5",
+                    "Mobile / PC": "Mobile / PC",
+                    "Mobile": "Mobile"
+                }
+            },
+            zh: {
+                pageTitle: "Game UID Centre",
+                searchPlaceholder: "搜索",
+                loading: "加载中...",
+                statsText: "共展示 {count} 款游戏",
+                noResults: "无结果",
+                copyUid: "复制 UID",
+                copied: "已复制! ✓",
+                toastSuccess: "UID 已复制!",
+                server: "服务器:",
+                platform: "平台:",
+                ign: "用户名:",
+                dateJoined: "入坑时间:",
+                visitWeb: "访问官网",
+                getGame: "获取游戏",
+                notSupported: "不支持当前设备",
+                screenshot: "游戏截图",
+                gameUid: "游戏 UID",
+                backToProfile: "返回主页",
+                active: "活跃中",
+                inactive: "未安装",
+                dataMap: {
+                    "Asia": "亚服 (Asia)",
+                    "EN Server (Global)": "国际服 (EN Server)",
+                    "TW Server": "台服 (TW Server)",
+                    "JP Server": "日服 (JP Server)",
+                    "CN Server": "国服 (CN Server)"
+                }
+            },
+            ja: {
+                pageTitle: "ゲーム UID センター",
+                searchPlaceholder: "検索",
+                loading: "読み込み中...",
+                statsText: "全 {count} 件のゲームを表示中",
+                noResults: "該当するゲームが見つかりません。",
+                copyUid: "UIDをコピー",
+                copied: "コピーしました! ✓",
+                toastSuccess: "UIDがクリップボードにコピーされました！",
+                server: "サーバー:",
+                platform: "対応機種:",
+                ign: "プレイヤー名:",
+                dateJoined: "プレイ開始日:",
+                visitWeb: "公式サイトへ",
+                getGame: "ゲームをダウンロード",
+                notSupported: "このデバイスでは利用できません",
+                screenshot: "ゲームスクリーンショット",
+                gameUid: "ゲーム UID",
+                backToProfile: "プロフィールに戻る",
+                active: "プレイ中",
+                inactive: "未インストール",
+                dataMap: {
+                    "Asia": "アジアサーバー (Asia)",
+                    "EN Server (Global)": "国際サーバー (EN)",
+                    "TW Server": "台湾サーバー (TW)",
+                    "JP Server": "日本サーバー (JP)",
+                    "CN Server": "中国サーバー (CN)"
+                }
+            }
+        };
+
         const games = [
             {
                 id: "genshin",
                 name: "Genshin Impact",
+                name_zh: "原神",
+                name_ja: "原神",
                 uid: "890809370",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -987,21 +1128,14 @@
                 dateJoined: "2023/09/10",
                 installed: true,
                 web: "https://genshin.hoyoverse.com/",
-                download: {
-                    android: "https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact",
-                    ios: "https://apps.apple.com/us/app/genshin-impact/id1517783697",
-                    pc: "https://genshin.hoyoverse.com/"
-                },
-                theme: {
-                    gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)",
-                    color: "#ffe599",
-                    glow: "rgba(255, 229, 153, 0.4)",
-                    logo: "GI"
-                }
+                download: { android: "https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact", ios: "https://apps.apple.com/us/app/genshin-impact/id1517783697", pc: "https://genshin.hoyoverse.com/" },
+                theme: { gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)", color: "#ffe599", glow: "rgba(255, 229, 153, 0.4)", logo: "GI" }
             },
             {
                 id: "hsr",
                 name: "Honkai: Star Rail",
+                name_zh: "崩坏：星穹铁道",
+                name_ja: "崩壊：スターレイル",
                 uid: "829489975",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -1024,6 +1158,8 @@
             {
                 id: "wuwa",
                 name: "Wuthering Waves",
+                name_zh: "鸣潮",
+                name_ja: "鳴潮",
                 uid: "902033757",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -1047,6 +1183,8 @@
             {
                 id: "zzz",
                 name: "Zenless Zone Zero",
+                name_zh: "绝区零",
+                name_ja: "ゼンレスゾーンゼロ",
                 uid: "1301491173",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -1069,7 +1207,7 @@
             },
             {
                 id: "pjsekai-en",
-                name: "Hatsune Miku: Colorful Stage (EN)",
+                name: "Hatsune Miku: Colorful Stage",
                 uid: "557473370690953223",
                 ign: "WASABISOCUTE",
                 server: "EN Server (Global)",
@@ -1091,7 +1229,7 @@
             },
             {
                 id: "pjsekai-tw",
-                name: "世界計畫 缤纷舞台！feat. 初音未来 (TW)",
+                name: "世界計畫 缤纷舞台！feat. 初音未来",
                 uid: "7452268978774367029",
                 ign: "WASABI",
                 server: "TW Server",
@@ -1113,7 +1251,7 @@
             },
             {
                 id: "pjsekai-jp",
-                name: "プロジェクトセカイ カラフルステージ！ feat. 初音ミク (JP)",
+                name: "プロジェクトセカイ カラフルステージ！ feat. 初音ミク",
                 uid: "619395971567607811",
                 ign: "WASABI9184",
                 server: "JP Server",
@@ -1135,7 +1273,7 @@
             },
             {
                 id: "pjsekai-cn",
-                name: "初音未来：缤纷舞台 (CN)",
+                name: "初音未来：缤纷舞台",
                 uid: "7507137651108240180",
                 ign: "WASABI",
                 server: "CN Server",
@@ -1157,7 +1295,7 @@
             },
             {
                 id: "pjsekai-kr",
-                name: "프로젝트 세카이 컬러풀 스테이지! feat.하츠네 미쿠 (KR)",
+                name: "프로젝트 세카이 컬러풀 스테이지! feat.하츠네 미쿠",
                 uid: "7507588644467923773",
                 ign: "WASABI",
                 server: "KR Server",
@@ -1180,6 +1318,8 @@
             {
                 id: "rotaeno",
                 name: "Rotaeno",
+                name_zh: "旋转音律",
+                name_ja: "Rotaeno - ロテーノ",
                 uid: "YUPQMY",
                 ign: "WASABISOCUTE",
                 server: "Global",
@@ -1225,6 +1365,8 @@
             {
                 id: "honkai3rd",
                 name: "Honkai Impact 3rd",
+                name_zh: "崩坏3",
+                name_ja: "崩壊3rd",
                 uid: "24410062",
                 ign: "WASABISOCUTE",
                 server: "SEA",
@@ -1248,6 +1390,8 @@
             {
                 id: "reverse1999",
                 name: "Reverse: 1999",
+                name_zh: "重返未来：1999",
+                name_ja: "リバース：1999",
                 uid: "411450496",
                 ign: "WASABISOCUTE",
                 server: "Global",
@@ -1271,6 +1415,8 @@
             {
                 id: "endfield",
                 name: "Arknights: Endfield",
+                name_zh: "明日方舟：终末地",
+                name_ja: "アークナイツ：エンドフィールド",
                 uid: "4742686222",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -1294,6 +1440,7 @@
             {
                 id: "nte",
                 name: "Neverness to Everness",
+                name_zh: "异环",
                 uid: "214281392407",
                 ign: "WASABISOCUTE",
                 server: "SEA",
@@ -1340,6 +1487,7 @@
             {
                 id: "mc-java",
                 name: "Minecraft Java Edition",
+                name_zh: "我的世界Java版",
                 uid: "WASABISOCUTE",
                 ign: "WASABISOCUTE",
                 server: "Global",
@@ -1361,6 +1509,7 @@
             {
                 id: "mc-bedrock",
                 name: "Minecraft Bedrock Edition",
+                name_zh: "我的世界基岩版",
                 uid: "WASABI9184",
                 ign: "WASABI9184",
                 server: "Global",
@@ -1384,6 +1533,7 @@
             {
                 id: "amongus",
                 name: "Among Us",
+                name_zh: "我们之中 / 太空狼人杀",
                 uid: "liveflat#1623",
                 ign: "WASABI",
                 server: "Global",
@@ -1518,6 +1668,8 @@
             {
                 id: "bluearchive",
                 name: "Blue Archive",
+                name_zh: "蔚蓝档案",
+                name_ja: "ブルーアーカイブ",
                 uid: "BFXQSUZQ",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -1541,6 +1693,7 @@
             {
                 id: "val",
                 name: "Valorant",
+                name_zh: "无畏契约",
                 uid: "WASABISOCUTE#9184",
                 ign: "WASABISOCUTE",
                 server: "Asia",
@@ -1562,6 +1715,7 @@
             {
                 id: "bleap",
                 name: "Bleap",
+                name_zh: "闪音跃动",
                 uid: "2075782725838573568",
                 ign: "WASABISOCUTE#10000",
                 server: "Global",
@@ -1625,7 +1779,7 @@
                     logo: "ARK"
                 }
             },
-             {
+            {
                 id: "ark-tw",
                 name: "明日方舟",
                 uid: "475683985",
@@ -1650,16 +1804,20 @@
             }
         ];
 
-        // Cache DOM Elements
-        const gameGrid = document.getElementById("gameGrid");
+        let currentLang = localStorage.getItem('selectedLanguage') || 'en';
+        let searchQuery = "";
+        let currentGenre = "all";
+        let activeGame = null;
+
+        const langSelect = document.getElementById("langSelect");
         const searchInput = document.getElementById("searchInput");
         const statsSummary = document.getElementById("statsSummary");
-        const filterButtons = document.querySelectorAll(".filter-btn");
-
-        // Modal elements
+        const gameGrid = document.getElementById("gameGrid");
         const detailModal = document.getElementById("detailModal");
-        const modalCard = document.getElementById("modalCard");
         const modalCloseBtn = document.getElementById("modalCloseBtn");
+        const modalCopyBtn = document.getElementById("modalCopyBtn");
+        const copyToast = document.getElementById("copyToast");
+        const modalCard = document.getElementById("modalCard");
         const modalLeft = document.getElementById("modalLeft");
         const modalScreenshot = document.getElementById("modalScreenshot");
         const modalFallback = document.getElementById("modalFallback");
@@ -1672,80 +1830,107 @@
         const modalGameIgn = document.getElementById("modalGameIgn");
         const modalIgnContainer = document.getElementById("modalIgnContainer");
         const modalJoinDate = document.getElementById("modalJoinDate");
+        const modalNoteBox = document.getElementById("modalNoteBox");
+        const modalNoteText = document.getElementById("modalNoteText");
         const modalUidText = document.getElementById("modalUidText");
-        const modalCopyBtn = document.getElementById("modalCopyBtn");
         const modalWebBtn = document.getElementById("modalWebBtn");
         const modalDownloadBtn = document.getElementById("modalDownloadBtn");
         const downloadBtnText = document.getElementById("downloadBtnText");
         const downloadIcon = document.getElementById("downloadIcon");
 
-        // Toast element
-        const copyToast = document.getElementById("copyToast");
-
-        // App State
-        let currentGenre = "all";
-        let searchQuery = "";
-        let activeGame = null;
-
-        // Helper: Detect Device Operating System
-        function getDeviceOS() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                return 'ios';
-            }
-            if (/android/i.test(userAgent)) {
-                return 'android';
-            }
-            return 'pc';
+        function getTransText(val) {
+            return i18n[currentLang].dataMap[val] || val;
         }
 
-        // Function: Render Game Cards
+        function detectDeviceType() {
+            const ua = navigator.userAgent || '';
+            const platform = navigator.platform || '';
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
+            const isConsole = /Xbox|PlayStation|Nintendo|Switch|Wii|WiiU/i.test(ua);
+            const isPS5 = /PS5|PlayStation 5/i.test(ua);
+            const isTouchMac = /MacIntel/i.test(platform) && navigator.maxTouchPoints > 1;
+
+            if (isPS5) return 'PS5';
+            if (isConsole) return 'Console';
+            if (isMobile || isTouchMac) return 'Mobile';
+            return 'PC';
+        }
+
+        function isPlatformSupported(platformText, deviceType) {
+            const normalizedPlatform = platformText.toLowerCase();
+            if (normalizedPlatform.includes('mobile') && deviceType === 'Mobile') return true;
+            if (normalizedPlatform.includes('pc') && deviceType === 'PC') return true;
+            if (normalizedPlatform.includes('ps5') && deviceType === 'PS5') return true;
+            if (normalizedPlatform.includes('console') && deviceType === 'Console') return true;
+            return false;
+        }
+
+        function updateStaticTexts() {
+            const currentDict = i18n[currentLang];
+
+            const langIso = currentLang === 'zh' ? 'zh-CN' : currentLang === 'ja' ? 'ja-JP' : 'en-GB';
+            document.documentElement.lang = langIso;
+            document.getElementById("pageMainTitle").textContent = currentDict.pageTitle;
+            searchInput.placeholder = currentDict.searchPlaceholder;
+            document.getElementById("modalFallbackTitle").textContent = currentDict.screenshot;
+            document.getElementById("lblServer").textContent = currentDict.server;
+            document.getElementById("lblPlatform").textContent = currentDict.platform;
+            document.getElementById("lblIgn").textContent = currentDict.ign;
+            document.getElementById("lblDateJoined").textContent = currentDict.dateJoined;
+            document.getElementById("lblModalUidLabel").textContent = currentDict.gameUid;
+
+            document.getElementById("txtVisitWeb").textContent = currentDict.visitWeb;
+            document.getElementById("txtCopyBtn").textContent = currentDict.copyUid;
+            document.getElementById("downloadBtnText").textContent = currentDict.getGame;
+            document.getElementById("txtToast").textContent = currentDict.toastSuccess;
+            document.getElementById("pageFooter").innerHTML = `<p>&copy; 2026 WASABISOCUTE <a href="index.html">${currentDict.backToProfile}</a></p>`;
+        }
+
         function renderCards() {
+            const currentDict = i18n[currentLang];
             gameGrid.innerHTML = "";
 
             const filtered = games.filter(game => {
+                const lowerQuery = searchQuery.toLowerCase();
+                const matchesSearch = game.name.toLowerCase().includes(lowerQuery) ||
+                    (game.name_zh && game.name_zh.toLowerCase().includes(lowerQuery)) ||
+                    (game.name_ja && game.name_ja.toLowerCase().includes(lowerQuery)) ||
+                    (game.uid && game.uid.toLowerCase().includes(lowerQuery)) ||
+                    game.server.toLowerCase().includes(lowerQuery);
                 const matchesGenre = currentGenre === "all" || game.genre === currentGenre;
-                const normalizedQuery = searchQuery.toLowerCase().trim();
-                const matchesSearch = !normalizedQuery ||
-                    game.name.toLowerCase().includes(normalizedQuery) ||
-                    (game.uid || "").toLowerCase().includes(normalizedQuery) ||
-                    (game.ign || "").toLowerCase().includes(normalizedQuery) ||
-                    game.server.toLowerCase().includes(normalizedQuery) ||
-                    game.platform.toLowerCase().includes(normalizedQuery);
-
-                return matchesGenre && matchesSearch;
+                return matchesSearch && matchesGenre;
             });
 
+            statsSummary.textContent = currentDict.statsText.replace("{count}", filtered.length);
+
             if (filtered.length === 0) {
-                gameGrid.innerHTML = `
-          <div class="no-results">
-            <p>No result</p>
-          </div>
-        `;
-                statsSummary.textContent = "0 games total";
+                gameGrid.innerHTML = `<div class="no-results">${currentDict.noResults}</div>`;
                 return;
             }
-
-            const activeCount = filtered.filter(g => g.installed).length;
-            statsSummary.textContent = `Found ${filtered.length} game${filtered.length === 1 ? '' : 's'} (Active: ${activeCount})`;
 
             filtered.forEach(game => {
                 const card = document.createElement("div");
                 card.className = "game-card";
-                card.style.setProperty("--theme-gradient", game.theme.gradient);
-                card.style.setProperty("--theme-glow", game.theme.glow);
-                card.style.setProperty("--card-theme-color", game.theme.color);
+                card.style.setProperty('--card-theme-color', game.theme.color);
+                card.style.setProperty('--theme-glow', game.theme.glow);
+                card.style.setProperty('--theme-gradient', game.theme.gradient);
 
+                const statusClass = game.installed ? "status-active" : "status-inactive";
+                const statusText = game.installed ? currentDict.active : currentDict.inactive;
+
+                let gameDisplayName = game.name;
+                if (currentLang === 'zh' && game.name_zh) gameDisplayName = game.name_zh;
+                if (currentLang === 'ja' && game.name_ja) gameDisplayName = game.name_ja;
                 card.innerHTML = `
           <div class="card-header">
             <span class="badge badge-platform">${game.platform.split(' / ')[0]}</span>
             
             <span class="badge badge-status ${game.installed ? 'status-active' : 'status-inactive'}">
-              ${game.installed ? 'Active' : 'Inactive'}
+              ${statusText}
             </span>
             
           </div>
-          <h3 class="game-title">${game.name} ${game.note ? `<span class="card-note-badge" title="">
+          <h3 class="game-title">${gameDisplayName} ${game.note ? `<span class="card-note-badge" title="">
               !
               <span class="note-tooltip">${game.note}</span>
             </span>` : ''}</h3>
@@ -1761,13 +1946,10 @@
           </div>
         `;
 
-                // Card Click opens Modal
                 card.addEventListener("click", (e) => {
-                    // If clicked the copy button specifically, do copy instead of modal
                     if (e.target.closest(".copy-icon-btn")) {
-                        e.stopPropagation();
-                        const uid = e.target.closest(".copy-icon-btn").dataset.uid;
-                        copyToClipboard(uid);
+                        copyToClipboard(game.uid);
+                        showToast();
                         return;
                     }
                     openModal(game);
@@ -1777,202 +1959,133 @@
             });
         }
 
-        // Function: Copy to Clipboard Action
-        function copyToClipboard(text) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast();
-                }).catch(err => {
-                    fallbackCopyToClipboard(text);
-                });
-            } else {
-                fallbackCopyToClipboard(text);
-            }
-        }
-
-        // Fallback Clipboard copy
-        function fallbackCopyToClipboard(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            textArea.style.left = "-9999px";
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand("copy");
-                showToast();
-            } catch (err) {
-                console.error("Fallback copy failed", err);
-            }
-            document.body.removeChild(textArea);
-        }
-
-        function showToast() {
-            copyToast.classList.add("active");
-            setTimeout(() => {
-                copyToast.classList.remove("active");
-            }, 2500);
-        }
-
-        // Modal Control Flow
         function openModal(game) {
             activeGame = game;
+            const currentDict = i18n[currentLang];
 
-            // Theme matching
-            modalCard.style.setProperty("--theme-gradient", game.theme.gradient);
-            modalCard.style.setProperty("--theme-glow", game.theme.glow);
+            modalCard.style.setProperty('--theme-gradient', game.theme.gradient);
+            modalCard.style.setProperty('--theme-glow', game.theme.glow);
 
-            // Content mapping
-            modalGameTitle.textContent = game.name;
-            modalGameServer.textContent = game.server;
-            modalGamePlatform.textContent = game.platform;
-            if (game.uid) {
-                modalUidText.textContent = game.uid;
+            const uidText = (game.uid || "").trim();
+            const displayUid = uidText || (currentLang === 'zh' ? '不适用' : (currentLang === 'ja' ? '不適用' : 'Unavailable'));
+            modalUidText.textContent = displayUid;
+            if (uidText) {
                 modalUidText.style.fontStyle = "";
                 modalUidText.style.color = "";
                 modalCopyBtn.style.display = "";
             } else {
-                modalUidText.textContent = "Unavailable";
                 modalUidText.style.fontStyle = "italic";
-                modalUidText.style.color = "rgba(255,255,255,0.35)";
+                modalUidText.style.color = "rgba(255, 255, 255, 0.35)";
                 modalCopyBtn.style.display = "none";
             }
 
+            let gameDisplayName = game.name;
+            if (currentLang === 'zh' && game.name_zh) gameDisplayName = game.name_zh;
+            if (currentLang === 'ja' && game.name_ja) gameDisplayName = game.name_ja;
+            modalGameTitle.textContent = gameDisplayName;
 
-            // In Game Nickname
-            if (game.ign) {
-                modalIgnContainer.style.display = "flex";
-                modalGameIgn.textContent = game.ign;
-            } else {
-                modalIgnContainer.style.display = "none";
-            }
+            modalGameServer.textContent = getTransText(game.server);
+            modalGamePlatform.textContent = getTransText(game.platform);
+            modalGameIgn.textContent = game.ign;
+            modalJoinDate.textContent = game.dateJoined;
 
-            // Date Joined
-            const modalJoinDateContainer = document.getElementById("modalJoinDateContainer");
-            if (game.dateJoined) {
-                modalJoinDateContainer.style.display = "flex";
-                modalJoinDate.textContent = game.dateJoined;
-            } else {
-                modalJoinDateContainer.style.display = "none";
-            }
+            modalStatusBadge.className = `badge badge-status ${game.installed ? 'status-active' : 'status-inactive'}`;
+            modalStatusBadge.textContent = game.installed ? currentDict.active : currentDict.inactive;
 
-            // Note box
-            const modalNoteBox = document.getElementById("modalNoteBox");
-            const modalNoteText = document.getElementById("modalNoteText");
             if (game.note) {
                 modalNoteBox.style.display = "flex";
-                modalNoteText.textContent = game.note;
+                modalNoteText.innerHTML = game.note;
             } else {
                 modalNoteBox.style.display = "none";
             }
-
-            // Installation status badge
-            modalStatusBadge.className = `badge badge-status ${game.installed ? 'status-active' : 'status-inactive'}`;
-            modalStatusBadge.textContent = game.installed ? 'Active' : 'Inactive';
-
-            // Reset Copy Button
             modalCopyBtn.className = "modal-copy-btn";
-            modalCopyBtn.querySelector("span").textContent = "Copy UID";
+            modalCopyBtn.querySelector("span").textContent = currentDict.copyUid;
 
-            // Official Web Button
-            modalWebBtn.href = game.web;
-
-            // Smart Download Button OS Resolution
-            const os = getDeviceOS();
-
-            if (game.download && game.download[os]) {
-                modalDownloadBtn.href = game.download[os];
-                modalDownloadBtn.style.pointerEvents = '';
-                modalDownloadBtn.style.opacity = '';
-
-                // Update button text and icon based on detected system (UK English)
-                if (os === 'ios') {
-                    downloadBtnText.textContent = "Get on App Store";
-                    downloadIcon.innerHTML = `<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z" fill="currentColor"/>`;
-                } else if (os === 'android') {
-                    downloadBtnText.textContent = "Get on Google Play";
-                    downloadIcon.innerHTML = `<path d="M3 5.27V18.73c0 .89 1.08 1.34 1.71.71l6.79-6.79L3.5 4.65c-.32-.32-.5-.74-.5-1.18V5.27zm11.29 6.02L18 8.01l-9-5.18c-.62-.36-1.38-.36-2 0l7.29 7.29c.31.31.72.48 1.15.48.43 0 .84-.17 1.15-.48zm2.42 1.42l-2.42 2.42c-.62.62-1.63.62-2.25 0l-7.29-7.29 9 5.18c.62.36 1.38.36 2 0l.96-.31z" fill="currentColor"/>`;
+            const dlBtn = modalDownloadBtn;
+            const deviceType = detectDeviceType();
+            const supportedOnDevice = isPlatformSupported(game.platform, deviceType);
+            if (game.download) {
+                dlBtn.style.display = "flex";
+                if (supportedOnDevice) {
+                    dlBtn.classList.remove('disabled');
+                    dlBtn.removeAttribute('aria-disabled');
+                    dlBtn.title = currentDict.getGame;
+                    dlBtn.href = game.download.pc || game.download.android || game.download.ios || "#";
+                    downloadBtnText.textContent = currentDict.getGame;
                 } else {
-                    downloadBtnText.textContent = "Get for PC";
-                    downloadIcon.innerHTML = `<path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" fill="currentColor"/>`;
+                    dlBtn.classList.add('disabled');
+                    dlBtn.setAttribute('aria-disabled', 'true');
+                    dlBtn.title = currentDict.notSupported;
+                    dlBtn.href = '#';
+                    downloadBtnText.textContent = currentDict.notSupported;
                 }
             } else {
-                modalDownloadBtn.removeAttribute('href');
-                modalDownloadBtn.style.pointerEvents = 'none';
-                modalDownloadBtn.style.opacity = '0.5';
-                downloadBtnText.textContent = "This game is not supported on this device";
-                downloadIcon.innerHTML = `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z" fill="currentColor"/>`;
+                dlBtn.style.display = "none";
             }
 
-            // Screenshot Resolution
             const screenshotUrl = `picture/screenshots/${game.id}.jpg`;
             modalScreenshot.src = screenshotUrl;
 
-            // Handle image load status
             modalScreenshot.onload = function () {
                 modalScreenshot.style.display = "block";
                 modalFallback.style.display = "none";
             };
 
             modalScreenshot.onerror = function () {
-                // Hide screenshot, show gorgeous fallback gradient representing the game
                 modalScreenshot.style.display = "none";
                 modalFallback.style.display = "flex";
                 modalFallbackLogo.textContent = game.theme.logo || "UID";
-                modalFallbackTitle.textContent = game.name;
+                modalFallbackTitle.textContent = gameDisplayName;
                 modalLeft.style.background = game.theme.gradient;
             };
-
-            // Open Modal view
             detailModal.classList.add("active");
-            document.body.style.overflow = "hidden"; // Disable background scrolling
+            document.body.style.overflow = "hidden";
         }
 
         function closeModal() {
             detailModal.classList.remove("active");
-            document.body.style.overflow = ""; // Re-enable background scrolling
+            document.body.style.overflow = "";
             activeGame = null;
         }
 
-        // Modal Event Listeners
-        modalCloseBtn.addEventListener("click", closeModal);
-        detailModal.addEventListener("click", (e) => {
-            if (e.target === detailModal) {
-                closeModal();
-            }
+        langSelect.addEventListener("change", (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('selectedLanguage', currentLang);
+
+            updateStaticTexts();
+            renderCards();
         });
+
+        function copyToClipboard(text) {
+            if (!text) return;
+            navigator.clipboard.writeText(text).catch(() => { });
+        }
+
+        function showToast() {
+            copyToast.classList.add("active");
+            setTimeout(() => copyToast.classList.remove("active"), 2500);
+        }
 
         modalCopyBtn.addEventListener("click", () => {
-            if (activeGame) {
+            if (activeGame && activeGame.uid) {
                 copyToClipboard(activeGame.uid);
                 modalCopyBtn.className = "modal-copy-btn copied";
-                modalCopyBtn.querySelector("span").textContent = "Copied! ✓";
+                modalCopyBtn.querySelector("span").textContent = i18n[currentLang].copied;
+                showToast();
             }
         });
 
-        // Keyboard Esc key close modal
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && detailModal.classList.contains("active")) {
-                closeModal();
-            }
-        });
+        modalCloseBtn.addEventListener("click", closeModal);
+        detailModal.addEventListener("click", (e) => { if (e.target === detailModal) closeModal(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-        // Search and Filtering Logic
         searchInput.addEventListener("input", (e) => {
             searchQuery = e.target.value;
             renderCards();
         });
 
-        filterButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                filterButtons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                currentGenre = btn.dataset.genre;
-                renderCards();
-            });
-        });
-
-        // Init Page load
+        langSelect.value = currentLang;
+        updateStaticTexts();
         renderCards();
     </script>
 </body>
