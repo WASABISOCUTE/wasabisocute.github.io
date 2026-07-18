@@ -336,6 +336,7 @@
             transform: translateY(-5px);
             border-color: var(--card-theme-color, var(--card-border-glow));
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 20px var(--theme-glow, rgba(120, 140, 255, 0.15));
+            z-index: 50;
         }
 
         .game-card:hover::before {
@@ -744,6 +745,55 @@
             box-shadow: none;
         }
 
+        .modal-user-input-section {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(120, 140, 255, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-user-input-section.active {
+            display: flex;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(120, 140, 255, 0.15);
+            padding: 12px 14px;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .modal-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            border: none;
+            margin-top: 5px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background: linear-gradient(135deg, #128C7E, #075E54);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
         /* Toast Notification */
         .toast {
             position: fixed;
@@ -882,6 +932,68 @@
             flex-shrink: 0;
             margin-top: 1px;
         }
+
+        /* Modal Enhancements & Responsive Layout */
+        .modal-card {
+            background: rgba(10, 10, 24, 0.65);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(120, 140, 255, 0.4);
+        }
+
+        .modal-game-title {
+            font-size: 28px;
+            background: linear-gradient(135deg, #fff, #c7d2fe);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-uid-wrapper {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(120, 140, 255, 0.2);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-uid-text {
+            color: #c7d2fe;
+            text-shadow: 0 0 10px rgba(120, 140, 255, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .modal-container {
+                flex-direction: row;
+                min-height: 500px;
+            }
+
+            .modal-left {
+                flex: 0 0 55%;
+                min-height: auto;
+                border-right: 1px solid rgba(120, 140, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .modal-screenshot {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                padding: 10px;
+            }
+
+            .modal-right {
+                flex: 1;
+                padding: 40px;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .modal-card {
+                max-width: 1100px;
+            }
+        }
     </style>
 </head>
 
@@ -986,7 +1098,27 @@
                         </button>
                     </div>
 
+                    <div class="modal-user-input-section">
+                        <input type="text" class="modal-input" id="userUidInput" placeholder="Your UID (Required)" />
+                        <input type="text" class="modal-input" id="userNameInput" placeholder="Your Name (Optional)" />
+                        <input type="text" class="modal-input" id="userMessageInput" placeholder="Message (Optional)" />
+                        <button class="btn-action btn-whatsapp" id="sendWaBtn">
+                            <svg class="svg-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            <span id="txtSendWa">Send via WhatsApp</span>
+                        </button>
+                    </div>
+
                     <div class="modal-actions">
+                        <button class="btn-action btn-primary" id="toggleWaBtn">
+                            <svg class="svg-icon" viewBox="0 0 24 24">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor" />
+                            </svg>
+                            <span id="txtShareToggle">Share UID</span>
+                        </button>
                         <a class="btn-action btn-primary" id="modalWebBtn" href="#" target="_blank">
                             <svg class="svg-icon" viewBox="0 0 24 24">
                                 <path
@@ -1043,6 +1175,12 @@
                 backToProfile: "Back to Profile",
                 active: "Active",
                 inactive: "Inactive",
+                yourUid: "Your UID (Required)",
+                yourName: "Your Name (Optional)",
+                yourMessage: "Message (Optional)",
+                sendWa: "Send via WhatsApp",
+                shareToggle: "Share UID",
+                errUidRequired: "Please enter your UID first!",
                 dataMap: {
                     "Asia": "Asia",
                     "EN Server (Global)": "EN Server (Global)",
@@ -1075,6 +1213,12 @@
                 backToProfile: "返回主页",
                 active: "活跃中",
                 inactive: "未安装",
+                yourUid: "你的 UID (必填)",
+                yourName: "你的昵称 (选填)",
+                yourMessage: "你想说的话 (选填)",
+                sendWa: "通过 WhatsApp 发送",
+                shareToggle: "分享 UID",
+                errUidRequired: "请先输入你的 UID！",
                 dataMap: {
                     "Asia": "亚服 (Asia)",
                     "EN Server (Global)": "国际服 (EN Server)",
@@ -1084,32 +1228,38 @@
                 }
             },
             ja: {
-                pageTitle: "ゲーム UID センター",
+                pageTitle: "Game UID Centre",
                 searchPlaceholder: "検索",
-                loading: "読み込み中...",
-                statsText: "全 {count} 件のゲームを表示中",
-                noResults: "該当するゲームが見つかりません。",
-                copyUid: "UIDをコピー",
-                copied: "コピーしました! ✓",
-                toastSuccess: "UIDがクリップボードにコピーされました！",
+                loading: "ロード中...",
+                statsText: "計 {count} 件のゲームを表示",
+                noResults: "結果なし",
+                copyUid: "UID をコピー",
+                copied: "コピー完了! ✓",
+                toastSuccess: "UID をコピーしました!",
                 server: "サーバー:",
-                platform: "対応機種:",
-                ign: "プレイヤー名:",
+                platform: "プラットフォーム:",
+                ign: "ユーザー名:",
                 dateJoined: "プレイ開始日:",
                 visitWeb: "公式サイトへ",
-                getGame: "ゲームをダウンロード",
-                notSupported: "このデバイスでは利用できません",
+                getGame: "ゲームを入手",
+                notSupported: "現在のデバイスは未対応",
                 screenshot: "ゲームスクリーンショット",
                 gameUid: "ゲーム UID",
-                backToProfile: "プロフィールに戻る",
-                active: "プレイ中",
+                backToProfile: "ホームに戻る",
+                active: "アクティブ",
                 inactive: "未インストール",
+                yourUid: "あなたの UID (必須)",
+                yourName: "お名前 (任意)",
+                yourMessage: "メッセージ (任意)",
+                sendWa: "WhatsAppで送信",
+                shareToggle: "UIDをシェア",
+                errUidRequired: "先にUIDを入力してください！",
                 dataMap: {
                     "Asia": "アジアサーバー (Asia)",
-                    "EN Server (Global)": "国際サーバー (EN)",
-                    "TW Server": "台湾サーバー (TW)",
-                    "JP Server": "日本サーバー (JP)",
-                    "CN Server": "中国サーバー (CN)"
+                    "EN Server (Global)": "国際サーバー (EN Server)",
+                    "TW Server": "台湾サーバー (TW Server)",
+                    "JP Server": "日本サーバー (JP Server)",
+                    "CN Server": "中国サーバー (CN Server)"
                 }
             }
         };
@@ -1327,7 +1477,11 @@
                 genre: "rhythm",
                 dateJoined: "2024/05/31",
                 installed: true,
-                note: "Rotaeno 的好友机制为单向添加：你只需输入对方ID即可直接添加对方为好友，并能看到对方的成绩——但对方不会得知有谁添加了他，也看不到你的成绩。<br>如果你想让我也能看见你的成绩，请使用任意社交媒体(如IG,Whatsapp等)告诉我你的ID。",
+                note: {
+                    zh: "Rotaeno 是单向好友机制，加我后你即可查看我的成绩。<br>如需互关，请通过社交媒体(IG, WhatsApp等)把你的ID发给我。",
+                    en: "Rotaeno has a one-way friend system. Add my ID to see my scores.<br>For mutual follow, please send me your ID via social media (IG, WhatsApp, etc.).",
+                    ja: "Rotaenoは一方通行のフレンド機能です。<br>相互フォローをご希望の場合は、SNS (IG, WhatsApp等) であなたのIDを教えてください。"
+                },
                 web: "https://www.rotaeno.com/",
                 download: {
                     android: "https://play.google.com/store/apps/details?id=com.xd.rotaeno.googleplay",
@@ -1837,6 +1991,12 @@
         const modalDownloadBtn = document.getElementById("modalDownloadBtn");
         const downloadBtnText = document.getElementById("downloadBtnText");
         const downloadIcon = document.getElementById("downloadIcon");
+        const userUidInput = document.getElementById("userUidInput");
+        const userNameInput = document.getElementById("userNameInput");
+        const userMessageInput = document.getElementById("userMessageInput");
+        const sendWaBtn = document.getElementById("sendWaBtn");
+        const toggleWaBtn = document.getElementById("toggleWaBtn");
+        const modalUserInputSection = document.querySelector(".modal-user-input-section");
 
         function getTransText(val) {
             return i18n[currentLang].dataMap[val] || val;
@@ -1883,6 +2043,12 @@
             document.getElementById("txtCopyBtn").textContent = currentDict.copyUid;
             document.getElementById("downloadBtnText").textContent = currentDict.getGame;
             document.getElementById("txtToast").textContent = currentDict.toastSuccess;
+            document.getElementById("txtSendWa").textContent = currentDict.sendWa;
+            document.getElementById("txtShareToggle").textContent = currentDict.shareToggle;
+            userUidInput.placeholder = currentDict.yourUid;
+            userNameInput.placeholder = currentDict.yourName;
+            userMessageInput.placeholder = currentDict.yourMessage;
+
             document.getElementById("pageFooter").innerHTML = `<p>&copy; 2026 WASABISOCUTE <a href="index.html">${currentDict.backToProfile}</a></p>`;
         }
 
@@ -1895,8 +2061,7 @@
                 const matchesSearch = game.name.toLowerCase().includes(lowerQuery) ||
                     (game.name_zh && game.name_zh.toLowerCase().includes(lowerQuery)) ||
                     (game.name_ja && game.name_ja.toLowerCase().includes(lowerQuery)) ||
-                    (game.uid && game.uid.toLowerCase().includes(lowerQuery)) ||
-                    game.server.toLowerCase().includes(lowerQuery);
+                    (game.uid && game.uid.toLowerCase().includes(lowerQuery));
                 const matchesGenre = currentGenre === "all" || game.genre === currentGenre;
                 return matchesSearch && matchesGenre;
             });
@@ -1921,6 +2086,10 @@
                 let gameDisplayName = game.name;
                 if (currentLang === 'zh' && game.name_zh) gameDisplayName = game.name_zh;
                 if (currentLang === 'ja' && game.name_ja) gameDisplayName = game.name_ja;
+                let gameNote = null;
+                if (game.note) {
+                    gameNote = typeof game.note === 'object' ? (game.note[currentLang] || game.note.en || game.note.zh) : game.note;
+                }
                 card.innerHTML = `
           <div class="card-header">
             <span class="badge badge-platform">${game.platform.split(' / ')[0]}</span>
@@ -1930,9 +2099,9 @@
             </span>
             
           </div>
-          <h3 class="game-title">${gameDisplayName} ${game.note ? `<span class="card-note-badge" title="">
+          <h3 class="game-title">${gameDisplayName} ${gameNote ? `<span class="card-note-badge" title="">
               !
-              <span class="note-tooltip">${game.note}</span>
+              <span class="note-tooltip">${gameNote}</span>
             </span>` : ''}</h3>
           <p class="game-server">${game.server}</p>
           <div class="uid-display">
@@ -1992,9 +2161,19 @@
             modalStatusBadge.className = `badge badge-status ${game.installed ? 'status-active' : 'status-inactive'}`;
             modalStatusBadge.textContent = game.installed ? currentDict.active : currentDict.inactive;
 
+            let gameNote = null;
             if (game.note) {
+                gameNote = typeof game.note === 'object' ? (game.note[currentLang] || game.note.en || game.note.zh) : game.note;
+            }
+
+            userUidInput.value = "";
+            userNameInput.value = "";
+            userMessageInput.value = "";
+            modalUserInputSection.classList.remove("active");
+
+            if (gameNote) {
                 modalNoteBox.style.display = "flex";
-                modalNoteText.innerHTML = game.note;
+                modalNoteText.innerHTML = gameNote;
             } else {
                 modalNoteBox.style.display = "none";
             }
@@ -2073,6 +2252,28 @@
                 modalCopyBtn.querySelector("span").textContent = i18n[currentLang].copied;
                 showToast();
             }
+        });
+
+        toggleWaBtn.addEventListener("click", () => {
+            modalUserInputSection.classList.toggle("active");
+        });
+
+        sendWaBtn.addEventListener("click", () => {
+            const uid = userUidInput.value.trim();
+            if (!uid) {
+                alert(i18n[currentLang].errUidRequired);
+                return;
+            }
+            const name = userNameInput.value.trim();
+            const msg = userMessageInput.value.trim();
+            const gameName = modalGameTitle.textContent;
+
+            let text = `${gameName}: ${uid}\n`;
+            text += `<${name || 'Anonymous'}>: ${msg || ''}`;
+
+            const contact = atob("NjAxMTIwOTA0MTgy");
+            const waUrl = `https://wa.me/${contact}?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
         });
 
         modalCloseBtn.addEventListener("click", closeModal);
