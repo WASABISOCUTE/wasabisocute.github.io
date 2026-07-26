@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <style>
         :root {
@@ -1102,6 +1103,10 @@
                         <input type="text" class="modal-input" id="userUidInput" placeholder="Your UID (Required)" />
                         <input type="text" class="modal-input" id="userNameInput" placeholder="Your Name (Optional)" />
                         <input type="text" class="modal-input" id="userMessageInput" placeholder="Message (Optional)" />
+                        <div id="recaptcha-container" style="display: none; align-self: center; margin-top: 5px;">
+                            <div class="g-recaptcha" data-sitekey="6Ld_S2YtAAAAAAkI9_wLPs2Ag1qf8GgyBb4cKdBN"
+                                data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
+                        </div>
                         <button class="btn-action btn-whatsapp" id="sendWaBtn">
                             <svg class="svg-icon" viewBox="0 0 24 24">
                                 <path
@@ -1942,7 +1947,7 @@
                 platform: "Mobile / PC",
                 genre: "gacha",
                 dateJoined: "2026/07/14",
-                installed: true,
+                installed: false,
                 web: "https://ak.gryphline.com/",
                 download: {
                     android: "https://gryphline-official.onelink.me/B3et/web",
@@ -2281,6 +2286,42 @@
             modalUserInputSection.classList.toggle("active");
         });
 
+        let recaptchaVerified = false;
+        window.onRecaptchaSuccess = function (token) {
+            recaptchaVerified = true;
+        };
+        window.onRecaptchaExpired = function () {
+            recaptchaVerified = false;
+        };
+
+        function getSendHistory() {
+            let history = [];
+            try {
+                const ls = localStorage.getItem('uidSendHistory');
+                if (ls) history = JSON.parse(ls);
+            } catch (e) { }
+
+            let cookieHistory = [];
+            const match = document.cookie.match(new RegExp('(^| )uidSendHistory=([^;]+)'));
+            if (match) {
+                try {
+                    cookieHistory = JSON.parse(decodeURIComponent(match[2]));
+                } catch (e) { }
+            }
+
+            const merged = [...new Set([...history, ...cookieHistory])].filter(t => !isNaN(t));
+            return merged.sort((a, b) => a - b);
+        }
+
+        function saveSendHistory(history) {
+            try {
+                localStorage.setItem('uidSendHistory', JSON.stringify(history));
+            } catch (e) { }
+
+            const expires = new Date(Date.now() + 15 * 60 * 1000).toUTCString();
+            document.cookie = `uidSendHistory=${encodeURIComponent(JSON.stringify(history))}; expires=${expires}; path=/`;
+        }
+
         sendWaBtn.addEventListener("click", () => {
             const uid = userUidInput.value.trim();
             if (!uid) {
@@ -2291,12 +2332,38 @@
             const msg = userMessageInput.value.trim();
             const gameName = modalGameTitle.textContent;
 
+            const now = Date.now();
+            let sendHistory = getSendHistory();
+            sendHistory = sendHistory.filter(time => now - time < 15 * 60 * 1000);
+
+            if (sendHistory.length >= 3) {
+                const recaptchaContainer = document.getElementById('recaptcha-container');
+                if (recaptchaContainer.style.display === 'none') {
+                    recaptchaContainer.style.display = 'block';
+                    return;
+                }
+
+                if (!recaptchaVerified) {
+                    alert(currentLang === 'zh' ? "请完成 reCAPTCHA 验证以继续。" : (currentLang === 'ja' ? "続行するにはreCAPTCHA認証を完了してください。" : "Please complete the reCAPTCHA verification to continue."));
+                    return;
+                }
+            }
+
             let text = `${gameName}: ${uid}\n`;
             text += `<${name || 'Anonymous'}>: ${msg || ''}`;
 
             const contact = atob("NjAxMTIwOTA0MTgy");
             const waUrl = `https://wa.me/${contact}?text=${encodeURIComponent(text)}`;
             window.open(waUrl, '_blank');
+
+            sendHistory.push(now);
+            saveSendHistory(sendHistory);
+
+            if (sendHistory.length > 3) {
+                if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+                recaptchaVerified = false;
+                document.getElementById('recaptcha-container').style.display = 'none';
+            }
         });
 
         modalCloseBtn.addEventListener("click", closeModal);
