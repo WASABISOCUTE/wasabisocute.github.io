@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found | WASABISOCUTE</title>
+  <link rel="icon" type="image/x-icon" href="/picture/favicon.ico">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 20% 20%, #2b2b5a, #0b0b18 60%, #05050b);
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* background */
+    .stars {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.35), transparent 25%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.25), transparent 25%),
+        radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.2), transparent 25%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.18), transparent 25%);
+      opacity: 0.7;
+      pointer-events: none;
+      animation: twinkle 8s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: 0.4;
+      }
+
+      to {
+        opacity: 0.8;
+      }
+    }
+
+    .card {
+      background: rgba(10, 10, 20, 0.6);
+      border: 1px solid rgba(120, 140, 255, 0.4);
+      border-radius: 18px;
+      padding: 60px 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .error-code {
+      font-size: 80px;
+      font-weight: bold;
+      color: #cbd5f5;
+      text-shadow: 0 0 20px rgba(120, 140, 255, 0.6);
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    h1 {
+      font-size: 24px;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #a6b0c3;
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .home-link {
+      display: inline-block;
+      text-decoration: none;
+      color: #cbd5f5;
+      padding: 10px 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(120, 140, 255, 0.5);
+      background: rgba(10, 10, 20, 0.5);
+      transition: 0.2s;
+      font-size: 15px;
+    }
+
+    .home-link:hover {
+      background: rgba(120, 140, 255, 0.2);
+      border-color: rgba(120, 140, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(120, 140, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+
+  <div class="container">
+    <div class="card">
+      <div class="error-code">404</div>
+      <h1>Page Not Found</h1>
+      <p>抱歉，您访问的页面不存在或已被移除。</p>
+
+      <a href="index.html" class="home-link">返回首页</a>
+    </div>
+  </div>
+</body>
+
+</html>
