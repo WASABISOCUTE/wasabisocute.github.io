@@ -771,6 +771,35 @@
             margin-left: 10px;
         }
 
+        .np-toast-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            padding-left: 16px;
+        }
+
+        .toast-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .toast-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .np-content {
@@ -862,7 +891,13 @@
             <div class="np-toast-title" id="toast-title">Title</div>
             <div class="np-toast-artist" id="toast-artist">Artist</div>
         </div>
-        <i class="fa-solid fa-expand np-toast-icon"></i>
+        <div class="np-toast-controls" onclick="event.stopPropagation()">
+            <button class="toast-btn" onclick="playPrevious(true)"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="toast-btn" id="toast-play-pause-btn" onclick="togglePlay()"><i
+                    class="fa-solid fa-pause"></i></button>
+            <button class="toast-btn" onclick="playNext(true)"><i class="fa-solid fa-forward-step"></i></button>
+            <button class="toast-btn" onclick="closeToast()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
     </div>
 
     <!-- NOW PLAYING OVERLAY -->
@@ -936,11 +971,11 @@
                 </div>
 
                 <div class="player-controls">
-                    <button class="ctrl-btn"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="ctrl-btn" onclick="playPrevious()"><i class="fa-solid fa-backward-step"></i></button>
                     <button class="btn-play-pause" id="play-pause-btn" onclick="togglePlay()">
                         <i class="fa-solid fa-play"></i>
                     </button>
-                    <button class="ctrl-btn"><i class="fa-solid fa-forward-step"></i></button>
+                    <button class="ctrl-btn" onclick="playNext()"><i class="fa-solid fa-forward-step"></i></button>
                 </div>
 
                 <!-- Spacer for flex alignment -->
@@ -1148,6 +1183,116 @@
                     [05:18.01]放下尘浮我已踏上归途
 `
             },
+            {
+                chapter: 0,
+                title: '你的答案', artist: '阿冗',
+                context: '', desc: '',
+                date: '', ytId: 'Tziswp8xQ_4', start: 0,
+                lyrics: `
+                    [00:25.29]也许世界就这样
+                    [00:28.59]我也还在路上
+                    [00:31.13]没有人能诉说
+                    [00:36.05]也许我只能沉默
+                    [00:39.24]眼泪湿润眼眶
+                    [00:41.90]可又不甘懦弱
+                    [00:45.55]低着头 期待白昼
+                    [00:50.71]接受所有的嘲讽
+                    [00:56.57]向着风 拥抱彩虹
+                    [01:01.75]勇敢的向前走
+                    [01:06.29]黎明的那道光
+                    [01:08.55]会越过黑暗
+                    [01:11.37]打破一切恐惧我能
+                    [01:14.29]找到答案
+                    [01:17.37]哪怕要逆着光
+                    [01:19.62]就驱散黑暗
+                    [01:22.28]丢弃所有的负担
+                    [01:25.30]不再孤单
+                    [01:28.29]不再孤单
+                    [01:31.97]
+                    [01:38.92]也许世界就这样
+                    [01:41.99]我也还在路上
+                    [01:44.99]没有人能诉说
+                    [01:49.49]也许我只能沉默
+                    [01:52.22]眼泪湿润眼眶
+                    [01:55.01]可又不甘懦弱
+                    [01:58.95]低着头 期待白昼
+                    [02:04.60]接受所有的嘲讽
+                    [02:10.25]向着风 拥抱彩虹
+                    [02:15.83]勇敢的向前走
+                    [02:20.47]黎明的那道光
+                    [02:22.14]会越过黑暗
+                    [02:25.01]打破一切恐惧我能
+                    [02:28.08]找到答案
+                    [02:31.05]哪怕要逆着光
+                    [02:33.08]就驱散黑暗
+                    [02:36.01]丢弃所有的负担
+                    [02:38.86]不再孤单
+                    [02:41.88]不再孤单
+                    [02:50.38]黎明的那道光
+                    [02:51.97]会越过黑暗
+                    [02:54.71]打破一切恐惧我能
+                    [02:57.81]找到答案
+                    [03:00.75]哪怕要逆着光
+                    [03:02.95]就驱散黑暗
+                    [03:05.66]有一万种的力量
+                    [03:08.64]淹没孤单
+                    [03:11.57]不再孤单
+                    [03:14.41]也许世界就这样
+                    [03:17.75]我也还在路上
+                    [03:20.60]没有人能诉说
+                    [03:25.55]也许我只能沉默
+                    [03:28.82]眼泪湿润眼眶
+                    [03:31.49]可又不甘懦弱
+`
+            },
+            {
+                chapter: 0,
+                title: 'Alone', artist: 'Alan Walker',
+                context: '', desc: '',
+                date: '2022', ytId: '1-xGerv5FOk', start: 0,
+                lyrics: `
+                    [00:04.07]Lost in your mind
+                    [00:10.94]I wanna know
+                    [00:13.33]Am I losing my mind?
+                    [00:20.79]Never let me go
+                    [00:22.92]If this night is not forever
+                    [00:26.38]At least we are together
+                    [00:28.84]I know I'm not alone
+                    [00:31.14]I know I'm not alone
+                    [00:34.11]Anywhere, whenever
+                    [00:36.24]Apart, but still together
+                    [00:38.78]I know I'm not alone
+                    [00:41.06]I know I'm not alone
+                    [00:51.10]I know I'm not alone
+                    [01:00.77]I know I'm not alone
+                    [01:06.32]Unconscious mind
+                    [01:12.85]I'm wide awake
+                    [01:15.77]Wanna feel one last time
+                    [01:22.85]Take my pain away
+                    [01:24.93]
+                    [01:34.99]If this night is not forever
+                    [01:38.50]At least we are together
+                    [01:41.06]I know I'm not alone
+                    [01:43.45]I know I'm not alone
+                    [01:46.10]Anywhere, whenever
+                    [01:48.60]Apart, but still together
+                    [01:51.01]I know I'm not alone
+                    [01:53.39]I know I'm not alone
+                    [02:03.06]I know I'm not alone
+                    [02:12.69]I know I'm not alone
+                    [02:17.24]I'm not alone, I'm not alone, I'm not alone
+                    [02:23.48]I know I'm not alone
+                    [02:28.02]I'm not alone, I'm not alone, I'm not alone
+                    [02:32.97]I know I'm not alone
+`
+            },
+            // Chapter 1
+            {
+                chapter: 1,
+                title: 'Le spectacle doit continuer', artist: 'HOYO-MiX',
+                context: 'Game - Genshin Impact', desc: 'Opera Epiclese',
+                date: 'NOV 2023', ytId: 'w1d7_SE0PzY', start: 0,
+            },
             // Chapter 3
             {
                 chapter: 3,
@@ -1177,54 +1322,54 @@
                 date: 'FEB 2025', ytId: 'G-WN0ab-9ZI', start: 0,
                 ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54',
                 lyrics: `
-[00:01.18]不安ばっか知ってんだ 雨が降りそうな日
-[00:04.76]風の匂いで分かるから
-[00:08.10]誰だって気付いてんだ 僕には無理だと
-[00:12.12]それでも足掻いては転んだ
-[00:14.96]
-[00:15.34]友情×努力＝勝利の方程式
-[00:19.37]解けないまま過ごした僕らにも
-[00:22.96]いつか分かる日が来るよって
-[00:25.83]確証無く笑える自分が嫌いだ
-[00:29.43]
-[00:30.12]星が降るあの街に
-[00:33.34]置き去りにした思い出が
-[00:37.01]胸の奥で揺らめいてる
-[00:40.74]いつまでも焦がれていた
-[00:44.69]
-[00:46.03]それは雑踏の海の中で
-[00:49.95]踊るように燃えている誰かの声
-[00:53.62]ずっと探し続けてる
-[00:57.35]たとえそれが僕らのワガママでもいいさ
-[01:01.90]
-[01:09.49]好きな事選んだんだ
-[01:11.38]胸を張ればいいって
-[01:13.15]わかってるわかってる繰り返した
-[01:15.51]
-[01:16.33]結んだ指とかさねた呼吸
-[01:19.62]鳴り響く鼓動に耳を澄ました
-[01:22.76]
-[01:23.28]ホントは言いたくなかった
-[01:25.31]うざったいんだよ外野ばっか
-[01:27.13]ここで生きるってこと決めたんだから！
-[01:30.35]
-[01:30.59]きっとボクらの出会いだって
-[01:34.40]この空の下にある小さなセカイ
-[01:37.98]ずっと求め続けてる
-[01:41.70]たとえそれが誰かの気まぐれでもいいさ
-[01:49.56]
-[02:00.32]それは雑踏の海の中で
-[02:03.97]踊るように燃えているあの日の声
-[02:07.63]ずっと探し続けてる
-[02:11.71]たとえそれが僕らのワガママでも
-[02:14.92]
-[02:15.48]きっとボクらの出会いだって
-[02:19.09]この空の下にある小さなセカイ
-[02:22.90]ずっと求め続けてる
-[02:26.54]たとえそれが誰かの気まぐれでもいいさ
-[02:30.86]
-[02:38.31]不安ばっか知っていた あの日のボクらが
-[02:41.88]この街で僕らになれますように
+                    [00:01.18]不安ばっか知ってんだ 雨が降りそうな日
+                    [00:04.76]風の匂いで分かるから
+                    [00:08.10]誰だって気付いてんだ 僕には無理だと
+                    [00:12.12]それでも足掻いては転んだ
+                    [00:14.96]
+                    [00:15.34]友情×努力＝勝利の方程式
+                    [00:19.37]解けないまま過ごした僕らにも
+                    [00:22.96]いつか分かる日が来るよって
+                    [00:25.83]確証無く笑える自分が嫌いだ
+                    [00:29.43]
+                    [00:30.12]星が降るあの街に
+                    [00:33.34]置き去りにした思い出が
+                    [00:37.01]胸の奥で揺らめいてる
+                    [00:40.74]いつまでも焦がれていた
+                    [00:44.69]
+                    [00:46.03]それは雑踏の海の中で
+                    [00:49.95]踊るように燃えている誰かの声
+                    [00:53.62]ずっと探し続けてる
+                    [00:57.35]たとえそれが僕らのワガママでもいいさ
+                    [01:01.90]
+                    [01:09.49]好きな事選んだんだ
+                    [01:11.38]胸を張ればいいって
+                    [01:13.15]わかってるわかってる繰り返した
+                    [01:15.51]
+                    [01:16.33]結んだ指とかさねた呼吸
+                    [01:19.62]鳴り響く鼓動に耳を澄ました
+                    [01:22.76]
+                    [01:23.28]ホントは言いたくなかった
+                    [01:25.31]うざったいんだよ外野ばっか
+                    [01:27.13]ここで生きるってこと決めたんだから！
+                    [01:30.35]
+                    [01:30.59]きっとボクらの出会いだって
+                    [01:34.40]この空の下にある小さなセカイ
+                    [01:37.98]ずっと求め続けてる
+                    [01:41.70]たとえそれが誰かの気まぐれでもいいさ
+                    [01:49.56]
+                    [02:00.32]それは雑踏の海の中で
+                    [02:03.97]踊るように燃えているあの日の声
+                    [02:07.63]ずっと探し続けてる
+                    [02:11.71]たとえそれが僕らのワガママでも
+                    [02:14.92]
+                    [02:15.48]きっとボクらの出会いだって
+                    [02:19.09]この空の下にある小さなセカイ
+                    [02:22.90]ずっと求め続けてる
+                    [02:26.54]たとえそれが誰かの気まぐれでもいいさ
+                    [02:30.86]
+                    [02:38.31]不安ばっか知っていた あの日のボクらが
+                    [02:41.88]この街で僕らになれますように
 `
             },
             {
@@ -1347,57 +1492,57 @@
                 date: 'APR 2026', ytId: 'SJcgOWsDwi4', start: 0,
                 ig: '',
                 lyrics: `
-[00:01.65]息つまるばかりで 温ぬるい退屈な夜道で
-[00:07.83](mellow mellow mellow)
-[00:09.31]ルールは無視で行きたいね
-[00:14.80]So burn my burn my heart
-[00:16.98]
-[00:17.18](uh...) 悟られそう (uh...) 可か不可 Get down now
-[00:24.71](uh...) あーあ もうきっと優等ぶった
-[00:30.16]'I'じゃ居られないくらい どうしようもない
-[00:32.54]
-[00:32.72]yuh 無理目のクエスチョン ha 実存？ フィクション？
-[00:36.53]You make me サゲなの何で？ I know the way
-[00:39.88]願ってるばっかじゃ叶わない めちゃくちゃにされたって変わらない
-[00:43.59]まあね 喰らえ 覚醒 Find the way
-[00:46.89]
-[00:47.71]待ってライトあびる感覚 甘い罠
-[00:51.14]見当違い disも聞き飽きたわ
-[00:55.07]そりゃねいけるところまで Take me higher
-[00:58.84]どう？ Turning back 無理ってとっくに分かってんでしょ
-[01:02.83]
-[01:02.86](uh...) 悟られそう (uh...) 可か不可 Get down now
-[01:10.63](uh...) あーあ もうずっとしゃんと居られないや
-[01:16.27]それは誰のせい？
-[01:18.27]
-[01:18.41]終わらない夢を描こう描いて
-[01:21.87]願ったまま欲しがったその先へ
-[01:26.10]終わらない夜を超えていこう 超えていこう
-[01:29.41]このまま 焦がれた向こう側へ
-[01:33.88]
-[01:35.62]はあぶっちゃけ解せないや 勝算なくても行っちゃえ！ とか
-[01:39.55]運命感じる感受性は否めない ウチら負けない
-[01:43.28]跳べ 吠え 目で追って いつでもNO.1
-[01:46.77]そこどけ 速攻揺らせ 攻め 甘美な時 Ride on now
-[01:51.65]
-[01:54.44]Shake it up まだまだ Go beyond the way yuh
-[01:58.67]
-[01:59.33]行き詰まるばかりで ずるい言葉を探して
-[02:05.25](mellow mellow mellow)
-[02:06.58]I am me 研ぎ澄まし 本能に従って 行け
-[02:12.18]Holla "We are the winners!"
-[02:13.92]So burn my burn my heart
-[02:14.92]
-[02:23.62]終わらない夢を描こう描いて
-[02:27.81]願ったまま欲しがったその先へ
-[02:32.13]終わらない夜を超えていこう 超えていこう
-[02:35.40]このまま 焦がれた向こう側へ
-[02:39.30]
-[02:39.90](uh...) 張り裂けそう 追いかけて合わせた 背が熱くて
-[02:48.47](uh...) 張り裂けそう もう一生鳴り止まない
-[02:52.60]限界の向こう側へ
-[02:54.71]
-[02:55.27]Ready Steady? Get out the way.
+                    [00:01.65]息つまるばかりで 温ぬるい退屈な夜道で
+                    [00:07.83](mellow mellow mellow)
+                    [00:09.31]ルールは無視で行きたいね
+                    [00:14.80]So burn my burn my heart
+                    [00:16.98]
+                    [00:17.18](uh...) 悟られそう (uh...) 可か不可 Get down now
+                    [00:24.71](uh...) あーあ もうきっと優等ぶった
+                    [00:30.16]'I'じゃ居られないくらい どうしようもない
+                    [00:32.54]
+                    [00:32.72]yuh 無理目のクエスチョン ha 実存？ フィクション？
+                    [00:36.53]You make me サゲなの何で？ I know the way
+                    [00:39.88]願ってるばっかじゃ叶わない めちゃくちゃにされたって変わらない
+                    [00:43.59]まあね 喰らえ 覚醒 Find the way
+                    [00:46.89]
+                    [00:47.71]待ってライトあびる感覚 甘い罠
+                    [00:51.14]見当違い disも聞き飽きたわ
+                    [00:55.07]そりゃねいけるところまで Take me higher
+                    [00:58.84]どう？ Turning back 無理ってとっくに分かってんでしょ
+                    [01:02.83]
+                    [01:02.86](uh...) 悟られそう (uh...) 可か不可 Get down now
+                    [01:10.63](uh...) あーあ もうずっとしゃんと居られないや
+                    [01:16.27]それは誰のせい？
+                    [01:18.27]
+                    [01:18.41]終わらない夢を描こう描いて
+                    [01:21.87]願ったまま欲しがったその先へ
+                    [01:26.10]終わらない夜を超えていこう 超えていこう
+                    [01:29.41]このまま 焦がれた向こう側へ
+                    [01:33.88]
+                    [01:35.62]はあぶっちゃけ解せないや 勝算なくても行っちゃえ！ とか
+                    [01:39.55]運命感じる感受性は否めない ウチら負けない
+                    [01:43.28]跳べ 吠え 目で追って いつでもNO.1
+                    [01:46.77]そこどけ 速攻揺らせ 攻め 甘美な時 Ride on now
+                    [01:51.65]
+                    [01:54.44]Shake it up まだまだ Go beyond the way yuh
+                    [01:58.67]
+                    [01:59.33]行き詰まるばかりで ずるい言葉を探して
+                    [02:05.25](mellow mellow mellow)
+                    [02:06.58]I am me 研ぎ澄まし 本能に従って 行け
+                    [02:12.18]Holla "We are the winners!"
+                    [02:13.92]So burn my burn my heart
+                    [02:14.92]
+                    [02:23.62]終わらない夢を描こう描いて
+                    [02:27.81]願ったまま欲しがったその先へ
+                    [02:32.13]終わらない夜を超えていこう 超えていこう
+                    [02:35.40]このまま 焦がれた向こう側へ
+                    [02:39.30]
+                    [02:39.90](uh...) 張り裂けそう 追いかけて合わせた 背が熱くて
+                    [02:48.47](uh...) 張り裂けそう もう一生鳴り止まない
+                    [02:52.60]限界の向こう側へ
+                    [02:54.71]
+                    [02:55.27]Ready Steady? Get out the way.
 `
             },
             {
@@ -1407,60 +1552,60 @@
                 date: 'JUN 2026', ytId: 'P7ueDJG9IO4', start: 0,
                 ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTE5NDk0MzU3NzUyODk0?story_media_id=3922679128558534096_63008808258&igsh=MWFhNTVpN2hzZmRjMw==',
                 lyrics: `
-[00:11.04]眠れない夜
-[00:12.03]僕らは初めて繋がり合った気がした
-[00:16.08]どうしようもない
-[00:17.36]そんな日々を抱える僕らはどこか似ていた
-[00:21.16]
-[00:21.50]量産される音楽と命が
-[00:24.51]重なりあっても
-[00:25.75]時既に遅くて
-[00:27.13]不確かな音や言葉や数字に苛まれる
-[00:30.59]世界は傷だらけ
-[00:31.52]
-[00:31.67]誰だって
-[00:33.11]言葉にできない痛みを抱えてる
-[00:37.11]僕だって
-[00:38.31]痛い程知ってるよそんなこと
-[00:41.86]
-[00:42.11]だから
-[00:43.48]この歌は僕と君の
-[00:47.21]息を繋ぐため歌うアリア
-[00:53.45]
-[01:14.15]僕らいつの時代も
-[01:16.95]サヨナラに怯えて
-[01:19.21]命を持て余している
-[01:22.25]知る由もないのに
-[01:24.62]
-[01:25.03]僕らいつの未来も
-[01:27.59]普通を恐れて
-[01:29.79]天才に成りたがる
-[01:32.44]成る意味もないのに
-[01:36.32]
-[01:46.80]忘れられないんだ
-[01:49.52]淘汰された表情
-[01:51.94]それは嬉しい方じゃない
-[01:55.30]悲しい方の
-[01:57.06]
-[01:57.44]子どもの頃は
-[01:59.81]誰かを救いたいと
-[02:01.92]夢を綴ったはずなのに
-[02:07.94]
-[02:07.94]僕達は、最期を求めて生まれてきたんだ
-[02:13.22]今春もこの夏も死にがいを探している
-[02:18.45]この世界を作った神様に
-[02:23.91]バレない場所でこの歌を
-[02:28.79]歌わせて
-[02:30.29]
-[03:01.94]僕らいつの時代も
-[03:04.52]平和を保つため
-[03:06.89]兵器を買い安堵している
-[03:10.03]必要もないのに
-[03:11.88]
-[03:12.51]僕らいつの終いも
-[03:15.22]失くして気づいて
-[03:17.37]初めて大切にされる
-[03:20.07]それじゃもう遅いのに
+                    [00:11.04]眠れない夜
+                    [00:12.03]僕らは初めて繋がり合った気がした
+                    [00:16.08]どうしようもない
+                    [00:17.36]そんな日々を抱える僕らはどこか似ていた
+                    [00:21.16]
+                    [00:21.50]量産される音楽と命が
+                    [00:24.51]重なりあっても
+                    [00:25.75]時既に遅くて
+                    [00:27.13]不確かな音や言葉や数字に苛まれる
+                    [00:30.59]世界は傷だらけ
+                    [00:31.52]
+                    [00:31.67]誰だって
+                    [00:33.11]言葉にできない痛みを抱えてる
+                    [00:37.11]僕だって
+                    [00:38.31]痛い程知ってるよそんなこと
+                    [00:41.86]
+                    [00:42.11]だから
+                    [00:43.48]この歌は僕と君の
+                    [00:47.21]息を繋ぐため歌うアリア
+                    [00:53.45]
+                    [01:14.15]僕らいつの時代も
+                    [01:16.95]サヨナラに怯えて
+                    [01:19.21]命を持て余している
+                    [01:22.25]知る由もないのに
+                    [01:24.62]
+                    [01:25.03]僕らいつの未来も
+                    [01:27.59]普通を恐れて
+                    [01:29.79]天才に成りたがる
+                    [01:32.44]成る意味もないのに
+                    [01:36.32]
+                    [01:46.80]忘れられないんだ
+                    [01:49.52]淘汰された表情
+                    [01:51.94]それは嬉しい方じゃない
+                    [01:55.30]悲しい方の
+                    [01:57.06]
+                    [01:57.44]子どもの頃は
+                    [01:59.81]誰かを救いたいと
+                    [02:01.92]夢を綴ったはずなのに
+                    [02:07.94]
+                    [02:07.94]僕達は、最期を求めて生まれてきたんだ
+                    [02:13.22]今春もこの夏も死にがいを探している
+                    [02:18.45]この世界を作った神様に
+                    [02:23.91]バレない場所でこの歌を
+                    [02:28.79]歌わせて
+                    [02:30.29]
+                    [03:01.94]僕らいつの時代も
+                    [03:04.52]平和を保つため
+                    [03:06.89]兵器を買い安堵している
+                    [03:10.03]必要もないのに
+                    [03:11.88]
+                    [03:12.51]僕らいつの終いも
+                    [03:15.22]失くして気づいて
+                    [03:17.37]初めて大切にされる
+                    [03:20.07]それじゃもう遅いのに
 `
             }
         ];
@@ -1501,6 +1646,7 @@
         let isPlayerReady = false;
         let progressInterval;
         let currentTrackId = 0;
+        let playerTimeout;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
@@ -1531,6 +1677,8 @@
 
             if (event.data == YT.PlayerState.PLAYING) {
                 playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                const toastBtn = document.getElementById('toast-play-pause-btn');
+                if (toastBtn) toastBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                 playBtn.classList.add('is-playing');
                 // Clear any frozen inline styles and restart animation
                 visualizer.querySelectorAll('.bar').forEach(bar => {
@@ -1540,6 +1688,8 @@
                 startProgressTracker();
             } else {
                 playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                const toastBtn = document.getElementById('toast-play-pause-btn');
+                if (toastBtn) toastBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
                 playBtn.classList.remove('is-playing');
                 // Capture current animated heights before removing animation
                 const bars = visualizer.querySelectorAll('.bar');
@@ -1563,17 +1713,26 @@
         }
 
         // Overlay Controls
-        function openPlayer(trackId) {
+        function openPlayer(trackId, keepHidden = false) {
+            clearTimeout(playerTimeout);
             const toast = document.getElementById('np-toast');
-            if (toast) toast.classList.remove('active');
+            if (toast && !keepHidden) toast.classList.remove('active');
 
             const isReopening = (currentTrackId === trackId && isPlayerReady);
             currentTrackId = trackId;
             const track = tracks[trackId];
 
             // UI Updates
-            document.getElementById('np-overlay').classList.add('active');
-            document.body.style.overflow = 'hidden'; // prevent bg scrolling
+            if (!keepHidden) {
+                document.getElementById('np-overlay').classList.add('active');
+                document.body.style.overflow = 'hidden'; // prevent bg scrolling
+            } else {
+                if (toast) {
+                    document.getElementById('toast-title').innerText = track.title;
+                    document.getElementById('toast-artist').innerText = track.artist;
+                    document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+                }
+            }
 
             const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
             document.getElementById('np-bg').style.backgroundImage = `url(${coverUrl})`;
@@ -1586,8 +1745,13 @@
             const infoText = [track.context, track.desc].filter(Boolean).join(' • ');
             document.getElementById('menu-info').innerText = infoText || 'Memory Track';
             document.getElementById('menu-date').innerText = track.date ? ("Memory Date: " + track.date) : "Memory Date: N/A";
-            document.getElementById('menu-ig').href = track.ig || '#';
-
+            const igLinkElem = document.getElementById('menu-ig');
+            if (track.ig) {
+                igLinkElem.href = track.ig;
+                igLinkElem.style.display = 'flex';
+            } else {
+                igLinkElem.style.display = 'none';
+            }
             // Only re-render lyrics if not reopening to save performance
             if (!isReopening) {
                 const lyricsContainer = document.getElementById('lyrics-container');
@@ -1650,11 +1814,12 @@
                 }
             } else {
                 // fallback if clicked before ready
-                setTimeout(() => openPlayer(trackId), 500);
+                playerTimeout = setTimeout(() => openPlayer(trackId, keepHidden), 500);
             }
         }
 
         function closePlayer() {
+            clearTimeout(playerTimeout);
             document.getElementById('np-overlay').classList.remove('active');
             document.body.style.overflow = 'auto';
             document.getElementById('np-options-menu').classList.remove('active'); // ensure menu closes
@@ -1694,6 +1859,23 @@
             } else {
                 player.playVideo();
             }
+        }
+
+        function playPrevious(keepHidden = false) {
+            if (currentTrackId > 0) {
+                openPlayer(currentTrackId - 1, keepHidden);
+            }
+        }
+
+        function playNext(keepHidden = false) {
+            if (currentTrackId < tracks.length - 1) {
+                openPlayer(currentTrackId + 1, keepHidden);
+            }
+        }
+
+        function closeToast() {
+            document.getElementById('np-toast').classList.remove('active');
+            if (isPlayerReady) player.pauseVideo();
         }
 
         // Progress Tracking
