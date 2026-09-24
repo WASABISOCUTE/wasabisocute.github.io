@@ -736,7 +736,7 @@ const games = [
         }
     },
     {
-        id: "bdon",
+        id: "bdon-en",
         name: "BanG Dream: Our notes",
         name_zh: "BanG Dream！交织的乐章",
         name_ja: "ンドリ！ アワーノーツ",
@@ -751,6 +751,28 @@ const games = [
         download: {
             android: "https://play.google.com/store/apps/details?id=com.bilibili.sirius",
             ios: "https://apps.apple.com/us/app/bang-dream-our-notes/id6757695187",
+        },
+        theme: {
+            gradient: "linear-gradient(135deg, #54a0ff, #2980b9)",
+            color: "#128afa",
+            glow: "rgba(18, 138, 250, 0.3)",
+            logo: "BDON"
+        }
+    },
+    {
+        id: "bdon-jp",
+        name: "ンドリ！ アワーノーツ",
+        uid: "55155062190",
+        ign: "WASABI9184",
+        server: "JP Server",
+        platform: "Mobile",
+        genre: "rhythm",
+        dateJoined: "2026/09/24",
+        installed: true,
+        web: "https://bang-dream-on.bushimo.jp/",
+        download: {
+            android: "https://play.google.com/store/apps/details?id=com.bushiroad.sirius",
+            ios: "https://apps.apple.com/jp/app/bang-dream-our-notes/id6771716739",
         },
         theme: {
             gradient: "linear-gradient(135deg, #54a0ff, #2980b9)",
