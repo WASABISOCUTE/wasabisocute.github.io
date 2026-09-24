@@ -25,7 +25,7 @@ const games = [
                 server: "Asia",
                 platform: "Mobile / PC / PS5",
                 dateJoined: "2023/11/26",
-                installed: true,
+                installed: false,
                 web: "https://hsr.hoyoverse.com/",
                 download: {
                     android: "https://play.google.com/store/apps/details?id=com.HoYoverse.hkrpgoversea&pcampaignid=web_share",
@@ -735,5 +735,28 @@ const games = [
                     logo: "ART"
                 }
             },
-            
+            {
+                id: "BDON,
+                name: "BanG Dream: Our notes"",
+                name_zh: "BanG Dream！交织的乐章",
+                name_ja: "ンドリ！ アワーノーツ",
+                uid: "35400537608",
+                ign: "WASABI9184",
+                server: "EN Region",
+                platform: "Mobile",
+                genre: "rhythm",
+                dateJoined: "2026/09/24",
+                installed: true,
+                web: "https://bdon.biligames.com/",
+                download: {
+                    android: "https://play.google.com/store/apps/details?id=com.bilibili.sirius",
+                    ios: "https://apps.apple.com/us/app/bang-dream-our-notes/id6757695187",
+                },
+                theme: {
+                    gradient: "linear-gradient(135deg, #54a0ff, #2980b9)",
+                    color: "#128afa",
+                    glow: "rgba(18, 138, 250, 0.3)",
+                    logo: "BDON"
+                }
+            },
         ];
