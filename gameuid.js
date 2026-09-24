@@ -736,7 +736,7 @@ const games = [
         }
     },
     {
-        id: "BDON",
+        id: "bdon",
         name: "BanG Dream: Our notes",
         name_zh: "BanG Dream！交织的乐章",
         name_ja: "ンドリ！ アワーノーツ",
