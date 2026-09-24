@@ -739,7 +739,6 @@ const games = [
         id: "bdon-en",
         name: "BanG Dream: Our notes",
         name_zh: "BanG Dream！交织的乐章",
-        name_ja: "ンドリ！ アワーノーツ",
         uid: "35400537608",
         ign: "WASABI9184",
         server: "EN Region",
