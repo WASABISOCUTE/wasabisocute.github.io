@@ -1,4 +1,4 @@
-const games = [
+const games = [eee
     {
         id: "genshin",
         name: "Genshin Impact",
