@@ -780,4 +780,20 @@ const games = [
             logo: "BDON"
         }
     },
+        {
+        id: "genshin-cn",
+        name: "Genshin Impact",
+        name_zh: "原神",
+        name_ja: "原神",
+        uid: "534215664",
+        ign: "WASABISOCUTE",
+        server: "Bilibili",
+        platform: "Mobile / PC / PS5",
+        genre: "rpg",
+        dateJoined: "2026/09/29",
+        installed: true,
+        web: "https://ys.mihoyo.com/",
+        download: { android: "https://app.biligame.com/page/detail_share.html?id=103496", ios: "https://app.biligame.com/page/detail_share.html?id=103496", pc: "https://app.biligame.com/page/detail_share.html?id=103496 },
+        theme: { gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)", color: "#ffe599", glow: "rgba(255, 229, 153, 0.4)", logo: "GI" }
+    },
 ];
