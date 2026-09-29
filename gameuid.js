@@ -793,7 +793,10 @@ const games = [
         dateJoined: "2026/09/29",
         installed: true,
         web: "https://ys.mihoyo.com/",
-        download: { android: "https://app.biligame.com/page/detail_share.html?id=103496", ios: "https://app.biligame.com/page/detail_share.html?id=103496", pc: "https://app.biligame.com/page/detail_share.html?id=103496 },
+            download: {
+                android: "https://app.biligame.com/page/detail_share.html?id=103496",
+                ios: "https://app.biligame.com/page/detail_share.html?id=103496",
+                pc: "https://app.biligame.com/page/detail_share.html?id=103496" },
         theme: { gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)", color: "#ffe599", glow: "rgba(255, 229, 153, 0.4)", logo: "GI" }
     },
 ];
