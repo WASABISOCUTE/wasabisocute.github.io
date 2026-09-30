@@ -1,7 +1,7 @@
 const socialLinks = [
-    { title: "GitHub", icon: "fa-brands fa-github", url: "#" },
-    { title: "Phone", icon: "fa-solid fa-phone", url: "#" },
-    { title: "Email", icon: "fa-regular fa-envelope", url: "#" }
+    { title: "GitHub", icon: "fa-brands fa-github", url: "github.com/WASABISOCUTRE" },
+    { title: "WhatsApp", icon: "fa-solid fa-whatsapp", url: "https://api.whatsapp.com/send/?phone=601120904182" },
+    { title: "Email", icon: "fa-regular fa-envelope", url: "mailto: wasabi9487@gmail.com" }
 ];
 
 const linkSections = [
