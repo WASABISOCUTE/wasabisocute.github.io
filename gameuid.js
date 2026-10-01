@@ -787,7 +787,7 @@ const games = [
         name_ja: "原神",
         uid: "534215664",
         ign: "WASABISOCUTE",
-        server: "Bilibili",
+        server: "世界树",
         platform: "Mobile / PC / PS5",
         genre: "rpg",
         dateJoined: "2026/09/29",
