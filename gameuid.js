@@ -119,7 +119,7 @@ const games = [
         server: "TW Server",
         platform: "Mobile",
         genre: "rhythm",
-        dateJoined: "2024/12",
+        dateJoined: "2024/12/25",
         installed: false,
         web: "https://www.tw-pjsekai.com/",
         download: {
