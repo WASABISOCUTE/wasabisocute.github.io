@@ -10,7 +10,7 @@ const linkSections = [
         title: "Social Media",
         links: [
             { text: "Instagram", icon: "fa-brands fa-instagram", url: "https://www.instagram.com/wasabisimyeezhe_ws" },
-            { text: "Threads", icon: "fa-brands fa-threads", url: "threads.com/wasabisimyeezhe_ws" },
+            { text: "Threads", icon: "fa-brands fa-threads", url: "https://www.threads.com/wasabisimyeezhe_ws" },
             { text: "Facebook", icon: "fa-brands fa-facebook", url: "https://www.facebook.com/wasabisimyeezhe0601" },
             { text: "YouTube", icon: "fa-brands fa-youtube", url: "https://www.youtube.com/@wasabisyz_ws" }
         ]
@@ -18,7 +18,7 @@ const linkSections = [
     {
         title: "My Space",
         links: [
-            { text: "Home", icon: "fa-solid fa-home", url: "https://wasabisocute.github.io" },
+            { text: "Home", icon: "fa-solid fa-home", url: "index.html" },
             { text: "Articles", icon: "fa-solid fa-newspaper", url: "articles.html" },
             { text: "Music Collection", icon: "fa-solid fa-compact-disc", url: "music_collection/index.html" },
             { text: "Game UID", icon: "fa-solid fa-gamepad", url: "gameuid.html" }
