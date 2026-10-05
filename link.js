@@ -19,7 +19,7 @@ const linkSections = [
         title: "My Space",
         links: [
             { text: "Home", icon: "fa-solid fa-home", url: "index.html" },
-            { text: "Articles", icon: "fa-solid fa-newspaper", url: "articles.html" },
+            { text: "Articles", icon: "fa-solid fa-newspaper", url: "articles-shpw.html" },
             { text: "Music Collection", icon: "fa-solid fa-compact-disc", url: "music_collection/index.html" },
             { text: "Game UID", icon: "fa-solid fa-gamepad", url: "gameuid.html" }
         ]
