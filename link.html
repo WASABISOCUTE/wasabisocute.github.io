@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Links | WASABISOCUTE</title>
     <link rel="icon" type="image/x-icon" href="/picture/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -252,6 +255,176 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             z-index: 10;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 15, 30, 0.95);
+            border: 1px solid var(--accent-color);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast i {
+            color: #10b981;
+            font-size: 16px;
+        }
+
+        /* Share Modal Overlay */
+        .share-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 12, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            padding: 16px;
+        }
+
+        .share-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Share Modal Content Card */
+        .share-modal-content {
+            background: rgba(18, 18, 38, 0.92);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--card-border-glow);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 440px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transform: scale(0.92);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .share-modal-overlay.active .share-modal-content {
+            transform: scale(1);
+        }
+
+        .share-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .share-modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 12px;
+        }
+
+        .share-modal-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .share-modal-close:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            transform: scale(1.08);
+        }
+
+        .share-modal-url {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+            background: rgba(8, 8, 20, 0.6);
+            border: 1px solid rgba(120, 140, 255, 0.15);
+            padding: 10px 14px;
+            border-radius: 12px;
+            word-break: break-all;
+            user-select: all;
+            max-height: 70px;
+            overflow-y: auto;
+        }
+
+        .share-modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .share-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .share-action-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(120, 140, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .share-action-btn.primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            border: none;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .share-action-btn.primary:hover {
+            background: linear-gradient(135deg, #7174f8, #5b53ee);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+            transform: translateY(-2px);
         }
     </style>
 </head>

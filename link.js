@@ -177,7 +177,7 @@ function copyToClipboard(text) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initShareModal() {
     const closeBtn = document.getElementById('share-modal-close');
     const modalOverlay = document.getElementById('share-modal');
     const copyBtn = document.getElementById('share-btn-copy');
@@ -185,25 +185,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.getElementById('share-btn-open');
 
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeShareModal);
+        closeBtn.onclick = closeShareModal;
     }
     if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
+        modalOverlay.onclick = (e) => {
             if (e.target === modalOverlay) closeShareModal();
-        });
+        };
     }
 
     if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
+        copyBtn.onclick = () => {
             copyToClipboard(currentShareUrl).then(() => {
                 showToast('已复制链接到剪贴板 / Copied link');
                 closeShareModal();
             });
-        });
+        };
     }
 
     if (nativeShareBtn) {
-        nativeShareBtn.addEventListener('click', () => {
+        nativeShareBtn.onclick = () => {
             if (navigator.share) {
                 navigator.share({
                     title: currentShareTitle,
@@ -219,13 +219,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeShareModal();
                 });
             }
-        });
+        };
     }
 
     if (openBtn) {
-        openBtn.addEventListener('click', () => {
+        openBtn.onclick = () => {
             window.open(currentShareUrl, '_blank');
             closeShareModal();
-        });
+        };
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initShareModal);
+} else {
+    initShareModal();
+}
