@@ -12,8 +12,17 @@ const games = [
         dateJoined: "2023/09/10",
         installed: true,
         web: "https://genshin.hoyoverse.com/",
-        download: { android: "https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact", ios: "https://apps.apple.com/us/app/genshin-impact/id1517783697", pc: "https://genshin.hoyoverse.com/" },
-        theme: { gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)", color: "#ffe599", glow: "rgba(255, 229, 153, 0.4)", logo: "GI" }
+        download: {
+            android: "https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact",
+            ios: "https://apps.apple.com/us/app/genshin-impact/id1517783697",
+            pc: "https://genshin.hoyoverse.com/"
+        },
+        theme: {
+            gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)",
+            color: "#ffe599",
+            glow: "rgba(255, 229, 153, 0.4)",
+            logo: "GI"
+        }
     },
     {
         id: "hsr",
@@ -237,7 +246,7 @@ const games = [
         platform: "Mobile",
         genre: "rhythm",
         dateJoined: "2024",
-        installed: true,
+        installed: "idle",
         web: "https://pigeon-games.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=com.PigeonGames.Phigros",
@@ -335,7 +344,7 @@ const games = [
         platform: "Mobile / PC / Console",
         genre: "rpg",
         dateJoined: "2026/04/29",
-        installed: true,
+        installed: "idle",
         web: "https://nte.perfectworld.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=com.hottagames.nte",
@@ -358,7 +367,7 @@ const games = [
         platform: "PC / Mobile / Console",
         genre: "sandbox",
         dateJoined: "2021",
-        installed: true,
+        installed: "idle",
         web: "https://www.roblox.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=com.roblox.client",
@@ -382,7 +391,7 @@ const games = [
         platform: "PC",
         genre: "sandbox",
         dateJoined: "2021/06",
-        installed: true,
+        installed: "idle",
         web: "https://www.minecraft.net/",
         download: {
             pc: "https://apps.microsoft.com/detail/9NXP44L49SHJ?hl=en-gb&gl=JP&ocid=pdpshare"
@@ -473,7 +482,7 @@ const games = [
         platform: "Mobile",
         genre: "rhythm",
         dateJoined: "2024/10/20 17:30",
-        installed: true,
+        installed: false,
         web: "https://phira.moe/",
         download: {
             android: "https://github.com/TeamFlos/phira/releases",
@@ -496,7 +505,7 @@ const games = [
         platform: "Mobile",
         genre: "rhythm",
         dateJoined: "2025",
-        installed: true,
+        installed: false,
         web: "https://arcaea.lowiro.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=moe.low.arc",
@@ -588,7 +597,7 @@ const games = [
         platform: "PC",
         genre: "fps",
         dateJoined: "2024",
-        installed: true,
+        installed: "idle",
         web: "https://playvalorant.com/",
         download: {
             pc: "https://playvalorant.com/",
@@ -610,7 +619,7 @@ const games = [
         platform: "Mobile",
         genre: "rhythm",
         dateJoined: "2026/07/11",
-        installed: true,
+        installed: "idle",
         web: "https://bleap.fun",
         download: {
             android: "https://play.google.com/store/apps/details?id=com.blp.bleap",
@@ -632,7 +641,7 @@ const games = [
         platform: "PC",
         genre: "rhythm",
         dateJoined: "2026/07/11",
-        installed: true,
+        installed: "idle",
         web: "https://osu.ppy.sh/",
         download: {
             pc: "https://osu.ppy.sh/",
@@ -699,7 +708,7 @@ const games = [
         platform: "Mobile / PC",
         genre: "rhythm",
         dateJoined: "2026/07/23",
-        installed: true,
+        installed: "idle",
         web: "https://www.hololive-dreams.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=game.qualiarts.hololive.dreams.com",
@@ -722,7 +731,7 @@ const games = [
         platform: "Mobile",
         genre: "rhythm",
         dateJoined: "2026/08/17",
-        installed: true,
+        installed: "idle",
         web: "www.asteryhthm.com",
         download: {
             android: "https://play.google.com/store/apps/details%3Fid%3Dcom.straycubic.asterhythm",
@@ -780,7 +789,7 @@ const games = [
             logo: "BDON"
         }
     },
-        {
+    {
         id: "genshin-cn",
         name: "Genshin Impact",
         name_zh: "原神",
@@ -793,10 +802,16 @@ const games = [
         dateJoined: "2026/09/29",
         installed: true,
         web: "https://ys.mihoyo.com/",
-            download: {
-                android: "https://app.biligame.com/page/detail_share.html?id=103496",
-                ios: "https://app.biligame.com/page/detail_share.html?id=103496",
-                pc: "https://app.biligame.com/page/detail_share.html?id=103496" },
-        theme: { gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)", color: "#ffe599", glow: "rgba(255, 229, 153, 0.4)", logo: "GI" }
+        download: {
+            android: "https://app.biligame.com/page/detail_share.html?id=103496",
+            ios: "https://app.biligame.com/page/detail_share.html?id=103496",
+            pc: "https://www.biligame.com/detail/?id=103496"
+        },
+        theme: {
+            gradient: "linear-gradient(135deg, #0b2f35, #1fa2ff)",
+            color: "#ffe599",
+            glow: "rgba(255, 229, 153, 0.4)",
+            logo: "YS"
+        }
     },
 ];
