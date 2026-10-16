@@ -2,235 +2,1901 @@
 <html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile | WASABISOCUTE</title>
-  <link rel="icon" type="image/x-icon" href="/picture/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Collection | WASABISOCUTE</title>
+    <link rel="icon" type="image/x-icon" href="/picture/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at 20% 20%, #2b2b5a, #0b0b18 60%, #05050b);
-      color: #e5e7eb;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-    }
-
-    /* background */
-    .stars {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.35), transparent 25%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.25), transparent 25%),
-        radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.2), transparent 25%),
-        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.18), transparent 25%);
-      opacity: 0.7;
-      pointer-events: none;
-      animation: twinkle 8s infinite alternate;
-    }
-
-    @keyframes twinkle {
-      from {
-        opacity: 0.4;
-      }
-
-      to {
-        opacity: 0.8;
-      }
-    }
-
-    .card {
-      background: rgba(10, 10, 20, 0.6);
-      border: 1px solid rgba(120, 140, 255, 0.4);
-      border-radius: 18px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .profile {
-      text-align: center;
-    }
-
-    .avatar {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 3px solid rgba(120, 140, 255, 0.9);
-      box-shadow: 0 0 20px rgba(120, 140, 255, 0.7);
-      object-fit: cover;
-    }
-
-    h1 {
-      margin: 14px 0 6px;
-      font-size: 30px;
-      letter-spacing: 1px;
-    }
-
-    .bio {
-      color: #a6b0c3;
-      font-size: 14px;
-    }
-
-    .links {
-      margin-top: 18px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .links a {
-      text-decoration: none;
-      color: #cbd5f5;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(120, 140, 255, 0.5);
-      background: rgba(10, 10, 20, 0.5);
-      transition: 0.2s;
-    }
-
-    .links a:hover {
-      background: rgba(120, 140, 255, 0.2);
-      border-color: rgba(120, 140, 255, 0.9);
-      transform: translateY(-2px);
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 40px 0 16px;
-      border-bottom: 1px solid rgba(120, 140, 255, 0.3);
-      padding-bottom: 10px;
-    }
-
-    .section-header h2 {
-      margin: 0;
-      font-size: 22px;
-    }
-
-    .articles-link {
-      font-size: 13.5px;
-      color: #cbd5f5;
-      opacity: 0.65;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      border: 1px solid rgba(120, 140, 255, 0.2);
-      background: rgba(10, 10, 20, 0.4);
-      padding: 5px 12px;
-      border-radius: 8px;
-    }
-
-    .articles-link:hover {
-      opacity: 1;
-      border-color: rgba(120, 140, 255, 0.7);
-      background: rgba(120, 140, 255, 0.1);
-      transform: translateY(-1px);
-    }
-
-    .repos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .repo {
-      background: rgba(10, 10, 20, 0.6);
-      border: 1px solid rgba(120, 140, 255, 0.25);
-      border-radius: 14px;
-      padding: 14px;
-      transition: 0.2s;
-    }
-
-    .repo:hover {
-      transform: translateY(-4px);
-      border-color: rgba(120, 140, 255, 0.9);
-      box-shadow: 0 10px 25px rgba(120, 140, 255, 0.25);
-    }
-
-    .repo a {
-      color: #cbd5f5;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .repo p {
-      margin-top: 8px;
-      color: #a6b0c3;
-      font-size: 13px;
-    }
-  </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="stars"></div>
-
-  <div class="container">
-    <div class="card">
-      <div class="profile">
-        <img class="avatar" src="https://avatars.githubusercontent.com/u/93391433?v=4" alt="avatar">
-        <h1>WASABISOCUTE</h1>
-        <div class="bio">...</div>
-
-        <div class="links">
-          <a href="https://github.com/WASABISOCUTE" target="_blank">GitHub</a>
-          <a href="https://instagram.com/wasabisimyeezhe_ws" target="_blank">Instagram</a>
-          <a href="mailto:wasabi9487@gmail.com">Email</a>
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-compact-disc"></i> WASABISOCUTE Music Collection
+        </a>
+        <div class="header-actions">
+            <div class="tooltip-container" id="help-btn" onclick="toggleHelp(event)">
+                <i class="fa-solid fa-circle-question"></i> Help
+                <div class="tooltip-popup" id="help-popup" onclick="event.stopPropagation()">
+                    <h4>问题排查 & 快捷键 <button class="close-btn" onclick="toggleHelp(event)"><i
+                                class="fa-solid fa-xmark"></i></button></h4>
+                    <div style="font-size: 13px; margin-top: 8px;">1. 若视频未正常显示（黑屏），请尝试关闭标签页后重开<br>（Ctrl + W 后按 Ctrl +
+                        Shift + T）</div>
+                    <div style="font-size: 13px; margin-top: 8px;">2. 若播放器报错或无法播放，请切换到其他歌曲后重试，<br>若问题仍然存在，请尝试1.的解决方法
+                    </div>
+                    <div style="font-size: 13px; margin-top: 8px;">3. 若问题仍然存在，请联系：<a
+                            href="mailto:wasabi9487@gmail.com">wasabi9487@gmail.com</a>
+                        或
+                        <a href="mailto:sa234508@foonyewsa.edu.my">sa234508@foonyewsa.edu.my</a>
+                    </div>
+                    <div
+                        style="font-size: 13px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px;">
+                        <b>快捷键 / Shortcuts：</b><br>
+                        • <kbd>Space</kbd> 播放 / 暂停 (Play/Pause)<br>
+                        • <kbd>←</kbd> 上一首 (Previous)<br>
+                        • <kbd>→</kbd> 下一首 (Next)<br>
+                        • <kbd>↑</kbd> 调高音量 (Volume Up)<br>
+                        • <kbd>↓</kbd> 调低音量 (Volume Down)<br>
+                        • <kbd>ESC</kbd> 收起播放器 (Close Player)
+                    </div>
+                </div>
+            </div>
+            <div class="tooltip-container" id="settings-btn" onclick="toggleSettings(event)">
+                <i class="fa-solid fa-gear"></i> Settings
+                <div class="tooltip-popup" id="settings-popup" onclick="event.stopPropagation()">
+                    <h4>设置 / Settings <button class="close-btn" onclick="toggleSettings(event)"><i
+                                class="fa-solid fa-xmark"></i></button></h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">歌词翻译 / Lyrics Translation</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-translation" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">歌词发音 / Lyrics Pronunciation</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-pronunciation">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">启用全屏 / Fullscreen</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-fullscreen">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div style="font-size: 13px; margin-top: 12px; color: var(--text-muted); font-weight: bold;">实验性功能
+                        / Experimental</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">真实音频可视化 / Real Audio Visualizer</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-real-visualizer">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-tip">
+                        <i class="fa-solid fa-circle-info"></i> 启用真实频谱分析。开启时请在浏览器共享弹窗中选择<b>【此标签页 / This
+                            Tab】</b>并务必勾选<b>【同时共享标签页音频】</b>。
+                    </div>
+                </div>
+            </div>
+            <a href="wasabisocute.github.io"><i class="fa-solid fa-house"></i> Home</a>
         </div>
-      </div>
-
-      <div class="section-header">
-        <h2>My Repositories</h2>
-        <div style="display: flex; gap: 10px;">
-          <a href="articles-show.html" class="articles-link">
-            Articles 📝
-          </a>
+    </header>
+    <main id="main-content">
+    </main>
+    <div class="np-toast" id="np-toast" onclick="openPlayer(currentTrackId)">
+        <img src="" class="np-toast-cover" id="toast-cover" alt="Cover">
+        <div class="np-toast-info">
+            <div class="np-toast-title marquee-target" id="toast-title">Title</div>
+            <div class="np-toast-artist marquee-target" id="toast-artist">Artist</div>
         </div>
-      </div>
-      <div id="repos" class="repos"></div>
+        <div class="np-toast-controls" onclick="event.stopPropagation()">
+            <button class="toast-btn" onclick="playPrevious(true)"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="toast-btn" id="toast-play-pause-btn" onclick="togglePlay()"><i
+                    class="fa-solid fa-pause"></i></button>
+            <button class="toast-btn" onclick="playNext(true)"><i class="fa-solid fa-forward-step"></i></button>
+            <button class="toast-btn" onclick="closeToast()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
     </div>
-  </div>
+    <div class="now-playing-overlay" id="np-overlay">
+        <div class="np-background" id="np-bg"></div>
 
-  <script>
-    const username = "WASABISOCUTE";
-    const repoContainer = document.getElementById("repos");
+        <div class="np-header">
+            <div class="logo"><i class="fa-solid fa-compact-disc"></i> NOW PLAYING</div>
+            <button class="btn-close" onclick="closePlayer()"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
 
-    fetch(`https://api.github.com/users/${username}/repos`)
-      .then(res => res.json())
-      .then(repos => {
-        repos.sort((a, b) => b.stargazers_count - a.stargazers_count)
-          .forEach(repo => {
-            const div = document.createElement("div");
-            div.className = "repo";
-            div.innerHTML = `
-              <a href="${repo.html_url}" target="_blank">${repo.name}</a>
-              <p>${repo.description || "No description"}</p>
-            `;
-            repoContainer.appendChild(div);
-          });
-      })
-      .catch(() => {
-        repoContainer.innerHTML = "<p>仓库加载失败</p>";
-      });
-  </script>
+        <div class="np-content">
+            <div class="np-left">
+                <div class="video-container">
+                    <div id="youtube-player"></div>
+                </div>
+                <div class="np-track-details">
+                    <div>
+                        <div class="np-title" id="np-title">Track Title</div>
+                        <div class="np-artist" id="np-artist">Artist Name</div>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button class="btn-options" id="btn-toggle-pron" onclick="togglePronunciationSetting(event)">
+                            <i class="fa-solid fa-closed-captioning"></i>
+                        </button>
+                        <div class="np-options-wrapper">
+                            <button class="btn-options" id="btn-trans" onclick="toggleTransMenu(event)">
+                                <i class="fa-solid fa-language"></i>
+                            </button>
+                            <div class="np-options-menu" id="np-trans-menu"
+                                style="width: auto; right: 0; bottom: 60px;">
+                                <div class="menu-trans-item" data-lang="none" onclick="setTransMode('none')">Off</div>
+                                <div class="menu-trans-item" data-lang="cn" onclick="setTransMode('cn')">中文</div>
+                                <div class="menu-trans-item" data-lang="en" onclick="setTransMode('en')">English</div>
+                            </div>
+                        </div>
+                        <div class="np-options-wrapper">
+                            <button class="btn-options" id="btn-options" onclick="toggleOptionsMenu(event)">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <div class="np-options-menu" id="np-options-menu">
+                                <div class="menu-track-title" id="menu-title">Title</div>
+                                <div class="menu-track-artist" id="menu-artist">Artist</div>
+                                <div class="menu-info-item" id="menu-info">Info</div>
+                                <div class="menu-info-item" id="menu-date">Date</div>
+                                <a href="#" target="_blank" class="menu-ig-link" id="menu-ig">
+                                    <i class="fa-brands fa-instagram"></i> Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="np-right">
+                <div class="lyrics-container" id="lyrics-container">
+                </div>
+            </div>
+        </div>
+        <div class="np-bottom">
+            <div class="progress-container">
+                <span id="time-current">0:00</span>
+                <div class="progress-bar-bg" id="progress-bg">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                    <div class="progress-bar-thumb" id="progress-thumb"></div>
+                </div>
+                <span id="time-total">0:00</span>
+            </div>
+
+            <div class="controls-row">
+                <div class="visualizer" id="visualizer">
+                    <canvas id="real-visualizer-canvas" class="visualizer-canvas"></canvas>
+                </div>
+
+                <div class="player-controls">
+                    <button class="ctrl-btn" onclick="playPrevious()"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="btn-play-pause" id="play-pause-btn" onclick="togglePlay()">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <button class="ctrl-btn" onclick="playNext()"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+                <div class="controls-spacer">
+                    <div class="volume-container">
+                        <button class="ctrl-btn" id="volume-btn" onclick="toggleMute()">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                        <input type="range" id="volume-slider" min="0" max="100" value="100"
+                            oninput="changeVolume(this.value)">
+                    </div>
+                    <button class="ctrl-btn" id="loop-mode-btn" onclick="toggleLoopMode()" title="Stop After Current">
+                        <i class="fa-solid fa-ban"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<footer id="footer" style="color: white;">
+        <span id="aboutLink">Copyright © 2026 WASABISOCUTE | Assisted by <span class="footer-credits">Google
+                Antigravity</span></span>
+    </footer>-->
+    <div class="secret-console-overlay" id="secret-console-overlay" onclick="handleConsoleOverlayClick(event)">
+        <div class="secret-console-window" onclick="event.stopPropagation()">
+            <div class="console-titlebar">
+                <div class="console-titlebar-left">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span id="console-titlebar-text">SYSTEM TERMINAL // SECURE_PORTAL_v2.6</span>
+                </div>
+                <button class="console-close-btn" onclick="closeConsole()" title="Close (ESC)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="console-screen" id="console-screen" onclick="focusConsoleInput()">
+                <div class="console-log" id="console-log"></div>
+                <div class="console-input-row" id="console-input-row">
+                    <span class="console-prompt-label" id="console-prompt-label">Login PIN:</span>
+                    <div class="console-input-wrapper">
+                        <input type="password" id="console-input" class="console-input" autocomplete="off"
+                            spellcheck="false" onkeydown="handleConsoleInputKey(event)">
+                        <span class="console-cursor" id="console-cursor">█</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="screen-transition-overlay" id="screen-transition-overlay">
+        <div class="transition-shutter-blade blade-top"></div>
+        <div class="transition-shutter-blade blade-bottom"></div>
+
+        <div class="transition-grid-bg"></div>
+        <div class="transition-flash"></div>
+
+        <div class="transition-core-wrapper">
+            <div class="transition-shockwave"></div>
+            <div class="transition-hud-box">
+                <div class="transition-hud-header">
+                    <span class="hud-tag"><i class="fa-solid fa-microchip"></i> WASABI BIOS v10.0</span>
+                    <span class="hud-status" id="hud-status-badge">SECURE_LINK</span>
+                </div>
+                <div class="transition-glitch-text" id="transition-glitch-text" data-text="AUTHENTICATING...">
+                    AUTHENTICATING...</div>
+                <div class="transition-progress-bar">
+                    <div class="transition-progress-fill" id="transition-progress-fill"></div>
+                </div>
+                <div class="transition-hud-footer">
+                    <span id="transition-subtext">DECRYPTING ARCHIVES...</span>
+                    <span id="transition-percentage">00%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-laser-beam"></div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="data.js"></script>
+    <script src="data2.js"></script>
+    <script>
+        const defaultChapters = [
+            { id: -1, title: 'Chapter -01', subtitle: '< 2020 • Demo' },
+            { id: 0, title: 'Chapter 00', subtitle: '> 2020 • Tutorial' },
+            { id: 1, title: 'Chapter 01', subtitle: '2023 • Getting Started' },
+            { id: 2, title: 'Chapter 02', subtitle: '2024 • Deepening Dive' },
+            { id: 3, title: 'Chapter 03', subtitle: '2025' },
+            { id: 4, title: 'Chapter 04', subtitle: '2026 • In Progress' }
+        ];
+
+        let isSecretMode = false;
+        let activeTracks = tracks;
+        let activeConfig = (typeof config !== 'undefined') ? config : {};
+        let activeChapters = defaultChapters;
+        let isConsoleOpen = false;
+        let isTransitioning = false;
+        const SECRET_PINS = ['100601'];
+
+        function renderGrid() {
+            const mainContainer = document.getElementById('main-content') || document.querySelector('main');
+            if (!mainContainer) return;
+            mainContainer.innerHTML = '';
+
+            activeChapters.forEach(ch => {
+                const section = document.createElement('div');
+                section.className = 'chapter-section';
+                section.id = `section-ch${ch.id}`;
+                section.innerHTML = `
+                    <h2 class="chapter-title">${ch.title}</h2>
+                    <div class="chapter-subtitle">${ch.subtitle}</div>
+                    <div class="track-grid" id="grid-ch${ch.id}"></div>
+                `;
+                mainContainer.appendChild(section);
+            });
+
+            activeTracks.forEach((track, index) => {
+                let targetGrid = document.getElementById(`grid-ch${track.chapter}`);
+                if (!targetGrid) {
+                    const section = document.createElement('div');
+                    section.className = 'chapter-section';
+                    section.id = `section-ch${track.chapter}`;
+                    section.innerHTML = `
+                        <h2 class="chapter-title">Chapter ${track.chapter}</h2>
+                        <div class="chapter-subtitle">Collection</div>
+                        <div class="track-grid" id="grid-ch${track.chapter}"></div>
+                    `;
+                    mainContainer.appendChild(section);
+                    targetGrid = document.getElementById(`grid-ch${track.chapter}`);
+                }
+
+                const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+                const badgeHTML = (activeConfig.showContext && track.context) ? `<span class="badge"><span class="badge-text marquee-target">${track.context}</span></span>` : '';
+                const dateHTML = (activeConfig.showDate && track.date) ? `<span>${track.date}</span>` : '';
+
+                const cardHTML = `
+                    <div class="track-card" onclick="openPlayer(${index})">
+                        <div class="track-cover-wrapper">
+                            <img src="${coverUrl}" class="track-cover">
+                            <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                        </div>
+                        <div class="track-info">
+                            <div class="track-title marquee-target">${track.title}</div>
+                            <div class="track-artist marquee-target">${track.artist}</div>
+                            <div class="track-meta">
+                                <div class="track-meta-left">
+                                    ${badgeHTML}
+                                </div>
+                                <div class="track-date">
+                                    ${dateHTML}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                targetGrid.innerHTML += cardHTML;
+            });
+
+            if (activeConfig && !activeConfig.showChapterTitle) {
+                document.querySelectorAll('.chapter-title, .chapter-subtitle').forEach(el => el.style.display = 'none');
+            }
+        }
+        renderGrid();
+
+        function updateAllGridMarquees() {
+            document.querySelectorAll('.marquee-target').forEach(updateMarquee);
+        }
+        setTimeout(updateAllGridMarquees, 100);
+        let player;
+        let isPlayerReady = false;
+        let progressInterval;
+        let currentTrackId = 0;
+        let playerTimeout;
+        let loopMode = 0; // 0: Stop After Current, 1: Sequence, 2: Loop One, 3: Loop All
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '100%',
+                width: '100%',
+                videoId: '',
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        const visualizer = document.getElementById("visualizer");
+
+        for (let i = 0; i < 10; i++) {
+            const bar = document.createElement("div");
+            bar.className = "bar";
+            visualizer.appendChild(bar);
+        }
+
+        let realVisualizerStream = null;
+        let realAudioCtx = null;
+        let realAnalyser = null;
+        let realSourceNode = null;
+        let realVisualizerRafId = null;
+        let isRealVisualizerActive = false;
+
+        const VIS_BAR_COUNT = 16;
+        const peakHeights = new Array(VIS_BAR_COUNT).fill(0);
+        const peakDropSpeeds = new Array(VIS_BAR_COUNT).fill(0);
+        const currentBarHeights = new Array(VIS_BAR_COUNT).fill(0);
+
+        const binRanges = [];
+        const minBin = 1;
+        const maxBin = 1000;
+        const logMin = Math.log(minBin);
+        const logMax = Math.log(maxBin);
+        for (let i = 0; i < VIS_BAR_COUNT; i++) {
+            const start = Math.exp(logMin + (i / VIS_BAR_COUNT) * (logMax - logMin));
+            const end = Math.exp(logMin + ((i + 1) / VIS_BAR_COUNT) * (logMax - logMin));
+            binRanges.push([Math.floor(start), Math.max(Math.floor(start) + 1, Math.ceil(end))]);
+        }
+
+        function resizeVisualizerCanvas() {
+            const canvas = document.getElementById('real-visualizer-canvas');
+            if (!canvas) return;
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            const w = rect.width || 100;
+            const h = rect.height || 40;
+            if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+                canvas.width = Math.round(w * dpr);
+                canvas.height = Math.round(h * dpr);
+            }
+        }
+
+        window.addEventListener('resize', resizeVisualizerCanvas);
+
+        function drawVisualizerFrame() {
+            if (!isRealVisualizerActive) return;
+
+            const canvas = document.getElementById('real-visualizer-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            resizeVisualizerCanvas();
+
+            const dpr = window.devicePixelRatio || 1;
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            let freqData = null;
+            let isAudioPlaying = false;
+
+            if (realAnalyser) {
+                const bufferLength = realAnalyser.frequencyBinCount;
+                freqData = new Uint8Array(bufferLength);
+                realAnalyser.getByteFrequencyData(freqData);
+
+                if (player && typeof player.getPlayerState === 'function') {
+                    isAudioPlaying = (player.getPlayerState() === YT.PlayerState.PLAYING);
+                } else {
+                    let sum = 0;
+                    for (let i = 0; i < bufferLength; i++) sum += freqData[i];
+                    isAudioPlaying = sum > 10;
+                }
+            }
+
+            const barCount = VIS_BAR_COUNT;
+            const gap = 3 * dpr;
+            const totalGap = gap * (barCount - 1);
+            const barWidth = Math.min(3 * dpr, Math.max(1 * dpr, (width - totalGap) / barCount));
+            const minHeight = Math.max(3 * dpr, height * 0.08);
+            const maxHeight = height - 4 * dpr;
+
+            const isSecret = document.body.classList.contains('secret-mode');
+
+            for (let i = 0; i < barCount; i++) {
+                let targetNorm = 0;
+
+                if (freqData && isAudioPlaying) {
+                    const range = binRanges[i] || [i, i + 1];
+                    const startBin = range[0];
+                    const endBin = range[1];
+
+                    let sum = 0;
+                    let maxVal = 0;
+                    for (let j = startBin; j < endBin; j++) {
+                        const val = freqData[j] || 0;
+                        sum += val;
+                        if (val > maxVal) maxVal = val;
+                    }
+                    const avg = sum / (endBin - startBin);
+                    let rawEnergy = (avg * 0.7 + maxVal * 0.3);
+                    rawEnergy = Math.max(0, rawEnergy - 12);
+                    const trebleBoost = 1 + (i / barCount) * 0.6;
+                    let norm = (rawEnergy / 243) * trebleBoost;
+
+                    norm = Math.pow(norm, 1.3);
+
+                    targetNorm = Math.min(1, norm);
+                }
+
+                const attack = (i < 2) ? 0.45 : 0.35;
+                const release = (i < 2) ? 0.12 : 0.15;
+
+                if (targetNorm > currentBarHeights[i]) {
+                    currentBarHeights[i] += (targetNorm - currentBarHeights[i]) * attack;
+                } else {
+                    currentBarHeights[i] += (targetNorm - currentBarHeights[i]) * release;
+                }
+
+                if (currentBarHeights[i] < 0.001) currentBarHeights[i] = 0;
+
+                const barH = minHeight + currentBarHeights[i] * (maxHeight - minHeight);
+                const x = i * (barWidth + gap);
+                const y = height - barH;
+
+                // Peak Caps
+                if (barH >= peakHeights[i]) {
+                    peakHeights[i] = barH;
+                    peakDropSpeeds[i] = 0.0;
+                } else {
+                    peakHeights[i] -= peakDropSpeeds[i];
+                    peakDropSpeeds[i] += 0.15 * dpr;
+                    if (peakHeights[i] < minHeight) {
+                        peakHeights[i] = minHeight;
+                    }
+                }
+
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 255, 255, 1.0)';
+
+                const radius = Math.min(barWidth / 2, 2 * dpr);
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(x, y, barWidth, barH, [radius, radius, 0, 0]);
+                } else {
+                    ctx.moveTo(x, height);
+                    ctx.lineTo(x, y + radius);
+                    ctx.quadraticCurveTo(x, y, x + radius, y);
+                    ctx.lineTo(x + barWidth - radius, y);
+                    ctx.quadraticCurveTo(x + barWidth, y, x + barWidth, y + radius);
+                    ctx.lineTo(x + barWidth, height);
+                    ctx.closePath();
+                }
+                ctx.fill();
+                ctx.restore();
+
+                // Draw Peak Cap
+                const peakY = height - peakHeights[i];
+                const peakCapH = Math.max(2 * dpr, 2.5 * dpr);
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 255, 255, 1.0)';
+
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(x, Math.max(0, peakY - peakCapH - 1 * dpr), barWidth, peakCapH, radius);
+                } else {
+                    ctx.rect(x, Math.max(0, peakY - peakCapH - 1 * dpr), barWidth, peakCapH);
+                }
+                ctx.fill();
+                ctx.restore();
+            }
+
+            realVisualizerRafId = requestAnimationFrame(drawVisualizerFrame);
+        }
+
+        async function enableRealAudioVisualizer() {
+            if (isRealVisualizerActive) return true;
+
+            try {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+                    alert('当前浏览器不支持屏幕/标签页音频捕获 (getDisplayMedia API)。\n请使用 Chrome / Edge / Firefox 等现代桌面浏览器。');
+                    return false;
+                }
+
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        displaySurface: 'browser'
+                    },
+                    audio: {
+                        echoCancellation: false,
+                        noiseSuppression: false,
+                        autoGainControl: false
+                    },
+                    preferCurrentTab: true,
+                    selfBrowserSurface: 'include',
+                    systemAudio: 'include'
+                });
+
+                const audioTracks = stream.getAudioTracks();
+                if (!audioTracks || audioTracks.length === 0) {
+                    stream.getTracks().forEach(t => t.stop());
+                    alert('【未检测到音频轨道】\n请重新开启开关，并在浏览器共享弹窗中确保选择【此标签页】并勾选【同时共享标签页音频】(Share tab audio)。');
+                    const settingCheckbox = document.getElementById('setting-real-visualizer');
+                    if (settingCheckbox) settingCheckbox.checked = false;
+                    localStorage.setItem('setting-real-visualizer', 'false');
+                    disableRealAudioVisualizer();
+                    return false;
+                }
+
+                realVisualizerStream = stream;
+
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!realAudioCtx || realAudioCtx.state === 'closed') {
+                    realAudioCtx = new AudioContextClass();
+                }
+                if (realAudioCtx.state === 'suspended') {
+                    await realAudioCtx.resume();
+                }
+
+                realAnalyser = realAudioCtx.createAnalyser();
+                realAnalyser.fftSize = 2048; // Higher resolution for better frequency mapping
+                realAnalyser.smoothingTimeConstant = 0.8;
+
+                realSourceNode = realAudioCtx.createMediaStreamSource(stream);
+                realSourceNode.connect(realAnalyser);
+                // DO NOT connect to realAudioCtx.destination to prevent echo
+
+                stream.getTracks().forEach(track => {
+                    track.addEventListener('ended', () => {
+                        console.log('[RealVisualizer] MediaStream track ended');
+                        const settingCheckbox = document.getElementById('setting-real-visualizer');
+                        if (settingCheckbox) settingCheckbox.checked = false;
+                        localStorage.setItem('setting-real-visualizer', 'false');
+                        disableRealAudioVisualizer();
+                    });
+                });
+
+                isRealVisualizerActive = true;
+                const visualizerEl = document.getElementById('visualizer');
+                if (visualizerEl) visualizerEl.classList.add('real-mode');
+
+                cancelAnimationFrame(realVisualizerRafId);
+                drawVisualizerFrame();
+                return true;
+            } catch (err) {
+                console.warn('[RealVisualizer] Access cancelled or failed:', err);
+                const settingCheckbox = document.getElementById('setting-real-visualizer');
+                if (settingCheckbox) settingCheckbox.checked = false;
+                localStorage.setItem('setting-real-visualizer', 'false');
+                disableRealAudioVisualizer();
+                return false;
+            }
+        }
+
+        function disableRealAudioVisualizer() {
+            isRealVisualizerActive = false;
+            if (realVisualizerRafId) {
+                cancelAnimationFrame(realVisualizerRafId);
+                realVisualizerRafId = null;
+            }
+            if (realVisualizerStream) {
+                realVisualizerStream.getTracks().forEach(t => t.stop());
+                realVisualizerStream = null;
+            }
+            if (realSourceNode) {
+                try { realSourceNode.disconnect(); } catch (e) { }
+                realSourceNode = null;
+            }
+            if (realAnalyser) {
+                try { realAnalyser.disconnect(); } catch (e) { }
+                realAnalyser = null;
+            }
+            if (realAudioCtx) {
+                try { realAudioCtx.close(); } catch (e) { }
+                realAudioCtx = null;
+            }
+
+            const visualizerEl = document.getElementById('visualizer');
+            if (visualizerEl) visualizerEl.classList.remove('real-mode');
+
+            const canvas = document.getElementById('real-visualizer-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function onPlayerReady(event) {
+            isPlayerReady = true;
+        }
+
+        function onPlayerStateChange(event) {
+            const playBtn = document.getElementById('play-pause-btn');
+            const visualizer = document.getElementById('visualizer');
+
+            if (event.data == YT.PlayerState.PLAYING) {
+                playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                const toastBtn = document.getElementById('toast-play-pause-btn');
+                if (toastBtn) toastBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                playBtn.classList.add('is-playing');
+                visualizer.classList.add('playing');
+                if (realAudioCtx && realAudioCtx.state === 'suspended') {
+                    realAudioCtx.resume();
+                }
+                startProgressTracker();
+            } else {
+                playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                const toastBtn = document.getElementById('toast-play-pause-btn');
+                if (toastBtn) toastBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                playBtn.classList.remove('is-playing');
+                const bars = visualizer.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    const currentHeight = getComputedStyle(bar).height;
+                    bar.style.height = currentHeight;
+                });
+                visualizer.classList.remove('playing');
+                void visualizer.offsetHeight;
+                bars.forEach(bar => {
+                    bar.style.height = '10%';
+                });
+                stopProgressTracker();
+            }
+
+            if (event.data == YT.PlayerState.ENDED) {
+                if (loopMode === 2) {
+                    player.seekTo(activeTracks[currentTrackId].start || 0, true);
+                    player.playVideo();
+                } else if (loopMode === 3) {
+                    if (currentTrackId < activeTracks.length - 1) {
+                        playNext();
+                    } else {
+                        openPlayer(0);
+                    }
+                } else if (loopMode === 1) {
+                    // loopMode === 1 (Sequence)
+                    if (currentTrackId < activeTracks.length - 1) {
+                        playNext();
+                    }
+                } else if (loopMode === 0) {
+                    // loopMode === 0 (Stop After Current)
+                    // Do nothing, just let it stop
+                }
+            }
+
+            try {
+                player.unloadModule("captions");
+                player.unloadModule("cc");
+            } catch (exception) { }
+        }
+
+        // Controls （overlay)
+        function updateMarquee(element) {
+            if (!element) return;
+
+            const existingAttr = element.getAttribute('data-original-html') || element.getAttribute('data-original-text');
+            if (!existingAttr) {
+                element.setAttribute('data-original-html', element.innerHTML.trim());
+            }
+            const contentHtml = element.getAttribute('data-original-html') || element.getAttribute('data-original-text') || element.innerHTML.trim();
+
+            element.classList.remove('marquee');
+            element.style.removeProperty('--marquee-distance');
+            element.style.removeProperty('--marquee-duration');
+            element.innerHTML = '';
+
+            const content = document.createElement('div');
+            content.className = 'marquee-content';
+
+            const textSpan = document.createElement('span');
+            textSpan.className = 'marquee-text';
+            textSpan.innerHTML = contentHtml;
+            content.appendChild(textSpan);
+
+            element.appendChild(content);
+
+            requestAnimationFrame(() => {
+                if (textSpan.scrollWidth > element.clientWidth + 1) {
+                    const spacer = document.createElement('span');
+                    spacer.className = 'marquee-spacer';
+                    spacer.style.display = 'inline-block';
+                    spacer.style.width = '48px';
+                    content.appendChild(spacer);
+
+                    const textSpan2 = document.createElement('span');
+                    textSpan2.className = 'marquee-text';
+                    textSpan2.innerHTML = contentHtml;
+                    content.appendChild(textSpan2);
+
+                    const distance = Math.ceil(textSpan.getBoundingClientRect().width) + 48;
+
+                    const speed = 36;
+                    const duration = (distance / speed) + 4;
+
+                    element.style.setProperty('--marquee-distance', `-${distance}px`);
+                    element.style.setProperty('--marquee-duration', `${duration}s`);
+                    element.classList.add('marquee');
+                }
+            });
+        }
+
+        function updateNowPlayingMarquees() {
+            updateMarquee(document.getElementById('np-title'));
+            updateMarquee(document.getElementById('np-artist'));
+        }
+
+        let marqueeResizeDebounceTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(marqueeResizeDebounceTimer);
+            marqueeResizeDebounceTimer = setTimeout(() => {
+                updateAllGridMarquees();
+                updateNowPlayingMarquees();
+                const toastTitle = document.getElementById('toast-title');
+                const toastArtist = document.getElementById('toast-artist');
+                if (toastTitle) updateMarquee(toastTitle);
+                if (toastArtist) updateMarquee(toastArtist);
+            }, 150);
+        });
+
+        function getTrackIndexFromHash() {
+            const hash = window.location.hash.replace(/^#\/?/, '').trim();
+            if (!hash) return -1;
+
+            // 1. Search by track.id in activeTracks (string or number comparison)
+            const matchById = activeTracks.findIndex(t => t.id !== undefined && t.id !== null && String(t.id) === hash);
+            if (matchById !== -1) return matchById;
+
+            // 2. Fallback: Check if hash is a valid numeric array index within bounds
+            if (/^-?\d+$/.test(hash)) {
+                const idx = parseInt(hash, 10);
+                if (idx >= 0 && idx < activeTracks.length) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        }
+
+        function handleHashChangeOnLoad() {
+            const trackIndex = getTrackIndexFromHash();
+            if (trackIndex !== -1) {
+                openPlayer(trackIndex);
+            }
+        }
+
+        window.addEventListener('hashchange', () => {
+            const trackIndex = getTrackIndexFromHash();
+            if (trackIndex !== -1 && trackIndex !== currentTrackId) {
+                openPlayer(trackIndex);
+            }
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', handleHashChangeOnLoad);
+        } else {
+            setTimeout(handleHashChangeOnLoad, 50);
+        }
+
+        function openPlayer(trackId, keepHidden = false) {
+            clearTimeout(playerTimeout);
+            const track = activeTracks[trackId];
+            if (!track) return;
+
+            const trackHash = (track.id !== undefined && track.id !== null) ? track.id : trackId;
+            if (window.location.hash !== '#' + trackHash) {
+                history.replaceState(null, '', '#' + trackHash);
+            }
+
+            const toast = document.getElementById('np-toast');
+            const toastTitle = document.getElementById('toast-title');
+            const toastArtist = document.getElementById('toast-artist');
+            const isReopening = (currentTrackId === trackId && isPlayerReady);
+            currentTrackId = trackId;
+
+            toastTitle.setAttribute('data-original-html', track.title);
+            toastTitle.innerText = track.title;
+            toastArtist.setAttribute('data-original-html', track.artist);
+            toastArtist.innerText = track.artist;
+
+            updateMarquee(toastTitle);
+            updateMarquee(toastArtist);
+            toastArtist.setAttribute('data-original-text', track.artist);
+            document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+            if (!keepHidden) {
+                if (toast) toast.classList.remove('active');
+                document.getElementById('np-overlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                if (toast) toast.classList.add('active');
+            }
+            const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+            document.getElementById('np-bg').style.backgroundImage = `url(${coverUrl})`;
+            const npTitle = document.getElementById('np-title');
+            npTitle.innerText = track.title;
+            npTitle.setAttribute('data-original-html', track.title);
+            const npArtist = document.getElementById('np-artist');
+            npArtist.setAttribute('data-original-text', track.artist);
+            npArtist.setAttribute('data-original-html', track.artist);
+            npArtist.innerText = track.artist;
+            updateNowPlayingMarquees();
+            document.getElementById('menu-title').innerText = track.title;
+            document.getElementById('menu-artist').innerText = track.artist;
+            let infoParts = [];
+            if (activeConfig.showContext && track.context) infoParts.push(track.context);
+            if (activeConfig.showDesc && track.desc) infoParts.push(track.desc);
+            const infoText = infoParts.join(' • ');
+            const menuInfoElem = document.getElementById('menu-info');
+            if (infoParts.length > 0) {
+                menuInfoElem.style.display = 'block';
+                menuInfoElem.innerText = infoText;
+            } else {
+                menuInfoElem.style.display = 'none';
+            }
+
+            const menuDateElem = document.getElementById('menu-date');
+            if (activeConfig.showDate) {
+                menuDateElem.style.display = 'block';
+                menuDateElem.innerText = track.date ? ("Memory Date: " + track.date) : "Memory Date: N/A";
+            } else {
+                menuDateElem.style.display = 'none';
+            }
+
+            const igLinkElem = document.getElementById('menu-ig');
+            if (activeConfig.showIg && track.ig) {
+                igLinkElem.href = track.ig;
+                igLinkElem.style.display = 'flex';
+            } else {
+                igLinkElem.style.display = 'none';
+            }
+            if (!isReopening) {
+                renderLyrics(trackId);
+            }
+
+            //Video Load
+            if (isPlayerReady) {
+                if (!isReopening) {
+                    const loadOptions = {
+                        videoId: track.ytId,
+                        startSeconds: track.start || 0
+                    };
+                    if (track.end) {
+                        loadOptions.endSeconds = track.end;
+                    }
+                    player.loadVideoById(loadOptions);
+                }
+            } else {
+                playerTimeout = setTimeout(() => openPlayer(trackId, keepHidden), 500);
+            }
+        }
+
+        function closePlayer() {
+            clearTimeout(playerTimeout);
+            document.getElementById('np-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('np-options-menu').classList.remove('active'); // ensure menu closes
+            document.getElementById('np-trans-menu').classList.remove('active'); // ensure menu closes
+
+            if (currentTrackId !== undefined && isPlayerReady) {
+                const track = activeTracks[currentTrackId];
+                const toastTitle = document.getElementById('toast-title');
+                toastTitle.setAttribute('data-original-html', track.title);
+                toastTitle.setAttribute('data-original-text', track.title);
+                toastTitle.innerText = track.title;
+
+                const toastArtist = document.getElementById('toast-artist');
+                toastArtist.setAttribute('data-original-html', track.artist);
+                toastArtist.setAttribute('data-original-text', track.artist);
+                toastArtist.innerText = track.artist;
+
+                updateMarquee(toastTitle);
+                updateMarquee(toastArtist);
+
+                document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+
+                document.getElementById('np-toast').classList.add('active');
+            }
+        }
+
+        function toggleOptionsMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('np-options-menu');
+            menu.classList.toggle('active');
+            document.getElementById('np-trans-menu').classList.remove('active');
+        }
+
+        function toggleTransMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('np-trans-menu');
+            menu.classList.toggle('active');
+            document.getElementById('np-options-menu').classList.remove('active');
+        }
+
+        function togglePronunciationSetting(event) {
+            if (event) event.stopPropagation();
+            const pronunciationInput = document.getElementById('setting-pronunciation');
+            if (pronunciationInput) {
+                pronunciationInput.checked = !pronunciationInput.checked;
+                localStorage.setItem('setting-pronunciation', pronunciationInput.checked);
+                if (document.getElementById('np-overlay').classList.contains('active')) {
+                    renderLyrics(currentTrackId);
+                }
+            }
+        }
+
+        document.addEventListener('click', (event) => {
+            const menu = document.getElementById('np-options-menu');
+            const btn = document.getElementById('btn-options');
+            if (menu && menu.classList.contains('active')) {
+                if (!menu.contains(event.target) && (!btn || !btn.contains(event.target))) {
+                    menu.classList.remove('active');
+                }
+            }
+
+            const transMenu = document.getElementById('np-trans-menu');
+            const transBtn = document.getElementById('btn-trans');
+            if (transMenu && transMenu.classList.contains('active')) {
+                if (!transMenu.contains(event.target) && (!transBtn || !transBtn.contains(event.target))) {
+                    transMenu.classList.remove('active');
+                }
+            }
+
+            const helpPopup = document.getElementById('help-popup');
+            const helpBtn = document.getElementById('help-btn');
+            if (helpPopup && helpPopup.classList.contains('active')) {
+                if (!helpPopup.contains(event.target) && !helpBtn.contains(event.target)) {
+                    helpPopup.classList.remove('active');
+                }
+            }
+
+            const settingsPopup = document.getElementById('settings-popup');
+            const settingsBtn = document.getElementById('settings-btn');
+            if (settingsPopup && settingsPopup.classList.contains('active')) {
+                if (!settingsPopup.contains(event.target) && !settingsBtn.contains(event.target)) {
+                    settingsPopup.classList.remove('active');
+                }
+            }
+        });
+
+        function toggleHelp(event) {
+            event.stopPropagation();
+            document.getElementById('settings-popup').classList.remove('active');
+            document.getElementById('help-popup').classList.toggle('active');
+        }
+
+        function toggleSettings(event) {
+            event.stopPropagation();
+            document.getElementById('help-popup').classList.remove('active');
+            document.getElementById('settings-popup').classList.toggle('active');
+        }
+
+        // Initialize Settings from localStorage
+        const savedPronunciation = localStorage.getItem('setting-pronunciation') === 'true';
+        const savedTranslation = localStorage.getItem('setting-translation') !== 'false';
+        let translationMode = localStorage.getItem('setting-trans-lang') || 'cn';
+
+        const pronunciationInput = document.getElementById('setting-pronunciation');
+        const translationInput = document.getElementById('setting-translation');
+        const fullscreenInput = document.getElementById('setting-fullscreen');
+
+        if (pronunciationInput) pronunciationInput.checked = savedPronunciation;
+        if (translationInput) translationInput.checked = savedTranslation;
+
+        if (pronunciationInput) {
+            pronunciationInput.addEventListener('change', (e) => {
+                localStorage.setItem('setting-pronunciation', e.target.checked);
+                if (document.getElementById('np-overlay').classList.contains('active')) {
+                    renderLyrics(currentTrackId);
+                }
+            });
+        }
+
+        if (translationInput) {
+            translationInput.addEventListener('change', (e) => {
+                localStorage.setItem('setting-translation', e.target.checked);
+                if (document.getElementById('np-overlay').classList.contains('active')) {
+                    renderLyrics(currentTrackId);
+                }
+            });
+        }
+
+        if (fullscreenInput) {
+            fullscreenInput.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                            e.target.checked = false;
+                        });
+                    }
+                } else {
+                    if (document.fullscreenElement) {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                if (fullscreenInput) {
+                    fullscreenInput.checked = false;
+                }
+            } else {
+                if (fullscreenInput) {
+                    fullscreenInput.checked = true;
+                }
+            }
+        });
+
+        const realVisualizerInput = document.getElementById('setting-real-visualizer');
+        if (realVisualizerInput) {
+            realVisualizerInput.addEventListener('change', async (e) => {
+                if (e.target.checked) {
+                    const success = await enableRealAudioVisualizer();
+                    if (success) {
+                        localStorage.setItem('setting-real-visualizer', 'true');
+                    }
+                } else {
+                    localStorage.setItem('setting-real-visualizer', 'false');
+                    disableRealAudioVisualizer();
+                }
+            });
+        }
+
+        function setTransMode(lang) {
+            translationMode = lang;
+            localStorage.setItem('setting-trans-lang', lang);
+            document.querySelectorAll('.menu-trans-item').forEach(el => {
+                if (el.dataset.lang === lang) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+            if (document.getElementById('np-overlay').classList.contains('active')) {
+                renderLyrics(currentTrackId);
+            }
+        }
+
+        document.querySelectorAll('.menu-trans-item').forEach(el => {
+            if (el.dataset.lang === translationMode) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('active');
+            }
+        });
+
+        function renderLyrics(trackId) {
+            const track = activeTracks[trackId];
+            const lyricsContainer = document.getElementById('lyrics-container');
+            lyricsContainer.innerHTML = '';
+
+            let renderLyricsData = [];
+
+            if (typeof track.lyrics === 'string') {
+                renderLyricsData = track.lyrics.trim().split('\n').map(l => l.trim());
+            } else if (track.lyrics && track.lyrics.length > 0) {
+                renderLyricsData = track.lyrics;
+            } else {
+                renderLyricsData = [
+                    "Lyrics currently not available",
+                ];
+            }
+
+            const romajiByTime = {};
+            const plainRomajiList = [];
+
+            if (track.lyrics_rom) {
+                let rawRomajiLines = [];
+                if (typeof track.lyrics_rom === 'string') {
+                    rawRomajiLines = track.lyrics_rom.trim().split('\n').map(l => l.trim());
+                } else if (Array.isArray(track.lyrics_rom)) {
+                    rawRomajiLines = track.lyrics_rom;
+                }
+
+                rawRomajiLines.forEach((rLine) => {
+                    let rText = '';
+                    let rTime = undefined;
+
+                    if (typeof rLine === 'string') {
+                        const lrcMatch = rLine.match(/^\[(\d{2,}):(\d{2}(?:\.\d{1,3})?)\](.*)/);
+                        if (lrcMatch) {
+                            const minutes = parseInt(lrcMatch[1], 10);
+                            const seconds = parseFloat(lrcMatch[2]);
+                            rTime = (minutes * 60) + seconds;
+                            rText = lrcMatch[3].trim();
+                        } else {
+                            rText = rLine.trim();
+                        }
+                    } else if (typeof rLine === 'object') {
+                        rText = rLine.text || '';
+                        rTime = rLine.time;
+                    }
+
+                    if (rTime !== undefined) {
+                        const key = rTime.toFixed(1);
+                        romajiByTime[key] = rText;
+                    }
+                    plainRomajiList.push(rText);
+                });
+            }
+
+            let hasCn = !!track.lyrics_cn;
+            let hasEn = !!track.lyrics_en;
+            if (Array.isArray(track.lyrics)) {
+                if (!hasCn) hasCn = track.lyrics.some(l => typeof l === 'object' && l.cn);
+                if (!hasEn) hasEn = track.lyrics.some(l => typeof l === 'object' && l.en);
+            }
+
+            const btnCn = document.querySelector('.menu-trans-item[data-lang="cn"]');
+            const btnEn = document.querySelector('.menu-trans-item[data-lang="en"]');
+
+            if (btnCn) {
+                if (hasCn) btnCn.classList.remove('disabled');
+                else btnCn.classList.add('disabled');
+            }
+            if (btnEn) {
+                if (hasEn) btnEn.classList.remove('disabled');
+                else btnEn.classList.add('disabled');
+            }
+
+            const mainTransBtn = document.getElementById('btn-trans');
+            if (mainTransBtn) {
+                if (!hasCn && !hasEn) {
+                    mainTransBtn.classList.add('disabled');
+                } else {
+                    mainTransBtn.classList.remove('disabled');
+                }
+            }
+
+            const showPronunciation = document.getElementById('setting-pronunciation') ? document.getElementById('setting-pronunciation').checked : false;
+            const isTranslationEnabled = document.getElementById('setting-translation') ? document.getElementById('setting-translation').checked : true;
+
+            // Check if track has pronunciation lyrics
+            let hasPronunciation = !!track.lyrics_rom;
+            if (typeof track.lyrics_rom === 'string') {
+                hasPronunciation = track.lyrics_rom.trim().length > 0;
+            } else if (Array.isArray(track.lyrics_rom)) {
+                hasPronunciation = track.lyrics_rom.length > 0;
+            }
+            if (!hasPronunciation && typeof track.lyrics === 'string' && track.lyrics.includes('|')) {
+                hasPronunciation = true;
+            }
+
+            // Update toggle pronunciation button visual state
+            const togglePronBtn = document.getElementById('btn-toggle-pron');
+            if (togglePronBtn) {
+                if (!hasPronunciation) {
+                    togglePronBtn.style.opacity = '0.3';
+                    togglePronBtn.style.color = 'rgba(255,255,255,0.3)';
+                    togglePronBtn.title = '暂无歌词发音 / No Pronunciation Available';
+                } else if (showPronunciation) {
+                    togglePronBtn.style.opacity = '1';
+                    togglePronBtn.style.color = '#fff';
+                    togglePronBtn.title = '关闭歌词发音 / Turn Off Pronunciation';
+                } else {
+                    togglePronBtn.style.opacity = '0.4';
+                    togglePronBtn.style.color = 'rgba(255,255,255,0.5)';
+                    togglePronBtn.title = '开启歌词发音 / Turn On Pronunciation';
+                }
+            }
+
+            // Hide/show translation language dropdown button according to the setting
+            const transBtn = document.getElementById('btn-trans');
+            if (transBtn) {
+                transBtn.style.display = isTranslationEnabled ? 'flex' : 'none';
+            }
+
+            let effectiveTransMode = translationMode;
+            if (effectiveTransMode === 'cn' && !hasCn) {
+                if (hasEn) effectiveTransMode = 'en';
+                else effectiveTransMode = 'none';
+            }
+            if (effectiveTransMode === 'en' && !hasEn) {
+                if (hasCn) effectiveTransMode = 'cn';
+                else effectiveTransMode = 'none';
+            }
+
+            const transByTime = {};
+            const plainTransList = [];
+
+            let targetLyricsTrans = null;
+            if (isTranslationEnabled && effectiveTransMode === 'cn') {
+                targetLyricsTrans = track.lyrics_cn;
+            } else if (isTranslationEnabled && effectiveTransMode === 'en') {
+                targetLyricsTrans = track.lyrics_en;
+            }
+
+            if (targetLyricsTrans) {
+                let rawTransLines = [];
+                if (typeof targetLyricsTrans === 'string') {
+                    rawTransLines = targetLyricsTrans.trim().split('\n').map(l => l.trim());
+                } else if (Array.isArray(targetLyricsTrans)) {
+                    rawTransLines = targetLyricsTrans;
+                }
+
+                rawTransLines.forEach((rLine) => {
+                    let rText = '';
+
+                    if (typeof rLine === 'string') {
+                        const lrcMatch = rLine.match(/^\[(?:\d{2,}):(?:\d{2}(?:\.\d{1,3})?)\](.*)/);
+                        if (lrcMatch) {
+                            rText = lrcMatch[1].trim();
+                        } else {
+                            rText = rLine.trim();
+                        }
+                    } else if (typeof rLine === 'object') {
+                        rText = rLine.text || '';
+                    }
+
+                    plainTransList.push(rText);
+                });
+            }
+
+            renderLyricsData.forEach((line, index) => {
+                const div = document.createElement('div');
+                div.className = 'lyric-line';
+
+                let time = undefined;
+                let text = '';
+                let romaji = '';
+                let trans = '';
+
+                if (typeof line === 'string') {
+                    const lrcMatch = line.match(/^\[(\d{2,}):(\d{2}(?:\.\d{1,3})?)\](.*)/);
+                    if (lrcMatch) {
+                        const minutes = parseInt(lrcMatch[1], 10);
+                        const seconds = parseFloat(lrcMatch[2]);
+                        time = (minutes * 60) + seconds;
+                        text = lrcMatch[3].trim();
+                    } else {
+                        text = line;
+                    }
+
+                    // Check if string contains inline romaji separated by "|" (for backwards compatibility/flexibility)
+                    if (text.includes('|')) {
+                        const parts = text.split('|');
+                        text = parts[0].trim();
+                        romaji = parts[1].trim();
+                    }
+                } else if (typeof line === 'object') {
+                    text = line.text || '';
+                    romaji = line.romaji || '';
+                    if (effectiveTransMode === 'cn' && line.cn) trans = line.cn;
+                    else if (effectiveTransMode === 'en' && line.en) trans = line.en;
+                    if (line.time !== undefined) {
+                        time = line.time;
+                    }
+                }
+
+                // Resolve separate track.lyrics_rom if not already resolved inline/object
+                if (!romaji && track.lyrics_rom) {
+                    if (time !== undefined) {
+                        const key = time.toFixed(1);
+                        if (romajiByTime[key] !== undefined) {
+                            romaji = romajiByTime[key];
+                        }
+                    }
+                    // Fallback to index-based matching
+                    if (!romaji && index < plainRomajiList.length) {
+                        romaji = plainRomajiList[index];
+                    }
+                }
+
+                // Resolve translation
+                if (!trans && targetLyricsTrans) {
+                    if (index < plainTransList.length) {
+                        trans = plainTransList[index];
+                    }
+                }
+
+                if (time !== undefined) {
+                    div.dataset.time = time;
+                }
+
+                // Render logic
+                if ((showPronunciation && romaji) || (isTranslationEnabled && effectiveTransMode !== 'none' && trans)) {
+                    if (showPronunciation && romaji) {
+                        const romajiDiv = document.createElement('div');
+                        romajiDiv.className = 'lyric-romaji';
+                        romajiDiv.innerText = romaji;
+                        div.appendChild(romajiDiv);
+                    }
+
+                    const textDiv = document.createElement('div');
+                    textDiv.className = 'lyric-text';
+                    textDiv.innerText = text;
+                    div.appendChild(textDiv);
+
+                    if (isTranslationEnabled && effectiveTransMode !== 'none' && trans) {
+                        const transDiv = document.createElement('div');
+                        transDiv.className = 'lyric-trans';
+                        transDiv.innerText = trans;
+                        div.appendChild(transDiv);
+                    }
+                } else {
+                    div.innerText = text;
+                }
+
+                if (index === 1 && (!track.lyrics || track.lyrics.length === 0)) div.classList.add('active');
+                div.onclick = () => {
+                    if (div.dataset.time && isPlayerReady) {
+                        player.seekTo(parseFloat(div.dataset.time), true);
+                    } else {
+                        document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active'));
+                        div.classList.add('active');
+                    }
+                };
+                lyricsContainer.appendChild(div);
+            });
+
+            if (isTranslationEnabled && effectiveTransMode !== 'none') {
+                let sourceText = '';
+                if (effectiveTransMode === 'cn') sourceText = track.trans_source_cn || track.trans_source;
+                if (effectiveTransMode === 'en') sourceText = track.trans_source_en || track.trans_source;
+
+                if (sourceText) {
+                    const sourceDiv = document.createElement('div');
+                    sourceDiv.className = 'lyric-source';
+                    sourceDiv.innerText = `Lyrics Translation: ${sourceText}`;
+                    lyricsContainer.appendChild(sourceDiv);
+                }
+            }
+        }
+
+        function togglePlay() {
+            if (!isPlayerReady) return;
+            const state = player.getPlayerState();
+            if (state == YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+
+        function playPrevious(keepHidden = false) {
+            if (currentTrackId > 0) {
+                openPlayer(currentTrackId - 1, keepHidden);
+            }
+        }
+
+        function playNext(keepHidden = false) {
+            if (currentTrackId < activeTracks.length - 1) {
+                openPlayer(currentTrackId + 1, keepHidden);
+            } else if (loopMode === 3) {
+                openPlayer(0, keepHidden);
+            }
+        }
+
+        function toggleLoopMode() {
+            loopMode = (loopMode + 1) % 4;
+            const btn = document.getElementById('loop-mode-btn');
+            if (loopMode === 0) {
+                btn.innerHTML = '<i class="fa-solid fa-ban"></i>';
+                btn.title = "Stop After Current";
+            } else if (loopMode === 1) {
+                btn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+                btn.title = "Sequence Play";
+            } else if (loopMode === 2) {
+                btn.innerHTML = '<span style="position:relative;"><i class="fa-solid fa-repeat"></i><span style="position:absolute;font-size:0.5em;top:50%;left:50%;transform:translate(-50%,-50%);font-family:sans-serif;font-weight:bold;">1</span></span>';
+                btn.title = "Loop One";
+            } else if (loopMode === 3) {
+                btn.innerHTML = '<i class="fa-solid fa-repeat"></i>';
+                btn.title = "Loop All";
+            }
+        }
+
+        let previousVolume = 100;
+        let isMuted = false;
+
+        function changeVolume(value) {
+            if (player && isPlayerReady) {
+                player.setVolume(value);
+            }
+            const volumeBtnIcon = document.querySelector('#volume-btn i');
+            if (value == 0) {
+                volumeBtnIcon.className = 'fa-solid fa-volume-xmark';
+                isMuted = true;
+            } else if (value < 50) {
+                volumeBtnIcon.className = 'fa-solid fa-volume-low';
+                isMuted = false;
+                previousVolume = value;
+            } else {
+                volumeBtnIcon.className = 'fa-solid fa-volume-high';
+                isMuted = false;
+                previousVolume = value;
+            }
+        }
+
+        function toggleMute() {
+            const slider = document.getElementById('volume-slider');
+            if (isMuted) {
+                changeVolume(previousVolume);
+                slider.value = previousVolume;
+            } else {
+                changeVolume(0);
+                slider.value = 0;
+            }
+        }
+
+        function closeToast() {
+            document.getElementById('np-toast').classList.remove('active');
+            if (isPlayerReady) player.pauseVideo();
+        }
+
+        function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return "0:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function startProgressTracker() {
+            progressInterval = setInterval(() => {
+                if (player && player.getCurrentTime) {
+                    const current = player.getCurrentTime();
+                    const total = player.getDuration();
+                    const track = activeTracks[currentTrackId];
+                    const start = track.start || 0;
+                    const effectiveEnd = track.end || total;
+                    const duration = effectiveEnd - start;
+
+                    let currentAdjusted = current - start;
+                    if (currentAdjusted < 0) currentAdjusted = 0;
+
+                    document.getElementById('time-total').innerText = formatTime(duration);
+                    if (!isSeeking) {
+                        document.getElementById('time-current').innerText = formatTime(currentAdjusted);
+                    }
+
+                    if (duration > 0) {
+                        const pct = Math.max(0, Math.min(100, (currentAdjusted / duration) * 100));
+                        if (!isSeeking) {
+                            document.getElementById('progress-fill').style.width = pct + '%';
+                            document.getElementById('progress-thumb').style.left = pct + '%';
+                        }
+                    }
+
+                    const lyrics = document.querySelectorAll('.lyric-line[data-time]');
+                    if (lyrics.length > 0) {
+                        let activeIndex = -1;
+                        for (let i = 0; i < lyrics.length; i++) {
+                            if (current >= parseFloat(lyrics[i].dataset.time)) {
+                                activeIndex = i;
+                            } else {
+                                break;
+                            }
+                        }
+                        if (activeIndex !== -1) {
+                            const activeDiv = lyrics[activeIndex];
+                            if (!activeDiv.classList.contains('active')) {
+                                document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active'));
+                                activeDiv.classList.add('active');
+
+                                const container = document.getElementById('lyrics-container');
+                                const offset = activeDiv.offsetTop - container.offsetTop - (container.clientHeight / 2) + (activeDiv.clientHeight / 2);
+                                container.scrollTo({ top: offset, behavior: 'smooth' });
+                            }
+                        }
+                    }
+                }
+            }, 100);
+        }
+
+        function stopProgressTracker() {
+            clearInterval(progressInterval);
+        }
+
+        let isSeeking = false;
+
+        function getSeekPct(clientX) {
+            const bg = document.getElementById('progress-bg');
+            const rect = bg.getBoundingClientRect();
+            return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        }
+
+        function applySeekPct(pct, commit) {
+            document.getElementById('progress-fill').style.width = (pct * 100) + '%';
+            document.getElementById('progress-thumb').style.left = (pct * 100) + '%';
+
+            if (isPlayerReady) {
+                const track = activeTracks[currentTrackId];
+                const start = track.start || 0;
+                const total = player.getDuration();
+                const effectiveEnd = track.end || total;
+                const duration = effectiveEnd - start;
+                if (duration > 0) {
+                    document.getElementById('time-current').innerText = formatTime(duration * pct);
+                }
+            }
+
+            if (commit && isPlayerReady) {
+                const track = activeTracks[currentTrackId];
+                const start = track.start || 0;
+                const total = player.getDuration();
+                const effectiveEnd = track.end || total;
+                const duration = effectiveEnd - start;
+                if (duration > 0) {
+                    const seekTo = start + (duration * pct);
+                    player.seekTo(seekTo, true);
+                }
+            }
+        }
+
+        document.getElementById('progress-bg').addEventListener('mousedown', (e) => {
+            if (!isPlayerReady) return;
+            isSeeking = true;
+            document.getElementById('progress-bg').classList.add('seeking');
+            applySeekPct(getSeekPct(e.clientX), false);
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isSeeking) return;
+            applySeekPct(getSeekPct(e.clientX), false);
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isSeeking) return;
+            isSeeking = false;
+            document.getElementById('progress-bg').classList.remove('seeking');
+            applySeekPct(getSeekPct(e.clientX), true);
+        });
+
+        document.getElementById('progress-bg').addEventListener('touchstart', (e) => {
+            if (!isPlayerReady) return;
+            isSeeking = true;
+            document.getElementById('progress-bg').classList.add('seeking');
+            applySeekPct(getSeekPct(e.touches[0].clientX), false);
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isSeeking) return;
+            applySeekPct(getSeekPct(e.touches[0].clientX), false);
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (!isSeeking) return;
+            isSeeking = false;
+            document.getElementById('progress-bg').classList.remove('seeking');
+            const touch = e.changedTouches[0];
+            applySeekPct(getSeekPct(touch.clientX), true);
+        });
+
+        window.addEventListener('resize', () => {
+            updateNowPlayingMarquees();
+            updateAllGridMarquees();
+        });
+
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function focusConsoleInput() {
+            const input = document.getElementById('console-input');
+            if (input) input.focus();
+        }
+
+        function handleConsoleOverlayClick(e) {
+            if (e.target.id === 'secret-console-overlay') {
+                closeConsole();
+            }
+        }
+
+        function appendConsoleLog(text, className = '') {
+            const log = document.getElementById('console-log');
+            if (!log) return;
+            const line = document.createElement('div');
+            line.className = `console-line ${className}`;
+            line.innerText = text;
+            log.appendChild(line);
+            const screen = document.getElementById('console-screen');
+            if (screen) screen.scrollTop = screen.scrollHeight;
+        }
+
+        function openConsole() {
+            if (isTransitioning) return;
+            isConsoleOpen = true;
+            const overlay = document.getElementById('secret-console-overlay');
+            overlay.classList.add('active');
+
+            const log = document.getElementById('console-log');
+            log.innerHTML = '';
+
+            const input = document.getElementById('console-input');
+            input.value = '';
+            input.disabled = false;
+
+            if (!isSecretMode) {
+                document.getElementById('console-titlebar-text').innerText = 'SYSTEM TERMINAL // USER LOGIN';
+                appendConsoleLog('[SYSTEM] RESTRICTED ACCESS PROTOCOL INITIALIZED.', 'cmd-system');
+                appendConsoleLog('[SYSTEM] PLEASE ENTER AUTHORIZATION TO PROCEED.', 'cmd-system');
+                document.getElementById('console-prompt-label').innerText = 'Login PIN:';
+                input.type = 'password';
+                input.maxLength = 16;
+            } else {
+                document.getElementById('console-titlebar-text').innerText = 'SYSTEM TERMINAL // SESSION_ACTIVE_DATA';
+                appendConsoleLog('[SYSTEM] CURRENT ACCESS LEVEL: CLASSIFIED_ARCHIVE.', 'cmd-system');
+                appendConsoleLog('[SYSTEM] DISCONNECT FROM SECRET REPOSITORY?', 'cmd-system');
+                document.getElementById('console-prompt-label').innerText = 'Logout? [Y/N]:';
+                input.type = 'text';
+                input.maxLength = 1;
+            }
+
+            setTimeout(() => input.focus(), 60);
+        }
+
+        function closeConsole() {
+            isConsoleOpen = false;
+            const overlay = document.getElementById('secret-console-overlay');
+            if (overlay) overlay.classList.remove('active');
+            const input = document.getElementById('console-input');
+            if (input) {
+                input.value = '';
+                input.blur();
+            }
+        }
+
+        function handleConsoleInputKey(e) {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeConsole();
+                return;
+            }
+
+            const input = document.getElementById('console-input');
+            if (!input) return;
+
+            if (!isSecretMode) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const enteredPin = input.value.trim().toLowerCase();
+                    if (SECRET_PINS.includes(enteredPin)) {
+                        appendConsoleLog(`> ${'•'.repeat(input.value.length || 6)}`, 'cmd-user');
+                        appendConsoleLog('[AUTH] Access Granted. Decrypting secret data...', 'cmd-success');
+                        input.disabled = true;
+                        setTimeout(() => {
+                            closeConsole();
+                            executeGatewayTransition(true);
+                        }, 700);
+                    } else {
+                        appendConsoleLog(`> ${'•'.repeat(input.value.length || 4)}`, 'cmd-user');
+                        appendConsoleLog('[AUTH] Access Denied: Invalid PIN. Try again.', 'cmd-error');
+                        input.value = '';
+                    }
+                }
+            } else {
+                // Secret Mode Logout Handler
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const resp = input.value.trim().toUpperCase();
+                    if (resp === 'Y' || resp === 'YES') {
+                        appendConsoleLog(`> ${resp}`, 'cmd-user');
+                        appendConsoleLog('[SESSION] Logout confirmed. Reverting to public data...', 'cmd-warn');
+                        input.disabled = true;
+                        setTimeout(() => {
+                            closeConsole();
+                            executeGatewayTransition(false);
+                        }, 600);
+                    } else if (resp === 'N' || resp === 'NO') {
+                        appendConsoleLog(`> ${resp}`, 'cmd-user');
+                        appendConsoleLog('[SESSION] Logout cancelled. Session preserved.', 'cmd-system');
+                        setTimeout(() => {
+                            closeConsole();
+                        }, 400);
+                    } else if (resp !== '') {
+                        appendConsoleLog('[ERROR] Invalid command.', 'cmd-error');
+                        input.value = '';
+                    }
+                } else if (e.key === 'y' || e.key === 'Y') {
+                    e.preventDefault();
+                    input.value = 'Y';
+                    appendConsoleLog('> Y', 'cmd-user');
+                    appendConsoleLog('[SESSION] Logout confirmed. Reverting to public data...', 'cmd-warn');
+                    input.disabled = true;
+                    setTimeout(() => {
+                        closeConsole();
+                        executeGatewayTransition(false);
+                    }, 600);
+                } else if (e.key === 'n' || e.key === 'N') {
+                    e.preventDefault();
+                    input.value = 'N';
+                    appendConsoleLog('> N', 'cmd-user');
+                    appendConsoleLog('[SESSION] Logout cancelled. Session preserved.', 'cmd-system');
+                    setTimeout(() => {
+                        closeConsole();
+                    }, 400);
+                }
+            }
+        }
+
+        function executeGatewayTransition(toSecret) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            if (player && isPlayerReady) player.pauseVideo();
+            closeToast();
+            const npOverlay = document.getElementById('np-overlay');
+            if (npOverlay) npOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            const glitchElem = document.getElementById('transition-glitch-text');
+            const statusBadge = document.getElementById('hud-status-badge');
+            const subtextElem = document.getElementById('transition-subtext');
+            const percentageElem = document.getElementById('transition-percentage');
+            const progressFill = document.getElementById('transition-progress-fill');
+
+            const mainText = toSecret ? "ACCESS GRANTED // SECRET DATA" : "LOGGING OUT // PUBLIC DATA";
+            if (glitchElem) {
+                glitchElem.innerText = mainText;
+                glitchElem.setAttribute('data-text', mainText);
+            }
+
+            if (statusBadge) statusBadge.innerText = toSecret ? "CLASSIFIED" : "PUBLIC";
+            if (subtextElem) subtextElem.innerText = toSecret ? "DECRYPTING CLASSIFIED DATA..." : "RESTORING PUBLIC DATA...";
+
+            const transitionOverlay = document.getElementById('screen-transition-overlay');
+            if (transitionOverlay) transitionOverlay.classList.add('active');
+
+            let pct = 0;
+            if (progressFill) progressFill.style.width = '0%';
+            if (percentageElem) percentageElem.innerText = '00%';
+
+            const progressInterval = setInterval(() => {
+                pct += 4;
+                if (pct > 100) pct = 100;
+                if (progressFill) progressFill.style.width = pct + '%';
+                if (percentageElem) percentageElem.innerText = (pct < 10 ? '0' : '') + pct + '%';
+                if (pct >= 100) clearInterval(progressInterval);
+            }, 30);
+
+            setTimeout(() => {
+                // Midpoint transition: Switch dataset and re-render
+                isSecretMode = toSecret;
+                activeTracks = isSecretMode ? (window.tracks2 || tracks2) : tracks;
+                activeConfig = isSecretMode ? (window.config2 || config2 || config) : config;
+                activeChapters = isSecretMode ? (window.chapters2 || chapters2) : defaultChapters;
+
+                document.body.classList.toggle('secret-mode', isSecretMode);
+
+                const logoElem = document.querySelector('header .logo');
+                if (logoElem) {
+                    if (isSecretMode) {
+                        logoElem.innerHTML = '<i class="fa-solid fa-user-secret"></i> WASABISOCUTE Music Collection <span class="secret-badge">CLASSIFIED</span>';
+                    } else {
+                        logoElem.innerHTML = '<i class="fa-solid fa-compact-disc"></i> WASABISOCUTE Music Collection';
+                    }
+                }
+
+                currentTrackId = 0;
+                renderGrid();
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }, 550);
+
+            setTimeout(() => {
+                if (transitionOverlay) transitionOverlay.classList.remove('active');
+                isTransitioning = false;
+                clearInterval(progressInterval);
+            }, 1200);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (isConsoleOpen) {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeConsole();
+                }
+                return;
+            }
+
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.key === '/') {
+                e.preventDefault();
+                openConsole();
+                return;
+            }
+
+            switch (e.key) {
+                case ' ':
+                    e.preventDefault();
+                    togglePlay();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    playPrevious();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    playNext();
+                    break;
+                case 'ArrowUp': {
+                    e.preventDefault();
+                    const slider = document.getElementById('volume-slider');
+                    const newVol = Math.min(100, parseInt(slider.value) + 5);
+                    slider.value = newVol;
+                    changeVolume(newVol);
+                    break;
+                }
+                case 'ArrowDown': {
+                    e.preventDefault();
+                    const slider = document.getElementById('volume-slider');
+                    const newVol = Math.max(0, parseInt(slider.value) - 5);
+                    slider.value = newVol;
+                    changeVolume(newVol);
+                    break;
+                }
+                case 'Escape':
+                    closePlayer();
+                    break;
+            }
+        });
+    </script>
 </body>
 
 </html>
