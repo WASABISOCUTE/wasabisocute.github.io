@@ -19,43 +19,86 @@
 <body>
     <header>
         <a href="index.html" class="logo">
-            <i class="fa-solid fa-compact-disc"></i> WASABISOCUTE
+            <i class="fa-solid fa-compact-disc"></i> WASABISOCUTE Music Collection
         </a>
         <div class="header-actions">
+            <div class="tooltip-container" id="help-btn" onclick="toggleHelp(event)">
+                <i class="fa-solid fa-circle-question"></i> Help
+                <div class="tooltip-popup" id="help-popup" onclick="event.stopPropagation()">
+                    <h4>问题排查 & 快捷键 <button class="close-btn" onclick="toggleHelp(event)"><i
+                                class="fa-solid fa-xmark"></i></button></h4>
+                    <div style="font-size: 13px; margin-top: 8px;">1. 若视频未正常显示（黑屏），请尝试关闭标签页后重开<br>（Ctrl + W 后按 Ctrl +
+                        Shift + T）</div>
+                    <div style="font-size: 13px; margin-top: 8px;">2. 若播放器报错或无法播放，请切换到其他歌曲后重试，<br>若问题仍然存在，请尝试1.的解决方法
+                    </div>
+                    <div style="font-size: 13px; margin-top: 8px;">3. 若问题仍然存在，请联系：<a
+                            href="mailto:wasabi9487@gmail.com">wasabi9487@gmail.com</a>
+                        或
+                        <a href="mailto:sa234508@foonyewsa.edu.my">sa234508@foonyewsa.edu.my</a>
+                    </div>
+                    <div
+                        style="font-size: 13px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px;">
+                        <b>快捷键 / Shortcuts：</b><br>
+                        • <kbd>Space</kbd> 播放 / 暂停 (Play/Pause)<br>
+                        • <kbd>←</kbd> 上一首 (Previous)<br>
+                        • <kbd>→</kbd> 下一首 (Next)<br>
+                        • <kbd>↑</kbd> 调高音量 (Volume Up)<br>
+                        • <kbd>↓</kbd> 调低音量 (Volume Down)<br>
+                        • <kbd>ESC</kbd> 收起播放器 (Close Player)
+                    </div>
+                </div>
+            </div>
+            <div class="tooltip-container" id="settings-btn" onclick="toggleSettings(event)">
+                <i class="fa-solid fa-gear"></i> Settings
+                <div class="tooltip-popup" id="settings-popup" onclick="event.stopPropagation()">
+                    <h4>设置 / Settings <button class="close-btn" onclick="toggleSettings(event)"><i
+                                class="fa-solid fa-xmark"></i></button></h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">歌词翻译 / Lyrics Translation</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-translation" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">歌词发音 / Lyrics Pronunciation</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-pronunciation">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">启用全屏 / Fullscreen</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-fullscreen">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div style="font-size: 13px; margin-top: 12px; color: var(--text-muted); font-weight: bold;">实验性功能
+                        / Experimental</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                        <span style="font-size: 14px;">真实音频可视化 / Real Audio Visualizer</span>
+                        <label class="switch">
+                            <input type="checkbox" id="setting-real-visualizer">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-tip">
+                        <i class="fa-solid fa-circle-info"></i> 启用真实频谱分析。开启时请在浏览器共享弹窗中选择<b>【此标签页 / This
+                            Tab】</b>并务必勾选<b>【同时共享标签页音频】</b>。
+                    </div>
+                </div>
+            </div>
             <a href="wasabisocute.github.io"><i class="fa-solid fa-house"></i> Home</a>
         </div>
     </header>
-    <main>
-        <h2 class="chapter-title">Chapter -01</h2>
-        <div class="chapter-subtitle">&lt; 2020 • Before COVID</div>
-        <div class="track-grid" id="grid-ch-1">
-        </div>
-        <h2 class="chapter-title">Chapter 00</h2>
-        <div class="chapter-subtitle">&gt; 2020 • Before Everything</div>
-        <div class="track-grid" id="grid-ch0">
-        </div>
-        <h2 class="chapter-title">Chapter 01</h2>
-        <div class="chapter-subtitle">2023 • Getting Started</div>
-        <div class="track-grid" id="grid-ch1">
-        </div>
-        <h2 class="chapter-title">Chapter 02</h2>
-        <div class="chapter-subtitle">2024 • Deepening Dive</div>
-        <div class="track-grid" id="grid-ch2">
-        </div>
-        <h2 class="chapter-title">Chapter 03</h2>
-        <div class="chapter-subtitle">2025 • Memories Unlocked</div>
-        <div class="track-grid" id="grid-ch3">
-        </div>
-        <h2 class="chapter-title">Chapter 04</h2>
-        <div class="chapter-subtitle">2026 • In Progress</div>
-        <div class="track-grid" id="grid-ch4">
-        </div>
+    <main id="main-content">
     </main>
     <div class="np-toast" id="np-toast" onclick="openPlayer(currentTrackId)">
         <img src="" class="np-toast-cover" id="toast-cover" alt="Cover">
         <div class="np-toast-info">
-            <div class="np-toast-title" id="toast-title">Title</div>
-            <div class="np-toast-artist" id="toast-artist">Artist</div>
+            <div class="np-toast-title marquee-target" id="toast-title">Title</div>
+            <div class="np-toast-artist marquee-target" id="toast-artist">Artist</div>
         </div>
         <div class="np-toast-controls" onclick="event.stopPropagation()">
             <button class="toast-btn" onclick="playPrevious(true)"><i class="fa-solid fa-backward-step"></i></button>
@@ -83,18 +126,34 @@
                         <div class="np-title" id="np-title">Track Title</div>
                         <div class="np-artist" id="np-artist">Artist Name</div>
                     </div>
-                    <div class="np-options-wrapper">
-                        <button class="btn-options" onclick="toggleOptionsMenu(event)">
-                            <i class="fa-solid fa-ellipsis"></i>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button class="btn-options" id="btn-toggle-pron" onclick="togglePronunciationSetting(event)">
+                            <i class="fa-solid fa-closed-captioning"></i>
                         </button>
-                        <div class="np-options-menu" id="np-options-menu">
-                            <div class="menu-track-title" id="menu-title">Title</div>
-                            <div class="menu-track-artist" id="menu-artist">Artist</div>
-                            <div class="menu-info-item" id="menu-info">Info</div>
-                            <div class="menu-info-item" id="menu-date">Date</div>
-                            <a href="#" target="_blank" class="menu-ig-link" id="menu-ig">
-                                <i class="fa-brands fa-instagram"></i> IG Story
-                            </a>
+                        <div class="np-options-wrapper">
+                            <button class="btn-options" id="btn-trans" onclick="toggleTransMenu(event)">
+                                <i class="fa-solid fa-language"></i>
+                            </button>
+                            <div class="np-options-menu" id="np-trans-menu"
+                                style="width: auto; right: 0; bottom: 60px;">
+                                <div class="menu-trans-item" data-lang="none" onclick="setTransMode('none')">Off</div>
+                                <div class="menu-trans-item" data-lang="cn" onclick="setTransMode('cn')">中文</div>
+                                <div class="menu-trans-item" data-lang="en" onclick="setTransMode('en')">English</div>
+                            </div>
+                        </div>
+                        <div class="np-options-wrapper">
+                            <button class="btn-options" id="btn-options" onclick="toggleOptionsMenu(event)">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <div class="np-options-menu" id="np-options-menu">
+                                <div class="menu-track-title" id="menu-title">Title</div>
+                                <div class="menu-track-artist" id="menu-artist">Artist</div>
+                                <div class="menu-info-item" id="menu-info">Info</div>
+                                <div class="menu-info-item" id="menu-date">Date</div>
+                                <a href="#" target="_blank" class="menu-ig-link" id="menu-ig">
+                                    <i class="fa-brands fa-instagram"></i> Source
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,25 +166,16 @@
         <div class="np-bottom">
             <div class="progress-container">
                 <span id="time-current">0:00</span>
-                <div class="progress-bar-bg" onclick="seekVideo(event)" id="progress-bg">
+                <div class="progress-bar-bg" id="progress-bg">
                     <div class="progress-bar-fill" id="progress-fill"></div>
+                    <div class="progress-bar-thumb" id="progress-thumb"></div>
                 </div>
                 <span id="time-total">0:00</span>
             </div>
 
             <div class="controls-row">
                 <div class="visualizer" id="visualizer">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-
+                    <canvas id="real-visualizer-canvas" class="visualizer-canvas"></canvas>
                 </div>
 
                 <div class="player-controls">
@@ -135,2136 +185,175 @@
                     </button>
                     <button class="ctrl-btn" onclick="playNext()"><i class="fa-solid fa-forward-step"></i></button>
                 </div>
-                <div class="controls-spacer"></div>
+                <div class="controls-spacer">
+                    <div class="volume-container">
+                        <button class="ctrl-btn" id="volume-btn" onclick="toggleMute()">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                        <input type="range" id="volume-slider" min="0" max="100" value="100"
+                            oninput="changeVolume(this.value)">
+                    </div>
+                    <button class="ctrl-btn" id="loop-mode-btn" onclick="toggleLoopMode()" title="Stop After Current">
+                        <i class="fa-solid fa-ban"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+    <!--<footer id="footer" style="color: white;">
+        <span id="aboutLink">Copyright © 2026 WASABISOCUTE | Assisted by <span class="footer-credits">Google
+                Antigravity</span></span>
+    </footer>-->
+    <div class="secret-console-overlay" id="secret-console-overlay" onclick="handleConsoleOverlayClick(event)">
+        <div class="secret-console-window" onclick="event.stopPropagation()">
+            <div class="console-titlebar">
+                <div class="console-titlebar-left">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span id="console-titlebar-text">SYSTEM TERMINAL // SECURE_PORTAL_v2.6</span>
+                </div>
+                <button class="console-close-btn" onclick="closeConsole()" title="Close (ESC)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="console-screen" id="console-screen" onclick="focusConsoleInput()">
+                <div class="console-log" id="console-log"></div>
+                <div class="console-input-row" id="console-input-row">
+                    <span class="console-prompt-label" id="console-prompt-label">Login PIN:</span>
+                    <div class="console-input-wrapper">
+                        <input type="password" id="console-input" class="console-input" autocomplete="off"
+                            spellcheck="false" onkeydown="handleConsoleInputKey(event)">
+                        <span class="console-cursor" id="console-cursor">█</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="screen-transition-overlay" id="screen-transition-overlay">
+        <div class="transition-shutter-blade blade-top"></div>
+        <div class="transition-shutter-blade blade-bottom"></div>
+
+        <div class="transition-grid-bg"></div>
+        <div class="transition-flash"></div>
+
+        <div class="transition-core-wrapper">
+            <div class="transition-shockwave"></div>
+            <div class="transition-hud-box">
+                <div class="transition-hud-header">
+                    <span class="hud-tag"><i class="fa-solid fa-microchip"></i> WASABI BIOS v10.0</span>
+                    <span class="hud-status" id="hud-status-badge">SECURE_LINK</span>
+                </div>
+                <div class="transition-glitch-text" id="transition-glitch-text" data-text="AUTHENTICATING...">
+                    AUTHENTICATING...</div>
+                <div class="transition-progress-bar">
+                    <div class="transition-progress-fill" id="transition-progress-fill"></div>
+                </div>
+                <div class="transition-hud-footer">
+                    <span id="transition-subtext">DECRYPTING ARCHIVES...</span>
+                    <span id="transition-percentage">00%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-laser-beam"></div>
+    </div>
+
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="data.js"></script>
+    <script src="data2.js"></script>
     <script>
-        // Track Data
-        const tracks = [
-            //Chapter -1
-            {
-                chapter: -1,
-                title: '三生三世', artist: '张杰',
-                context: '《三生三世十里桃花》片头曲', desc: '',
-                date: '', ytId: 'wdtEWS2D9xo', start: 0,
-                lyrics: `
-                    [00:29.83]握不紧那段过往
-                    [00:33.24]冥灭了结魄光芒
-                    [00:36.69]那一滴离别的泪
-                    [00:40.24]灼烧着我的胸膛
-                    [00:43.75]爱在天地中流转
-                    [00:47.27]一颗心为谁奔忙
-                    [00:50.78]四海八荒身在何方
-                    [00:54.38]岁月该如何安放
-                    [00:57.98]听风声在沙沙作响
-                    [01:01.28]敲打着谁的愁肠
-                    [01:04.84]思念在一瞬间生长
-                    [01:08.44]才忘了夜多漫长
-                    [01:11.95]掌心的泪握到滚烫
-                    [01:15.15]只愿为你三生痴狂
-                    [01:19.11]落花满天又闻琴香
-                    [01:22.61]与你天地间徜徉
-                    [01:26.11]如果爱太荒凉我陪你梦一场
-                    [01:29.66]赎回你所有泪光
-                    [01:33.21]这一路有多远这三世有多长
-                    [01:36.66]执手到地老天荒
-                    [01:40.22]风凄凄雾茫茫雨滚滚雪漫漫
-                    [01:43.72]一步步都陪你同往
-                    [01:47.36]牵着手别惊慌管明天会怎样
-                    [01:50.76]哪怕注定流浪哪怕海角天涯
-                    [02:26.20]听风声在沙沙作响
-                    [02:29.63]敲打着谁的愁肠
-                    [02:33.09]思念在一瞬间生长
-                    [02:36.59]才忘了夜多漫长
-                    [02:40.20]掌心的泪握到滚烫
-                    [02:43.43]只愿为你三生痴狂
-                    [02:47.30]落花满天又闻琴香
-                    [02:50.85]与你天地间徜徉
-                    [02:54.33]如果爱太荒凉我陪你梦一场
-                    [02:58.14]赎回你所有泪光
-                    [03:01.39]这一路有多远这三世有多长
-                    [03:04.85]执手到地老天荒
-                    [03:08.41]风凄凄雾茫茫雨滚滚雪漫漫
-                    [03:11.97]一步步都陪你同往
-                    [03:15.47]牵着手别惊慌管明天会怎样
-                    [03:18.97]哪怕注定流浪
-                    [03:22.59]手牢牢不放爱念念不忘
-                    [03:26.23]人生何须多辉煌
-                    [03:29.60]浮华的终成空执着的都随风
-                    [03:33.21]情路何须多跌宕
-                    [03:36.58]要遇多少风浪心不再摇晃
-                    [03:40.32]一起细数这过往
-                    [03:43.02]陪你等风停了雾散了
-                    [03:45.50]雨住了雪化了
-                    [03:47.19]再遇见绝美月光
-                    [03:50.55]还有我在你身旁`
-            },
-            {
-                chapter: 0,
-                title: 'Monster', artist: 'Katie Sky',
-                context: '', desc: '',
-                date: '', ytId: '_Rh3dTb1KYE', start: 0,
-                lyrics: `[00:00.06]I see your monsters, I see your pain
-[00:05.67]Tell me your problems, I'll chase them away
-[00:11.19]I'll be your lighthouse, I'll make it okay
-[00:16.36]When I see your monsters, I'll stand there so brave
-[00:21.07]And chase them all away
-[00:24.51]
-[00:27.54]In the dark we, we
-[00:29.92]We stand apart we, we
-[00:32.99]Never see that the things that we need are staring right at us
-[00:38.41]You just want to hide, hide, hide
-[00:41.23]Never show your smile, smile
-[00:43.83]Stand alone when you need someone, it's the hardest thing of all
-[00:48.42]That you see are the bad, bad, bad
-[00:52.40]Memories, take your time and you'll find me
-[00:57.56]
-[00:57.57]I see your monsters, I see your pain
-[01:02.92]Tell me your problems, I'll chase them away
-[01:08.36]I'll be your lighthouse, I'll make it okay
-[01:13.57]When I see your monsters, I'll stand there so brave
-[01:18.32]And chase them all away
-[01:21.73]
-[01:22.11]I could see the sky, sky, sky
-[01:24.81]Beautiful tonight, night
-[01:27.43]When you breathe, why can't you see that the clouds are in your head?
-[01:33.01]I will stay there, there, there
-[01:35.70]No need to fear, fear
-[01:38.30]And when you need to talk it out with someone you can trust
-[01:42.90]What you see are the bad, bad, bad
-[01:46.92]Memories, take your time and you'll find me
-[01:52.05]
-[01:52.06]I see your monsters, I see your pain
-[01:57.48]Tell me your problems, I'll chase them away
-[02:02.90]I'll be your lighthouse, I'll make it okay
-[02:08.07]When I see your monsters, I'll stand there so brave
-[02:12.86]And chase them all away
-[02:18.30]I'll chase them all away
-[02:24.18]
-[02:27.47]You've got the chance to see the light
-[02:32.91]Even in the darkest night
-[02:38.30]And I will be here like you were for me
-[02:44.51]So just let me in
-[02:47.44]
-[02:48.96]'Cause I see your monsters, I see your pain
-[02:54.83]Tell me your problems, I'll chase them away
-[03:00.24]I'll be your lighthouse, I'll make it okay
-[03:05.33]When I see your monsters, I'll stand there so brave
-[03:10.47]
-[03:11.17]I see your monsters, I see your pain
-[03:16.60]Tell me your problems, I'll chase them away
-[03:22.01]I'll be your lighthouse, I'll make it okay (I'll make it okay)
-[03:27.23]When I see your monsters, I'll stand there so brave
-[03:31.95]And chase them all away
-[03:35.07]`
-            },
-            //Chapter 0
-            {
-                chapter: 0,
-                title: 'Counting Stars', artist: 'OneRepublic',
-                context: '', desc: '',
-                date: '', ytId: 'hT_nvWreIhg', start: 0,
-                lyrics: `
-                    [00:00.29]Lately I've been I've been losing sleep
-                    [00:04.99]Dreaming about the things that we could be
-                    [00:08.89]But baby I've been I've been praying hard
-                    [00:13.86]Said no more counting dollars
-                    [00:15.86]We'll be counting stars
-                    [00:18.78]Yeah we'll be counting stars
-                    [00:37.55]I see this life like a swinging vine
-                    [00:40.17]Swing my heart across the line
-                    [00:42.08]In my face is flashing signs
-                    [00:44.07]Seek it out and ye' shall find
-                    [00:45.97]Old but I'm not that old
-                    [00:48.01]Young but I'm not that bold
-                    [00:49.93]And I don't think the world is sold
-                    [00:52.00]I'm just doing what we're told
-                    [00:54.53]I I I I feel something so right
-                    [00:58.73]Doing the wrong thing
-                    [01:02.18]I I I I feel something so wrong
-                    [01:06.53]Doing the right thing
-                    [01:09.95]I couldn't lie couldn't lie couldn't lie
-                    [01:13.70]Everything that kills me makes me feel alive
-                    [01:17.66]Lately I've been I've been losing sleep
-                    [01:21.43]Dreaming about the things we could be
-                    [01:25.25]But baby I've been I've been praying hard
-                    [01:29.26]Said no more counting dollars
-                    [01:31.21]We'll be counting stars
-                    [01:33.34]Lately I've been I've been losing sleep
-                    [01:37.22]Dreaming about the things we could be
-                    [01:41.14]But baby I've been I've been praying hard
-                    [01:45.06]Said no more counting dollars
-                    [01:47.02]We'll be we'll be counting stars
-                    [01:56.25]I feel the love and I feel it burn
-                    [01:58.95]Down this river every turn
-                    [02:00.83]Hope is our four-letter word
-                    [02:02.72]Make that money watch it burn
-                    [02:04.64]Old but I'm not that old
-                    [02:06.84]Young but I'm not that bold
-                    [02:08.63]And I don't think the world is sold
-                    [02:10.53]I'm just doing what we're told
-                    [02:12.94]I I I I feel something so wrong
-                    [02:17.34]Doing the right thing
-                    [02:20.78]I could lie could lie could lie
-                    [02:24.57]Everything that drowns me makes me wanna fly
-                    [02:28.40]Lately I've been I've been losing sleep
-                    [02:32.31]Dreaming about the things we could be
-                    [02:36.10]But baby I've been I've been praying hard
-                    [02:40.09]Said no more counting dollars
-                    [02:42.11]We'll be counting stars
-                    [02:44.22]Lately I've been I've been losing sleep
-                    [02:48.21]Dreaming about the things we could be
-                    [02:51.90]But baby I've been I've been praying hard
-                    [02:55.83]Said no more counting dollars
-                    [02:57.65]We'll be we'll be counting stars
-                    [03:03.92]Take that money
-                    [03:04.52]Watch it burn
-                    [03:05.35]Sink in the river
-                    [03:06.38]The lessons I've learned
-                    [03:07.55]Take that money
-                    [03:08.23]Watch it burn
-                    [03:09.42]Sink in the river
-                    [03:10.39]The lessons I've learned
-                    [03:11.51]Take that money
-                    [03:12.33]Watch it burn
-                    [03:13.36]Sink in the river
-                    [03:14.35]The lessons I've learned
-                    [03:15.52]Take that money
-                    [03:16.41]Watch it burn
-                    [03:17.34]Sink in the river
-                    [03:18.33]The lessons I've learned
-                    [03:19.48]Everything that kills me
-                    [03:25.36]Makes me feel alive
-                    [03:26.56]Lately I've been I've been losing sleep
-                    [03:30.26]Dreaming about the things we could be
-                    [03:34.12]But baby I've been I've been praying hard
-                    [03:38.13]Said no more counting dollars
-                    [03:40.04]We'll be counting stars
-                    [03:41.98]Lately I've been I've been losing sleep
-                    [03:46.16]Dreaming about the things we could be
-                    [03:50.01]But baby I've been I've been praying hard
-                    [03:54.02]Said no more counting dollars
-                    [03:55.96]We'll be we'll be counting stars
-                    [03:58.57]Take that money
-                    [03:59.12]Watch it burn
-                    [03:59.61]Sink in the river
-                    [04:00.31]The lessons I've learned
-                    [04:01.73]Take that money
-                    [04:02.53]Watch it burn
-                    [04:03.47]Sink in the river
-                    [04:04.50]The lessons I've learned
-                    [04:05.68]Take that money
-                    [04:06.38]Watch it burn
-                    [04:07.18]Sink in the river
-                    [04:08.49]The lessons I've learned
-                    [04:09.33]Take that money
-                    [04:10.38]Watch it burn
-                    [04:11.16]Sink in the river
-                    [04:12.10]The lessons I've learned
-`
-
-            },
-            {
-                chapter: 0,
-                title: '沙漠骆驼', artist: '展展与罗罗',
-                context: '', desc: '',
-                date: '', ytId: 'BYgh1-JgTnY', start: 0,
-                lyrics: `
-                    [00:26.11]我要穿越这片沙漠
-                    [00:28.00]找寻真的自我
-                    [00:30.24]身边只有一匹骆驼陪我
-                    [00:34.66]这片风儿吹过
-                    [00:36.77]那片云儿飘过
-                    [00:38.91]突然之间出现爱的小河
-                    [00:43.22]我跨上沙漠之舟
-                    [00:45.45]背上烟斗和沙漏
-                    [00:47.64]手里还握著一壶烈酒
-                    [00:51.97]漫长古道悠悠
-                    [00:54.20]说不尽喜怒哀愁
-                    [00:56.37]只有那骆驼奔忙依旧
-                    [01:00.68]什么鬼魅传说
-                    [01:02.79]什么魑魅魍魉妖魔
-                    [01:04.99]只有那鹭鹰在幽幽的高歌
-                    [01:09.51]漫天黄沙掠过
-                    [01:11.66]走遍每个角落
-                    [01:13.83]行走在无尽的苍茫星河
-                    [01:18.11]白天黑夜交错
-                    [01:20.30]如此妖娆婀娜
-                    [01:22.57]蹉跎著岁月又蹉跎了自我
-                    [01:27.07]前方迷途太多
-                    [01:29.05]坚持才能洒脱
-                    [01:31.16]走出黑暗就能逍遥又快活
-                    [01:37.66]
-                    [01:48.57]我寻找沙漠绿洲
-                    [01:50.60]出现海市蜃楼
-                    [01:52.74]我仿佛看到她在那里等候
-                    [01:57.12]想起了她的温柔
-                    [01:59.32]滚烫着我的胸口
-                    [02:01.53]迷失在昨夜的那壶老酒
-                    [02:06.08]我穿上大头皮鞋
-                    [02:08.06]跨过凛冽荒野
-                    [02:10.20]我仿佛穿越到另一个世界
-                    [02:14.67]阿拉丁神灯要倾斜
-                    [02:16.80]天堂地狱已然重叠
-                    [02:18.93]突然之间飞来一只蝴蝶
-                    [02:23.10]什么鬼魅传说
-                    [02:25.40]什么魑魅魍魉妖魔
-                    [02:27.58]只有那鹭鹰在幽幽的高歌
-                    [02:32.06]漫天黄沙掠过
-                    [02:34.23]走遍每个角落
-                    [02:36.32]行走在无尽的苍茫星河
-                    [02:40.72]白天黑夜交错
-                    [02:42.83]如此妖娆婀娜
-                    [02:45.05]蹉跎著岁月又蹉跎了自我
-                    [02:49.39]前方迷途太多
-                    [02:51.61]坚持才能洒脱
-                    [02:53.67]走出黑暗就能逍遥又快活
-                    [03:00.60]
-                    [03:46.57]我已坠入在这神奇的国度
-                    [03:50.69]驼铃相伴走向圣堂之路
-                    [03:54.85]原谅我曾经恍惚陷入迷途
-                    [03:58.84]遮住了眼眸
-                    [04:00.99]湮没了意图
-                    [04:03.38]怎能被这样征服
-                    [04:12.53]什么鬼魅传说
-                    [04:14.49]什么魑魅魍魉妖魔
-                    [04:16.70]只有那鹭鹰在幽幽的高歌
-                    [04:21.01]漫天黄沙掠过
-                    [04:23.20]走遍每个角落
-                    [04:25.46]行走在无尽的苍茫星河
-                    [04:29.67]白天黑夜交错
-                    [04:31.90]如此妖娆婀娜
-                    [04:34.19]蹉跎著岁月又蹉跎了自我
-                    [04:38.62]前方迷途太多
-                    [04:40.60]坚持才能洒脱
-                    [04:42.83]走出黑暗就能逍遥又快活
-                    [04:47.60]梦里回到最初
-                    [04:49.41]浪潮起起伏伏
-                    [04:51.50]徬徨著未来又徬徨著孤独
-                    [04:56.05]漫长人生旅途
-                    [04:58.10]花开花落无数
-                    [05:00.41]沸腾的时光怎能被荒芜
-                    [05:04.97]清晨又到日暮
-                    [05:06.89]天边飞鸟群逐
-                    [05:09.40]摇曳著苍穹又描摹著黄土
-                    [05:13.88]东方鱼肚白出
-                    [05:15.94]烈日绽放吐露
-                    [05:18.01]放下尘浮我已踏上归途
-`
-            },
-            {
-                chapter: 0,
-                title: '你的答案', artist: '阿冗',
-                context: '', desc: '',
-                date: '', ytId: 'Tziswp8xQ_4', start: 0,
-                lyrics: `
-                    [00:25.29]也许世界就这样
-                    [00:28.59]我也还在路上
-                    [00:31.13]没有人能诉说
-                    [00:36.05]也许我只能沉默
-                    [00:39.24]眼泪湿润眼眶
-                    [00:41.90]可又不甘懦弱
-                    [00:45.55]低着头 期待白昼
-                    [00:50.71]接受所有的嘲讽
-                    [00:56.57]向着风 拥抱彩虹
-                    [01:01.75]勇敢的向前走
-                    [01:06.29]黎明的那道光
-                    [01:08.55]会越过黑暗
-                    [01:11.37]打破一切恐惧我能
-                    [01:14.29]找到答案
-                    [01:17.37]哪怕要逆着光
-                    [01:19.62]就驱散黑暗
-                    [01:22.28]丢弃所有的负担
-                    [01:25.30]不再孤单
-                    [01:28.29]不再孤单
-                    [01:31.97]
-                    [01:38.92]也许世界就这样
-                    [01:41.99]我也还在路上
-                    [01:44.99]没有人能诉说
-                    [01:49.49]也许我只能沉默
-                    [01:52.22]眼泪湿润眼眶
-                    [01:55.01]可又不甘懦弱
-                    [01:58.95]低着头 期待白昼
-                    [02:04.60]接受所有的嘲讽
-                    [02:10.25]向着风 拥抱彩虹
-                    [02:15.83]勇敢的向前走
-                    [02:20.47]黎明的那道光
-                    [02:22.14]会越过黑暗
-                    [02:25.01]打破一切恐惧我能
-                    [02:28.08]找到答案
-                    [02:31.05]哪怕要逆着光
-                    [02:33.08]就驱散黑暗
-                    [02:36.01]丢弃所有的负担
-                    [02:38.86]不再孤单
-                    [02:41.88]不再孤单
-                    [02:50.38]黎明的那道光
-                    [02:51.97]会越过黑暗
-                    [02:54.71]打破一切恐惧我能
-                    [02:57.81]找到答案
-                    [03:00.75]哪怕要逆着光
-                    [03:02.95]就驱散黑暗
-                    [03:05.66]有一万种的力量
-                    [03:08.64]淹没孤单
-                    [03:11.57]不再孤单
-                    [03:14.41]也许世界就这样
-                    [03:17.75]我也还在路上
-                    [03:20.60]没有人能诉说
-                    [03:25.55]也许我只能沉默
-                    [03:28.82]眼泪湿润眼眶
-                    [03:31.49]可又不甘懦弱
-`
-            },
-            {
-                chapter: 0,
-                title: 'Alone', artist: 'Alan Walker',
-                context: '', desc: '',
-                date: '2022', ytId: '1-xGerv5FOk', start: 0,
-                lyrics: `
-                    [00:04.07]Lost in your mind
-                    [00:10.94]I wanna know
-                    [00:13.33]Am I losing my mind?
-                    [00:20.79]Never let me go
-                    [00:22.92]If this night is not forever
-                    [00:26.38]At least we are together
-                    [00:28.84]I know I'm not alone
-                    [00:31.14]I know I'm not alone
-                    [00:34.11]Anywhere, whenever
-                    [00:36.24]Apart, but still together
-                    [00:38.78]I know I'm not alone
-                    [00:41.06]I know I'm not alone
-                    [00:51.10]I know I'm not alone
-                    [01:00.77]I know I'm not alone
-                    [01:06.32]Unconscious mind
-                    [01:12.85]I'm wide awake
-                    [01:15.77]Wanna feel one last time
-                    [01:22.85]Take my pain away
-                    [01:24.93]
-                    [01:34.99]If this night is not forever
-                    [01:38.50]At least we are together
-                    [01:41.06]I know I'm not alone
-                    [01:43.45]I know I'm not alone
-                    [01:46.10]Anywhere, whenever
-                    [01:48.60]Apart, but still together
-                    [01:51.01]I know I'm not alone
-                    [01:53.39]I know I'm not alone
-                    [02:03.06]I know I'm not alone
-                    [02:12.69]I know I'm not alone
-                    [02:17.24]I'm not alone, I'm not alone, I'm not alone
-                    [02:23.48]I know I'm not alone
-                    [02:28.02]I'm not alone, I'm not alone, I'm not alone
-                    [02:32.97]I know I'm not alone
-`
-            },
-            {
-                chapter: 0,
-                title: 'Haggstrom', artist: 'C418',
-                context: 'Game - Minecraft', desc: '',
-                date: '', ytId: 'laZusNy8QiY', start: 0,
-            },
-            {
-                chapter: 0,
-                title: '一路生花', artist: '温奕心',
-                context: '中秋晚会', desc: '',
-                date: 'SEP 2022', ytId: '-RDocB1x-70', start: 0,
-                lyrics: `                
-                    [00:22.25]海上的晚霞像年少的画
-                    [00:26.60]铺在天空等海鸥衔走它
-                    [00:30.31]
-                    [00:32.20]遥远的帆任风浪拍打
-                    [00:36.55]为梦再痛也不会害怕
-                    [00:40.65]
-                    [00:42.38]远走的风沙去谁的天涯
-                    [00:46.60]春天可曾在哪里见过他
-                    [00:50.57]
-                    [00:52.30]时间的手抚过了脸颊
-                    [00:56.59]他们谁都沉默不说话
-                    [01:00.68]
-                    [01:03.54]我希望许过的愿望一路生花
-                    [01:08.59]护送那时的梦抵挡过风沙
-                    [01:14.04]
-                    [01:14.28]指尖的樱花如诗写谁的韶华
-                    [01:19.21]疯狂的热爱夹带着文雅
-                    [01:23.88]我希望许过的愿望一路生花
-                    [01:28.68]将那雨中的人藏在屋檐下
-                    [01:33.54]岁月在冲刷逆流沧桑的喧哗
-                    [01:38.41]安静的夜晚你在想谁吗
-                    [01:44.35]
-                    [02:07.16]远走的风沙去谁的天涯
-                    [02:11.45]春天可曾在哪里见过他
-                    [02:15.61]
-                    [02:17.08]时间的手抚过了脸颊
-                    [02:21.24]他们谁都沉默不说话
-                    [02:25.66]
-                    [02:29.44]我希望许过的愿望一路生花
-                    [02:34.17]护送那时的梦抵挡过风沙
-                    [02:39.04]指尖的樱花如诗写谁的韶华
-                    [02:43.96]疯狂的热爱夹带着文雅
-                    [02:49.10]我希望许过的愿望一路生花
-                    [02:54.05]将那雨中的人藏在屋檐下
-                    [02:58.85]岁月在冲刷逆流沧桑的喧哗
-                    [03:03.58]安静的夜晚你在想谁吗
-                    [03:09.19]我希望许过的愿望一路生花
-                    [03:14.30]护送那时的梦抵挡过风沙
-                    [03:18.97]指尖的樱花如诗写谁的韶华
-                    [03:24.15]疯狂的热爱夹带着文雅
-                    [03:29.02]我希望许过的愿望
-                    [03:33.82]将那雨中的人藏在屋檐下
-                    [03:39.19]岁月在冲刷逆流沧桑的喧哗
-                    [03:44.06]安静的夜晚你在想谁吗
-                    [03:49.11]安静的夜晚你在想谁吗
-                    [03:58.52]
-                `
-            },
-            // Chapter 1
-            {
-                chapter: 1,
-                title: 'Payphone', artist: 'Maroon 5 ft. Wiz Khalifa',
-                context: '', desc: '',
-                date: 'MAR 2023', ytId: 'KRaWnd3LJfs', start: 0,
-                lyrics: `
-                    [00:39.52]I'm at a payphone trying to call home
-                    [00:44.01]All of my change I spent on you
-                    [00:48.18]Where have the times gone?
-                    [00:50.52]Baby, it's all wrong
-                    [00:52.71]Where are the plans we made for two?
-                    [00:57.37]Yeah I, I know it's hard to remember
-                    [01:00.69]The people we used to be
-                    [01:02.84]It's even harder to picture
-                    [01:05.06]That you're not here next to me
-                    [01:07.21]You say it's too late to make it
-                    [01:09.37]But is it too late to try?
-                    [01:11.55]And in our time that you wasted
-                    [01:13.46]All of our bridges burned down
-                    [01:16.15]I've wasted my nights
-                    [01:18.24]You turned out the lights
-                    [01:20.43]Now I'm paralyzed
-                    [01:22.58]Still stuck in that time
-                    [01:24.84]When we called it love
-                    [01:26.95]But even the sun sets in paradise
-                    [01:31.94]I'm at a payphone trying to call home
-                    [01:36.31]All of my change I spent on you
-                    [01:40.55]Where have the times gone?
-                    [01:42.88]Baby, it's all wrong
-                    [01:45.04]Where are the plans we made for two?
-                    [01:49.08]If happy ever after did exist
-                    [01:53.67]I would still be holding you like this
-                    [01:58.10]All those fairytales are full of shit
-                    [02:02.42]One more fuckin' love song, I'll be sick
-                    [02:06.59]Oh, you turned your back on tomorrow
-                    [02:10.50]'Cause you forgot yesterday
-                    [02:12.68]I gave you my love to borrow
-                    [02:14.80]But you just gave it away
-                    [02:17.08]You can't expect me to be fine
-                    [02:19.16]I don't expect you to care (Care)
-                    [02:21.41]I know I've said it before but
-                    [02:23.27]All of our bridges burned down
-                    [02:25.99]I've wasted my nights
-                    [02:28.15]You turned out the lights
-                    [02:30.24]Now I'm paralyzed
-                    [02:32.43]Still stuck in that time
-                    [02:34.61]When we called it love
-                    [02:36.84]But even the sun sets in paradise
-                    [02:41.73]I'm at a payphone trying to call home
-                    [02:46.17]All of my change I spent on you
-                    [02:50.43]Where have the times gone?
-                    [02:52.66]Baby, it's all wrong
-                    [02:54.88]Where are the plans we made for two? (Yeah)
-                    [02:58.89]If happy ever after did exist
-                    [03:03.54]I would still be holding you like this
-                    [03:07.60]And all those fairytales are full of shit
-                    [03:12.21]One more fuckin' love song, I'll be sick
-                    [03:16.26]Now I'm at a payphone
-                    [03:18.53]Man, fuck that shit
-                    [03:19.90]I'll be out spendin' all this money while you sittin 'round wonderin'
-                    [03:22.54]Why it wasn't you who came up from nothin'
-                    [03:24.23]Made it from the bottom, now when you see me, I'm stuntin'
-                    [03:26.53]And all of my cars start with a push of a button
-                    [03:28.55]Tellin' me I changed since I blew up or whatever you call it
-                    [03:31.09]Switch the number to my phone, so you never could call it
-                    [03:33.14]Don't need my name on my shirt, you can tell that I'm ballin'
-                    [03:35.38]Swish, what a shame, coulda got picked
-                    [03:37.58]Had a really good game, but you missed your last shot
-                    [03:39.80]So you talk about who you see at the top
-                    [03:41.64]Or what you coulda saw, but sad to say it's over for
-                    [03:44.16]Phantom pulled up, valet open doors
-                    [03:46.40]Wished I'd go away, got what you was lookin' for
-                    [03:48.50]Now it's me who they want, so you can go and take that little piece of shit with you
-                    [03:51.31]Yeah, I'm at a payphone trying to call home
-                    [03:55.98]All of my change I spent on you
-                    [04:00.31]Where have the times gone?
-                    [04:02.51]Baby, it's all wrong
-                    [04:04.70]Where are the plans we made for two?
-                    [04:08.66]If happy ever after did exist
-                    [04:13.36]I would still be holding you like this
-                    [04:17.42]And all these fairytales are full of shit
-                    [04:21.76]Yeah, one more fuckin' love song, I'll be sick
-                    [04:25.76]Yeah, now I'm at a payphone
-                `
-            },
-            {
-                chapter: 1,
-                title: 'Mind Your Manors', artist: 'Glowstick Entertainment',
-                context: 'Game - Dark Deception', desc: 'Chapter 2 Level 3 Chase Theme',
-                date: '2023', ytId: '1k8gE2l8iws', start: 0,
-                lyrics: `
-                    [00:09.85]Please don't look back
-                    [00:12.35]Please don't look back
-                    [00:14.83]Please don't look back
-                    [00:17.43]Please don't look back
-                    [00:20.39]Please don't look back
-                    [00:22.95]Please don't look back
-                    [00:25.52]Please don't look back
-                    [00:27.95]Please don't look back
-                    [00:30.52]We caught your sneaker
-                    [00:33.44]We know you're stalking
-                    [00:35.85]Now we are moving
-                    [00:38.32]And we are looming
-                    [00:41.09]We caught your sneaker
-                    [00:43.50]We know you're stalking
-                    [00:45.88]Now we are moving
-                    [00:48.39]And we are looming
-                    [00:51.11]Please don't look back
-                    [00:53.02]Please don't look back
-                    [00:55.60]Please don't look back
-                    [00:58.17]Please don't look back
-                    [01:00.68]Please don't look back
-                    [01:03.22]Please don't look back
-                    [01:05.80]Please don't look back
-                    [01:08.31]Please don't look back
-                    [01:10.93]We caught your sneaker
-                    [01:13.69]We know you're stalking
-                    [01:15.93]Now we are moving
-                    [01:18.59]And we are looming
-                    [01:21.33]We caught your sneaker
-                    [01:23.74]We know you're stalking
-                    [01:26.32]Now we are moving
-                    [01:28.65]And we are looming
-                    [01:50.65]Please don't look back
-                    [01:53.26]Please don't look back
-                    [01:56.04]Please don't look back
-                    [01:58.81]Please don't look back
-                    [02:01.41]Please don't look back
-                    [02:03.95]Please don't look back
-                    [02:06.35]Please don't look back
-                    [02:08.54]Please don't look back
-                    [02:11.14]We caught your sneaker
-                    [02:14.07]We know you're stalking
-                    [02:16.33]Now we are moving
-                    [02:19.05]And we are looming
-                    [02:21.60]We caught your sneaker
-                    [02:24.14]We know you're stalking
-                    [02:26.35]Now we are moving
-                    [02:29.01]And we are looming
-`
-            },
-            {
-                chapter: 1,
-                title: 'Unstoppable', artist: 'Sia',
-                context: '', desc: '',
-                date: 'SEP 2023', ytId: 'YaEG2aWJnZ8', start: 0,
-                lyrics: `
-                    [00:11.26]I'll smile, I know what it takes to fool this town
-                    [00:15.20]I'll do it till the sun goes down and all through the night time
-                    [00:21.02]Oh yeah, oh yeah, I'll tell you what you wanna hear
-                    [00:25.69]Keep my sunglasses on while I shed a tear
-                    [00:28.71]It's never the right time, yeah, yeah
-                    [00:33.61]
-                    [00:33.62]I'll put my armor on, show you how strong I am
-                    [00:39.03]I'll put my armor on, I'll show you that I am
-                    [00:44.71]
-                    [00:44.72]I'm unstoppable
-                    [00:47.51]I'm a Porsche with no brakes
-                    [00:50.35]I'm invincible
-                    [00:52.86]Yeah, I win every single game
-                    [00:55.90]I'm so powerful
-                    [00:58.36]I don't need batteries to play
-                    [01:01.37]I'm so confident
-                    [01:03.78]Yeah, I'm unstoppable today
-                    [01:07.19]Unstoppable today, unstoppable today
-                    [01:12.84]Unstoppable today, I'm unstoppable today
-                    [01:17.49]
-                    [01:17.50]Breakdown, only alone I will cry out now
-                    [01:21.24]You'll never see what's hiding out
-                    [01:24.06]Hiding out deep down, yeah, yeah
-                    [01:28.53]I know I've heard that to let your feelings show
-                    [01:32.09]Is the only way to make friendships grow
-                    [01:34.96]But I'm too afraid now, yeah, yeah
-                    [01:39.74]
-                    [01:39.74]I'll put my armor on, show you how strong I am
-                    [01:45.24]I'll put my armor on, I'll show you that I am
-                    [01:51.05]
-                    [01:51.05]I'm unstoppable
-                    [01:53.64]I'm a Porsche with no brakes
-                    [01:56.57]I'm invincible
-                    [01:59.06]Yeah, I win every single game
-                    [02:02.11]I'm so powerful
-                    [02:04.55]I don't need batteries to play
-                    [02:07.59]I'm so confident
-                    [02:10.03]Yeah, I'm unstoppable today
-                    [02:13.39]Unstoppable today, unstoppable today
-                    [02:19.03]Unstoppable today, I'm unstoppable today
-                    [02:24.34]Unstoppable today, unstoppable today
-                    [02:29.93]Unstoppable today, I'm unstoppable today
-                    [02:34.91]
-                    [02:34.92]I'll put my armor on, show you how strong I am
-                    [02:40.42]I'll put my armor on, I'll show you that I am
-                    [02:47.25]
-                    [02:47.45]I'm unstoppable
-                    [02:50.13]I'm a Porsche with no brakes
-                    [02:53.14]I'm invincible
-                    [02:55.56]Yeah, I win every single game
-                    [02:58.69]I'm so powerful
-                    [03:01.14]I don't need batteries to play
-                    [03:04.10]I'm so confident
-                    [03:06.56]Yeah, I'm unstoppable today
-                    [03:09.72]
-                    [03:09.93]Unstoppable today, unstoppable today
-                    [03:15.52]Unstoppable today, I'm unstoppable today
-                    [03:20.86]Unstoppable today, unstoppable today
-                    [03:26.50]Unstoppable today, I'm unstoppable today
-                    [03:31.84]`
-            },
-            {
-                chapter: 1,
-                title: 'Le spectacle doit continuer', artist: 'HOYO-MiX',
-                context: 'Game - Genshin Impact', desc: 'Opera Epiclese',
-                date: 'NOV 2023', ytId: 'w1d7_SE0PzY', start: 0,
-            },
-            {
-                chapter: 1,
-                title: 'otherside', artist: 'Lena Raine',
-                context: 'Game - Minecraft', desc: 'Music Disc - otherside',
-                date: '', ytId: 'kK81m-A3qpU', start: 0,
-            },
-            // Chapter 2
-            {
-                chapter: 2,
-                title: 'Duel in the mist', artist: 'HOYO-MiX',
-                context: 'Game - Genshin Impact', desc: 'Inazuma Battle Theme',
-                date: '2024', ytId: 'D48UG9WiTNk', start: 0,
-            },
-            {
-                chapter: 2,
-                title: 'Reverie', artist: 'Soba',
-                context: 'Game - Rotaeno', desc: '',
-                date: 'JUN 2024', ytId: 'HVSgWcz_FQs', start: 0,
-                lyrics: `
-                    [01:17.03]We're still the same you know
-                    [01:20.48]I feel the stillness
-                    [01:23.46]feel the stillness now
-                    [01:26.62]With all the days we learned
-                    [01:29.76]We're always one
-                    [01:32.07]we're always one somehow
-                    [01:36.15]We're still the same you know
-                    [01:38.93]I feel the stillness
-                    [01:41.86]feel the stillness now
-                    [01:45.16]With all the days we learned
-                    [01:48.24]We're always one
-                    [01:50.66]we're always one somehow
-                    [01:59.02]We're always one
-                    [02:00.83]we're always one somehow
-`
-            },
-            {
-                chapter: 2,
-                title: '60%的日常·悠闲', artist: 'HOYO-MiX',
-                context: 'Game - Zenless Zone Zero', desc: '',
-                date: 'JUL 2024', ytId: '8VA8VDp6yyk', start: 0,
-            },
-            {
-                chapter: 2,
-                title: 'Natlan', artist: 'HOYO-MiX',
-                context: 'Game - Genshin Impact', desc: 'Natlan',
-                date: 'AUG 2024', ytId: '_n-Tb5B5em4', start: 0,
-                lyrics: `
-                    [00:12.09]Shambulia! Beba silaha
-                    [00:19.18]Pigana mpaka mwishowe
-                    [00:25.68]Kwa nchi yetu tutaunguza damu yoyote
-                    [00:32.34]Rudi kwa pambaja ya dunia
-                    [00:38.79]Hadithi yaendelea(kama moto)
-                    [00:45.01]Heshima warithi vizazi(waka daima)
-                    [00:51.50]Ushujaa waangaza mbingu na ardhi
-                    [00:57.89]Mara tena ashinda Natlan
-                    [01:04.23]Milele tuwangoje, na tutawaimbia
-                    [01:10.75](Rudini) ndugu, (rudini) mashujaa
-                    [01:14.88]Mara ya tena mwangani
-                    [01:24.23]
-                    [02:16.81]Ati kweli mwahofuni kifo ? (Hapana)
-                    [02:23.05]Ushujaa wenu ni imara(bila shaka)
-                    [02:35.15](Kumbukeni majina ya mashujaa)
-                    [02:40.84](Andameni uwanjani)
-                    [02:47.89]Kwa jamaa(zuri, safi) nchi(sawa) na taifa
-                    [02:55.92]Kwa(vuma) matumaini(raha) mbeleni(nguvu) malengo
-                    [03:09.13](Rudini tunawangojeni)
-                    [03:20.79]
-                    [03:35.98]Nyimbo kelele sana
-                    [03:43.98]Sikiliza zitakuongoza nyumbani
-                    [03:57.24]Hadithi yaendelea(ahh, ahh)
-                    [04:03.76]Heshima warithi vizazi
-                    [04:10.26]Ushujaa waangaza mbingu na ardhi
-                    [04:16.58]Mara tena ashinda Natlan
-                    [04:23.03]Milele tuwangoje, na tutawaimbia
-                    [04:29.12]Rudini(ndugu) rudini(mashujaa)
-                    [04:33.21]Mara ya tena mwangani
-                    [04:43.01]Maisha marefu ni sasa
-`
-            },
-            {
-                chapter: 2,
-                title: 'Gion2', artist: 'HOYO-MiX',
-                context: 'Game - Honkai Impact 3rd', desc: ' ',
-                date: 'SEP 2024', ytId: 'agvdUJdCFsE', start: 0,
-            },
-            {
-                chapter: 2,
-                title: 'A Dance in Fire', artist: 'HOYO-MiX',
-                context: 'Game - Genshin Impact', desc: 'Natlan',
-                date: 'OCT 2024', ytId: 'PjeuDWPbt3o', start: 0,
-                ig: 'https://www.instagram.com/reel/DBG5MCAvhc0/',
-                lyrics: `
-                    [01:00.865] Nyimbo za moto
-                    [01:03.361] Ziwache ziwake angani
-                    [01:07.009] Kama vile moto usiozimika waenea nchini
-                    [01:17.057] Nenda mbele kwa ujabari
-                    [01:20.705] Ijapokua hata
-                    [01:24.161] Majivu ya motoni
-                    [01:26.721] Tena
-                    [02:38.488] Chagua njia ya mwenyewe
-                    [02:41.368] Moto daima utawaka
-                    [02:44.568] Moto daima utawaka
-                    [02:48.088] Na uso wa ulimwengu
-                    [02:51.672] Utajitokeza haponi
-                    [02:54.936] Na moto utakuwakia
-                    [02:58.264] Na moto utakuwakia
-                    [03:01.72] Na moto utakuwakia
-`
-            },
-            {
-                chapter: 2,
-                title: 'Burning Desire', artist: 'HOYO-MiX',
-                context: 'Game - Zenless Zone Zero', desc: '',
-                date: 'OCT 2024', ytId: '0NQPMTJ9rh0', start: 0,
-                lyrics: `[00:02.95] Good evening and welcome!
-[00:04.87] I'm Burnice and I'll be serving you today
-[00:09.602] What can I get for you?
-[00:11.60] A drink, some snacks - or a little flames?
-[00:16.848] Mocktails, mixers, ice
-[00:18.64] The snacks are real nice
-[00:20.496] Soda, sour-mix, dry
-[00:22.288] I’m lit you can't deny
-[00:24.208] Whatever you want
-[00:25.168] Whatever you need
-[00:26.192] So good you'll never
-[00:27.216] Ever want to leave
-[00:28.176] Anything that you desire
-[00:29.823] Set it on fire!
-[00:32.251] I'll make you spend your Dennies all away
-[00:36.987] That's my desire
-[00:39.227] You know I’m the real deal.
-[00:41.851] What's left to say?
-[00:44.75] 3-2-1, fire!
-[00:50.70] Burnice, Burnice, Burnice, Burnice, Burnice, Burnice
-[00:53.466] Go go!
-[00:53.516] Go go!
-[00:58.202] Burn it, Burnice, Burn it, Burnice, Burn it, Burnice
-[01:00.10] Or a little flames?
-[01:05.605] Burnice, Burnice, Burnice, Burnice, Burnice, Burnice
-[01:08.405] Go go!
-[01:13.17] Burn it, Burnice, Burn it, Burnice, Burn it, Burnice
-[01:15.154] Gonna watch it burn!
-[01:16.333] I know I look kinda cute and nice 'n' pleasant
-[01:18.51] But I got a short fuse for fools, don’t get arrogant
-[01:20.558] Watch out - let me pour you a drink
-[01:22.35] But think about messing with me, I’ll end you in a blink
-[01:24.398] So drink your drink, don’t you run your mouth
-[01:26.254] You think about stepping to me, and things'll go south
-[01:28.238] Wanna push your luck then o-k-k,
-[01:30.094] I'll burn you to ash, think twice before you play play
-[01:32.074] I'll make you spend your Dennies all away
-[01:37.066] That's my desire
-[01:39.754] You know I’m the real deal
-[01:41.93] What's left to say?
-[01:44.81] 3-2-1, fire!
-[01:50.826] Burnice, Burnice, Burnice, Burnice, Burnice, Burnice
-[01:53.231] Go go!
-[01:57.903] Burn it, Burnice, Burn it, Burnice, Burn it, Burnice
-[01:59.646] Or a little flames?
-[02:05.854] Burnice, Burnice, Burnice, Burnice, Burnice, Burnice
-[02:08.158] Go go!
-[02:13.214] Burn it, Burnice, Burn it, Burnice, Burn it, Burnice
-[02:15.035] Gonna watch it burn!
-`
-            },
-            {
-                chapter: 2,
-                title: 'Golden Sign', artist: 'HOYO-MiX',
-                context: 'Game - Zenless Zone Zero', desc: '',
-                date: 'DEC 2024', ytId: 'Hj1CBJxkyeA', start: 0,
-                lyrics: `
-                    [00:28.06]Yeah, the shining golden sign (ha-ha, yeah)
-                    [00:30.36] 
-                    [00:31.01]Let your inner spark ignite (ring, ring)
-                    [00:34.21] 
-                    [00:34.65]Find your treasure (treasure), glowing bright
-                    [00:37.53] 
-                    [00:37.73]Reaching for it and take a flight (woah)
-                    [00:40.80] 
-                    [00:41.05]Lucky or not, at least you tried
-                    [00:44.19]Chin up, in yourself, confide (yeah)
-                    [00:47.45] 
-                    [00:47.58]No doubt fate's on your side
-                    [00:50.72]You're chosen (skrrt, skrrt), so enjoy the ride (uh)
-                    [00:54.17] 
-                    [00:54.66]There are things you can't control
-                    [00:57.60] 
-                    [00:57.95]Fortune's fickle (ring, ring), that's this world
-                    [01:00.80]Embrace the result (result), stop keeping score (yeah)
-                    [01:04.06] 
-                    [01:04.35]That's the essence
-                    [01:06.04]Life's true goal (woah)
-                    [01:07.64] 
-                    [01:07.49]Not just trials (uh) and battles tough (yeah)
-                    [01:10.71] 
-                    [01:10.90]Go taking joy in simple stuff
-                    [01:14.16] 
-                    [01:14.80]Even when it's getting rough
-                    [01:17.24]Take it easy, having fun is just enough
-                    [01:20.56] 
-
-`
-            },
-            {
-                chapter: 2,
-                title: 'Tell Your World', artist: 'livetune',
-                context: 'Game - Hatsune Miku: Colorful Stage!', desc: ' ',
-                date: 'DEC 2024', ytId: 'B2fRMQUxnyw', start: 0,
-                lyrics: `
-                [00:20.775] 形のない気持ち忘れないように
-[00:27.266] 決まりきったレイアウトを消した
-[00:33.75] ふと口ずさんだフレーズを掴まえて
-[00:39.875] 胸に秘めた言葉乗せ空に解き放つの
-[00:48.031] 君に伝えたいことが
-[00:51.203] 君に届けたいことが
-[00:54.45] たくさんの点は線になって
-[00:57.491] 遠く彼方へと響く
-[01:00.975] 君に伝えたい言葉
-[01:04.05] 君に届けたい音が
-[01:07.25] いくつもの線は円になって
-[01:10.493] 全て繋げてく　どこにだって (ah)
-[01:26.353] 君が伝えたいことは
-[01:29.586] 君が届けたいことは
-[01:32.786] たくさんの点は線になって
-[01:35.474] 遠く彼方へと響く
-[01:39.058] 君が伝えたい言葉
-[01:42.322] 君が届けたい音は
-[01:45.586] いくつもの線は円になって
-[01:48.791] 全て繋げてく　どこにだって (ah…)
-`
-            },
-            {
-                chapter: 2,
-                title: 'ジャックポットサッドガール', artist: '25時、ナイトコードで。',
-                context: 'Game - Hatsune Miku: Colourful Stage!', desc: '',
-                date: 'DEC 2024', ytId: 'J9kD9rYR088', start: 0,
-                ig: 'https://www.instagram.com/reel/DE7mx9IxgwU/',
-                lyrics: `
-                    [00:15.486] 標準偏差以内の人生
-                    [00:17.902] 表情殺して腐った品性
-                    [00:20.189] ほらほら気づけばまた
-                    [00:22.301] ただただ過ぎ行く日々
-                    [00:24.605] 表現欲も非凡な才も
-                    [00:27.198] 漫然と生きてちゃなんもなんないの
-                    [00:29.693] ヤダヤダアタシはヤダ
-                    [00:32.011] 嘆けど変わらぬまま
-                    [00:34.443] 受け入れ難い心情をねじ込むのが愛なんだ
-                    [00:42.618] アタシはジャックポットサッドガール 分かり合えぬまま
-                    [00:49.081] 点と線でエンドロール描く日々の中
-                    [00:53.305] 誰にも言えないまんま抱えた想いこそ価値があるんだ
-                    [00:58.041] 探していた答えだって 未来みたいに手の中に
-                    [01:02.649] 正論ばっかじゃちょーつまんない
-                    [01:05.081] 人生は一種のジョークなんだ
-                    [01:07.385] ハローハロー気の向くまま
-                    [01:09.561] その音鳴らせばほら
-                    [01:12.121] 精神相場はちょー不安定
-                    [01:14.425] 安定な策とかホント退屈さ
-                    [01:16.729] 見て見てアタシの中
-                    [01:18.969] 心の奥底にある
-                    [01:21.401] 黒く澱んだ水槽に映るのは微笑だった
-                    [01:31.065] ジャックポットサッドガール 分かり合えずとも
-                    [01:35.545] 心の臓のビートを強く響かせて
-                    [01:39.961] 胸張り正々堂々正面突破で間違えるんだ
-                    [01:44.761] 隠し持った似合わないナイフ 異端ゆえの最先端
-                    [01:50.318] ひーふーみーよー
-                    [01:54.67] いーむーなーやー
-                    [01:59.086] ねぇ先生ここ無法地帯
-                    [02:01.582] あなた曰く既に廃れ枯れたアネクメーネ
-                    [02:03.822] 草木生えず人類の住めなくなった
-                    [02:06.062] チープでキッチュな小惑星
-                    [02:08.494] ねぇ先生あなたバカじゃないの
-                    [02:10.798] 未だ滾る感情を知らないの
-                    [02:13.166] 凝り固まってんならお勉強
-                    [02:15.278] ここで無垢で無知で無為な賛美を見せつけるわ
-                    [02:22.757] それでも
-                    [02:25.08] ジャックポットサッドガール　分かり合えるかな
-                    [02:29.624] どんな不安も怠惰もみな抱えたまま
-                    [02:33.931] 誰にも言えないまんま 自分のまんまで勝ち上がるんだ
-                    [02:39.063] 探していた答えだって 未来みたいに手の中に
-                    [02:43.574] あった
-                `
-            },
-            {
-                chapter: 2,
-                title: 'Twilight Melody', artist: 'CircusP',
-                context: 'Game - Hatsune Miku: Colourful Stage!', desc: '',
-                date: 'DEC 2024', ytId: 'A77p_8E7OFs', start: 0,
-                ig: 'https://www.instagram.com/reel/DIUDThwRCnq/',
-                lyrics: `
-                    [00:00.615] Let the music resonate in your heart
-                    [00:03.495] Together we can recreate a new start
-                    [00:07.504] On the borderline between what is real and yet unseen
-                    [00:10.471] Hear my song, follow me
-                    [00:24.714] If it feels like you have nowhere left
-                    [00:28.13] As the midnight sets in
-                    [00:31.146] Just look to the horizon
-                    [00:33.45] Find where it all begins
-                    [00:36.074] A new constellation will lead us to boundless odyssey
-                    [00:40.318] Come follow me
-                    [00:41.598] With luck, resolution, and vigor
-                    [00:44.03] We'll capture sights yet unseen
-                    [00:47.934] Now
-                    [00:48.36] Hear this melody resound in the chaos of the crowd
-                    [00:51.368] By noise be found, your voice calls out
-                    [00:53.864] On the borderline between what is real and yet unseen
-                    [00:56.744] Hear my song, follow me
-                    [00:58.792] Let the music resonate in your heart
-                    [01:01.48] Together we can recreate a new start
-                    [01:04.232] Confide into my arms
-                    [01:05.896] Hear this melody resound in the chaos of the crowd
-                    [01:08.584] Defy all doubts by twilight's sound
-                    [01:22.061] Open your eyes to something new
-                    [01:24.877] Gleaming stars come into view
-                    [01:27.501] Know that this love is absolute
-                    [01:30.381] As the sun will rise the day anew
-                    [01:34.54] Now
-                    [01:34.86] Hear this melody resound in the chaos of the crowd
-                    [01:37.863] By noise be found, your voice calls out
-                    [01:40.71] On the borderline between what is real and yet unseen
-                    [01:44.381] Hear my song, follow me
-                    [01:46.821] Let the music resonate in your heart
-                    [01:49.565] Together we can recreate a new start
-                    [01:52.269] Confide into my arms
-                    [01:53.405] Hear this melody resound in the chaos of the crowd
-                    [01:56.989] Defy all doubts by twilight's sound
-                    [02:03.149] I'll never let you down
-                    [02:09.003] Be found by twilight's sound
-`
-            },
-            // Chapter 3
-            {
-                chapter: 3,
-                title: 'Nameless Faces', artist: 'HOYO-MiX',
-                context: '2025 Opening', desc: 'Honkai Star Rail',
-                date: 'JAN 2025', ytId: 'TqKwoSk6708', start: 0,
-                lyrics: `
-                    [00:11.925] Moonlight, a barren void to horizon,
-                    [00:23.70] Days blur into nights of dreadful silence, oh.
-                    [00:34.90] You let me see thy heart,
-                    [00:37.90] Lost beacon in the dark,
-                    [00:40.975] Our lonely souls that spark,
-                    [00:43.90] We break apart.
-                    [00:51.75] We find,
-                    [00:53.266] We strive,
-                    [00:54.766] Our journey of eternity.
-                    [00:57.825] Desire, in mind,
-                    [01:00.725] To set our spirits free,
-                    [01:04.333] Echoes fade to oblivion,
-                    [01:06.975] Freedom to make our own.
-                    [01:10.066] We trod our destinies on
-                    [01:12.95] A path unknown.
-                    [01:14.95] In hope,
-                    [01:17.966] In vain,
-                    [01:20.75] To whom, who waits?
-`
-            },
-            {
-                chapter: 3,
-                title: 'Vitas Corrodens Pestis', artist: 'HOYO-MiX',
-                context: 'Game - Genshin Impact', desc: 'Chapter 5 Art 5',
-                date: 'JAN 2025', ytId: 'pZRSJ00DABs', start: 0,
-                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537309540074394582_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw==',
-                lyrics: `
-                    [00:00.19]Vae umbrifero corrupto veteri
-                    [01:32.24]Vides ut veteranum aureum altumque palatium
-                    [01:45.99]Praedico tibi hodie quod pereas et tandem moreris
-                    [01:50.74]Nunc sordida impudica pulvere obtectum
-                    [02:06.59]Numeramur nos et omnes in caelo corruimus
-                    [02:13.52]Numerabit vos et omnes in caelo corruetis
-                    [02:20.29]Neglegis immeritis nocituram postmodo
-                    [02:34.25]ferro odi ignique
-                    [02:35.50]natis committere, umbriferum cadaveris?
-                    [02:47.95]
-                    [03:01.38]Vides ut heres superbiae priscos nobiles progenies
-                    [03:13.61]Fors et debita iura vicesque superbae te ipsum
-                    [03:13.61]Nunc squamae exsiccatae remaneant nisi tantum
-                    [03:32.49]Irrident veteres odiorum
-                    [03:32.49]Irrides veteres odiorum vanitates
-                    [03:40.80]Ossa relicta in tenebrosis vivantium iam ponant odium
-                    [03:45.67]Vanitates et illudis veteris odi
-                    [03:55.14]Nescis cras quis lumen visurus erit?
-                    [03:55.14]Nescis cras quis nocte sepultus erit?
-                `
-            },
-            {
-                chapter: 3,
-                title: 'Ode of Resurrection : Recapitulation', artist: 'HOYO-MiX',
-                context: 'Game - Genshin Impact', desc: 'Chapter 5 Art 5',
-                date: 'JAN 2025', ytId: 'B1FUeACyqbI', start: 0,
-                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTY4NjkyNTY5NzkyMzIw?story_media_id=3537176221278097451_63008808258&igsh=MXJ4ZG4wZHA1OW5mMw==',
-                lyrics: `
-                    [00:42.74]Shambulia! Beba Silaha
-                    [00:49.02]Pigana mpaka mwishowe
-                    [00:55.74]Kwa nchi yetu tutaunguza damu yoyote
-                    [01:02.20]Rudi kwa pambaja ya dunia
-                    [01:08.18]Zuri, safi, sawa, sikia
-                    [01:14.32]Vuma, raha, nguvu, sikia
-                    [01:24.44]Hadithi yaendelea (kama moto)
-                    [01:30.52]Heshima warithi vizazi (waka daima)
-                    [01:34.29]Ushujaa waangaza mbingu na ardhi
-                    [01:40.25]Mara tena ashinda Natlan
-                    [01:45.02] 
-                    [02:04.58]Nyimbo kelele sana 
-                    [02:17.25]Kwa jamaa, nchi na taifa
-                    [02:17.25](Sikiliza zitakuongoza nyumbani)
-                    [02:17.25](Zuri, safi, sawa)
-                    [02:29.99]Kwa Matumaini, mbeleni, malengo (Vuma, raha, nguvu)
-                    [02:42.66] 
-                    [02:55.59]Mara ya tena mwangani
-                    [03:07.92]Mara ya tena mwangani
-                    [03:07.94]Mara ya tena mwangani
-                    [03:20.34]Maisha marefu ni sasa
-                    [03:26.56]Maisha marefu ni sasa
-                    [03:32.96]Maisha marefu ni sasa
-                    [03:39.30]Maisha marefu ni sasa
-                    [03:44.29] 
-
-`
-            },
-            {
-                chapter: 3,
-                title: 'Anthem of Era', artist: 'HOYO-MiX',
-                context: 'Out-zone exploration - Tokto, Japan', desc: 'Changi Airport Theme',
-                date: 'FEB 2025', ytId: 'f_53L9xa9GE', start: 0,
-                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54'
-            },
-            {
-                chapter: 3,
-                title: 'フロムトーキョー', artist: 'Leo/need',
-                context: 'Out-zone exploration - Tokto, Japan', desc: 'Tokyo Theme',
-                date: 'FEB 2025', ytId: 'G-WN0ab-9ZI', start: 0,
-                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDM4NTkxMTE3MjY5OTcx?story_media_id=3562051245785979709_63008808258&igsh=NWhzZWljMzE3eW54',
-                lyrics: `
-                    [00:01.18]不安ばっか知ってんだ 雨が降りそうな日
-                    [00:04.76]風の匂いで分かるから
-                    [00:08.10]誰だって気付いてんだ 僕には無理だと
-                    [00:12.12]それでも足掻いては転んだ
-                    [00:14.96]
-                    [00:15.34]友情×努力＝勝利の方程式
-                    [00:19.37]解けないまま過ごした僕らにも
-                    [00:22.96]いつか分かる日が来るよって
-                    [00:25.83]確証無く笑える自分が嫌いだ
-                    [00:29.43]
-                    [00:30.12]星が降るあの街に
-                    [00:33.34]置き去りにした思い出が
-                    [00:37.01]胸の奥で揺らめいてる
-                    [00:40.74]いつまでも焦がれていた
-                    [00:44.69]
-                    [00:46.03]それは雑踏の海の中で
-                    [00:49.95]踊るように燃えている誰かの声
-                    [00:53.62]ずっと探し続けてる
-                    [00:57.35]たとえそれが僕らのワガママでもいいさ
-                    [01:01.90]
-                    [01:09.49]好きな事選んだんだ
-                    [01:11.38]胸を張ればいいって
-                    [01:13.15]わかってるわかってる繰り返した
-                    [01:15.51]
-                    [01:16.33]結んだ指とかさねた呼吸
-                    [01:19.62]鳴り響く鼓動に耳を澄ました
-                    [01:22.76]
-                    [01:23.28]ホントは言いたくなかった
-                    [01:25.31]うざったいんだよ外野ばっか
-                    [01:27.13]ここで生きるってこと決めたんだから！
-                    [01:30.35]
-                    [01:30.59]きっとボクらの出会いだって
-                    [01:34.40]この空の下にある小さなセカイ
-                    [01:37.98]ずっと求め続けてる
-                    [01:41.70]たとえそれが誰かの気まぐれでもいいさ
-                    [01:49.56]
-                    [02:00.32]それは雑踏の海の中で
-                    [02:03.97]踊るように燃えているあの日の声
-                    [02:07.63]ずっと探し続けてる
-                    [02:11.71]たとえそれが僕らのワガママでも
-                    [02:14.92]
-                    [02:15.48]きっとボクらの出会いだって
-                    [02:19.09]この空の下にある小さなセカイ
-                    [02:22.90]ずっと求め続けてる
-                    [02:26.54]たとえそれが誰かの気まぐれでもいいさ
-                    [02:30.86]
-                    [02:38.31]不安ばっか知っていた あの日のボクらが
-                    [02:41.88]この街で僕らになれますように
-`
-            },
-            {
-                chapter: 3,
-                title: 'ザムザ', artist: '25時、ナイトコードで。',
-                context: '', desc: '',
-                date: 'MAR 2025', ytId: 'cchy8Tl5Oa8', start: 0,
-                ig: '',
-                lyrics: `
-                    [00:11.44]使い古した自分の名前に
-                    [00:13.52]あえてキッチュなルビを振って
-                    [00:15.39]高潔を打ち負かせるくらいに
-                    [00:17.40]恐ろしくなる　骨の髄まで
-                    [00:19.36]今はどんなふうに見えてますか？
-                    [00:21.40]醜いですか？　それはそっか
-                    [00:23.34]どうか林檎を投げつけないで
-                    [00:25.34]胸にLock up　Lock up
-                    [00:26.99]ザムザ
-                    [00:28.65]
-                    [00:35.75]「鏡をご覧」誰かが囁く
-                    [00:37.20]うまくいったら儲けものさ
-                    [00:39.01]甘い言葉も笑顔も通じない
-                    [00:40.95]走り出したらもう獣だ
-                    [00:42.92]月の真下をうろつきながら
-                    [00:44.87]考えてた　夜すがら
-                    [00:47.03]悪夢にどの指立てて
-                    [00:48.99]やるべきかってね
-                    [00:50.70]
-                    [00:51.04]ズキズキズキ　『ズキズキズキ』
-                    [00:53.11]ズキンズキンズキン　『ズキンズキン』
-                    [00:55.23]ズキズキズキ　『ズキズキズキ』
-                    [00:57.05]ズキ　ズキ　ズキン
-                    [00:58.68]変われ…
-                    [00:59.35]ズキズキズキズキズキ
-                    [01:02.08]
-                    [01:02.08]誰だって魂辛辛
-                    [01:05.05]ズキズキズキ
-                    [01:06.29]痛みと怒れる人(ラングラー)を喰らったったらった
-                    [01:10.86]だのに何故だろう今も
-                    [01:13.67]ズキズキズキって
-                    [01:15.16]派手な尻尾を引き摺りゆく ザザザザ　ザムザ
-                    [01:19.39]「現実はもういい」なんて云うなよザムザ
-                    [01:23.33]おーいえー
-                    [01:24.44]『ズキズキズキ』
-                    [01:27.42]ザザザザ　ザムザ
-                    [01:28.95]『ズキズキズキ』
-                    [01:31.49]
-                    [01:32.26]「ごめんね。ちっとも上手に
-                    [01:34.30]生きてあげられなくて」と伝えて
-                    [01:36.23]否定形の笑顔でも欲しくて
-                    [01:38.03]ニンゲン様なりきってる亡霊
-                    [01:41.09]自分の弱音に相槌ばかりだった
-                    [01:44.06]当然あなたとまともにケンカもできなかった
-                    [01:48.16]ズキズキズキ 『ズキズキズキ』
-                    [01:50.31]ズキンズキンズキン 『ズキンズキン』
-                    [01:52.30]ズキズキズキ 『ズキズキズキ』
-                    [01:54.22]ズキ　ズキ　ズキン
-                    [01:55.76]変われそうにないやいや
-                    [01:59.53]冗談じゃない　夢を食べないで
-                    [02:02.32]ズキズキズキ
-                    [02:03.46]小洒落た絶望を歌ったったらった
-                    [02:07.49]どうしようもない成れの果てでも
-                    [02:10.21]ズキズキズキって
-                    [02:11.73]いつか愛しい歌になるさ ザザザザ　ザムザ
-                    [02:16.40]
-                    [02:22.80]ねえ123で飛んで ザザザザ　ザムザ
-                    [02:26.94]一切合切蹴っ飛ばして ザザザザ　ザムザ
-                    [02:30.95]あとがきで触れられもしない日々
-                    [02:34.35]ここで逃げ出したら　本当にそうなりそうだ
-                    [02:39.84]
-                    [02:42.36]誰だって魂辛辛
-                    [02:45.01]ズキズキズキ…
-                    [02:46.20]痛みと怒れる人(ラングラー)を喰らったったらった
-                    [02:50.24]だのに何故だろう今も
-                    [02:52.97]ズキズキズキって (ズキズキ)
-                    [02:54.39]林檎をかじるようにザザ　ザムザ
-                    [02:57.78]どうしようもない成れの果てでもここにいる
-                    [03:01.97]シャガの花に毒されても
-                    [03:05.66]光は１時の方角にある
-                    [03:09.90]今は尻尾を引き摺りゆけ
-                    [03:12.37]ザザザザ　ザムザ
-                    [03:14.33]だから「現実はもういい」なんて云うなよザムザ
-                    [03:18.30]おーけー？
-                    [03:19.49]『ズキズキズキ…』
-                    [03:21.30]ザザザザザムザ
-                    [03:22.76]『ズキズキズキ…』
-                    [03:25.29]
-                    [03:26.26]『ズキズキズキ…』
-                    [03:28.95]ザザザザザムザ
-                    [03:30.77]『ズキズキ…』
-                    [03:33.61]『ズキ』
-`
-            },
-            {
-                chapter: 3,
-                title: 'The End of YoRHa', artist: 'Keiichi Okabe',
-                context: 'Game - NieR: Automata', desc: 'Ending E - the [E]nd of YoRHa',
-                date: 'APR 2025', ytId: 'PslQESlD4xs', start: 0,
-                ig: 'https://www.instagram.com/reel/DIY7A7GvZa3/',
-                lyrics: `
-                    [01:21.00]Cause we're going to shout it loud
-                    [01:24.26]Even if our words seem meaningless
-                    [01:27.46]It's like I'm carrying the weight of the world
-                    [01:32.84]
-                    [01:33.92]I wish that someway, somehow
-                    [01:37.32]That I could save every one of us
-                    [01:40.58]But the truth is that I'm only one girl
-                    [01:46.47]Maybe if I keep believing
-                    [01:49.03]My dreams will come to life
-                    [01:55.37]
-                    [01:56.26]Come to life
-                    [02:00.49]
-                    [02:13.51]溢れる緑
-                    [02:16.65]零れる命
-                    [02:19.27]風は今も遠く
-                    [02:25.04]
-                    [02:26.78]Nasico whosh pier wan nei
-                    [02:29.60]Wananba ri na qua lei
-                    [02:32.29]Sila schmer ya pit pa lu
-                    [02:38.30]Tell me God, are you punishing me?
-                    [02:45.41]Is this the price I'm paying for my past mistakes?
-                    [02:51.94]This is my redemption song
-                    [02:58.27]I need you more than ever right now
-                    [03:04.42]Can you hear me now?
-                    [03:08.00]そう僕らは今
-                    [03:11.26]ああ、無価値でも叫ぶ
-                    [03:14.46]この汚れた世界の愛
-                    [03:20.86]そう僕らは今
-                    [03:24.32]ああ、無意味でも願う
-                    [03:27.39]ただキミとの時間を
-                    [03:33.87]La feto bo ras di lei
-                    [03:36.99]Shel va pelo cra na dii sii hei
-                    [03:40.51]Naya chyo ma ter meh lava ma puoru
-                    [03:46.91]Ig nagya di lem myo
-                    [03:50.18]Sequoish pela chyo mei lu
-                    [03:53.31]Wana piesla hola uma schen dan
-                    [03:59.83]Still we're gonna shout it loud
-                    [04:03.22]Even if our words seem meaningless
-                    [04:06.29]It's like I'm carrying the weight of the world
-                    [04:12.76]I'd hope that some way, somehow
-                    [04:16.15]That I can save every one of us
-                    [04:19.35]But the truth is that I'm only one girl`
-            },
-            {
-                chapter: 3,
-                title: 'はじまりの未来', artist: '40mP x sasakure.UK',
-                context: 'Movie - 劇場版プロジェクトセカイ 壊れたセカイと歌えないミク', desc: '',
-                date: 'APR 2025 ', ytId: 'mxj3mW4jf7Q', start: 0,
-                ig: 'https://www.instagram.com/reel/DIiyxE9Rm4l/',
-                lyrics: `
-                    [00:00.128] 光、未来 相のうた追う
-                    [00:03.795] 迂回、出会い ハジメマシテ
-                    [00:06.322] 問うからまたね 舞台の裏
-                    [00:09.465] 添う続いてゆく未知の
-                    [00:25.632] 君が笑う景色の砂が
-                    [00:28.347] 好き、で色づくように ね
-                    [00:31.579] 嬉しい日も悲しい日も
-                    [00:34.491] うたと共にいるよ
-                    [00:36.731] あの坂道も 回り道も
-                    [00:40.233] 君と居れば ほらね、ミュージック
-                    [00:42.923] え そんな日常？ どんな日常？
-                    [00:46.459] 答案に、収まらないね 不思議
-                    [00:50.213] 風に溶けた音符の群れが
-                    [00:52.744] 渇いた心の声とハモって
-                    [00:56.345] 隠してきた本当の嘘が
-                    [00:58.959] ヘッドフォンに響いた
-                    [01:01.223] 内緒話も独り言も
-                    [01:04.90] 君の手にかかれば、ミュージック
-                    [01:07.404] 息継ぎしたら生まれたての
-                    [01:11.087] 季節を吸い込んだ
-                    [01:14.201] 変わりゆく景色の空白を
-                    [01:17.017] 変わらない歌声が彩るよ
-                    [01:20.025] 忘れ物に気づいた通学路
-                    [01:23.161] 躓いた問いを絡まった過去を
-                    [01:26.194] 解いたら、一歩 先
-                    [01:29.394] 走り出す未来のすぐそばで
-                    [01:32.841] 夢にまみれた今を抱く
-                    [01:35.721] 信号踏切いつでも
-                    [01:38.281] 音楽は もう、とまらない
-                    [01:41.591] あの笑顔もナミダも君のうた
-                    [01:45.056] まだ、歌えるよ
-                    [01:47.143] 青空の下でこの夏を再生
-                    [01:51.362] 聴いてよ こんなうたどう？
-                    [01:54.476] 無題 デモワンフレーズの衝動
-                    [01:57.361] じゃあ、またね１秒後に会おう
-                    [02:00.562] 終わらない未知で
-                    [02:16.188] オトで擦る星空の軌跡
-                    [02:18.902] 幸せ探す綺麗を纏う芽
-                    [02:22.332] 君が”君”で居てくれたから
-                    [02:25.084] ここにいる、今日だった
-                    [02:27.708] 1.2.3 で煌めくファンタジーを
-                    [02:31.311] 夜に翳すインターリュードを
-                    [02:34.306] 街を染めてゆくリリックを
-                    [02:37.277] 繋いでゆく、世界(セカイ)
-                    [02:40.359] はじまりの景色の空白を
-                    [02:43.239] 隣り合わせの君が彩るよ
-                    [02:46.20] 互い違い、間違い、すれ違い⋯？
-                    [02:49.444] 足りないくらいの
-                    [02:50.98] 消えないくらいの
-                    [02:52.452] 滲んだ色を はみ出した色を
-                    [02:55.70] 愛したら 一歩 先
-                    [03:01.514] 綺麗な未来になれなくても
-                    [03:04.906] 夢が零れてしまっても
-                    [03:07.914] 誰かの想いが届くまで
-                    [03:10.372] 音楽はそう、止めどなく溢れてく
-                    [03:16.986] 走り出す未来のすぐそばで
-                    [03:20.513] 夢にまみれた今を抱く
-                    [03:23.255] 水溜りクラッシュ弾けて
-                    [03:25.815] 音楽は もう、止まらない
-                    [03:29.468] 後悔も願いも 君のうた
-                    [03:32.77] ほら、聴こえるよ
-                    [03:34.818] 青空に映る
-                    [03:37.072] あの日々の残像
-                    [03:39.083] 「覚えてる？ 僕のうたを」
-                    [03:42.027] 重ね合うオーケストラ模様
-                    [03:44.843] サヨナラのあと 手を繋ごう
-                    [03:47.974] はじまる未知と―
-                    [04:03.726] 終わらない未知で―
-`
-            },
-            {
-                chapter: 3,
-                title: '千本桜', artist: '黒うさＰ',
-                context: '', desc: '',
-                date: 'APR 2025', ytId: 'shs0rAiwsGQ', start: 0,
-                ig: 'https://www.instagram.com/reel/DInnzAexPbz/',
-                lyrics: `
-                    [00:32.75] 大胆不敵にハイカラ革命
-                    [00:35.833] 磊々落々 反戦国家
-                    [00:39.016] 日の丸印の二輪車転がし
-                    [00:42.033] 悪霊退散 ICBM
-                    [00:45.283] 環状線を走り抜けて 東奔西走なんのその
-                    [00:51.40] 少年少女戦国無双 浮世の随に
-                    [00:57.116] 千本桜 夜ニ紛レ 君ノ声モ届カナイヨ
-                    [01:03.45] 此処は宴 鋼の檻 その断頭台で見下ろして
-                    [01:09.633] 三千世界 常世之闇 嘆ク唄モ聞コエナイヨ
-                    [01:15.90] 青藍の空 遥か彼方 その光線銃で打ち抜いて
-                    [01:35.083] 百戦錬磨の見た目は将校
-                    [01:38.15] いったりきたりの花魁道中
-                    [01:41.266] アイツもコイツも皆で集まれ
-                    [01:44.316] 聖者の行進 わんっ つー さん しっ
-                    [01:47.45] 禅定門を潜り抜けて 安楽浄土厄払い
-                    [01:53.583] きっと終幕は大団円 拍手の合間に
-                    [01:59.366] 千本桜 夜ニ紛レ 君ノ声モ届カナイヨ
-                    [02:05.716] 此処は宴 鋼の檻 その断頭台で見下ろして
-                    [02:11.95] 三千世界 常世之闇 嘆ク唄モ聞コエナイヨ
-                    [02:18.233] 希望の丘 遥か彼方 その閃光弾を打ち上げろ
-                    [02:56.05] 環状線を走り抜けて 東奔西走なんのその
-                    [03:02.20] 少年少女戦国無双 浮世の随に
-                    [03:08.00] 千本桜 夜ニ紛レ 君ノ声モ届カナイヨ
-                    [03:14.20] 此処は宴 鋼の檻 その断頭台を飛び降りて
-                    [03:20.633] 千本桜 夜ニ紛レ 君が歌い僕は踊る
-                    [03:26.866] 此処は宴 鋼の檻 さあ光線銃を撃ちまくれ
-`
-            },
-            {
-                chapter: 3,
-                title: 'どんな結末がお望みだい', artist: 'ワンダーランズxショウタイム',
-                context: '-', desc: '',
-                date: 'MAY 2025', ytId: 'GY8DlK9f688', start: 0,
-                ig: 'https://www.instagram.com/reel/DJLrZTLxcuv',
-                lyrics: `
-                    [00:03.083] 夏の暑さも　皆の思いも
-                    [00:08.183] いつかは夜風に吹かれてもう
-                    [00:15.166] 前にしか進めないと知ったから
-                    [00:19.35] （綺麗な） 枯れないで　おとさないで
-                    [00:23.616] 胸に抱いた　花束を
-                    [00:30.95] もしも思い出の　陰に手を伸ばしたら
-                    [00:36.816] まだ見ぬ景色は　遠ざかるばかりで
-                    [00:43.45] 迷いも戸惑いも証明だって
-                    [00:47.366] 今までの夢が在って
-                    [00:49.85] 振り返れば沢山の笑顔見せて
-                    [00:54.766] 手と手を繋ぎあって
-                    [00:57.516] 育んだ絆だけはたったひとつ
-                    [01:01.666] 叶えたい夢になんて　名前を付けようか
-                    [01:06.966] 痛みを伴うこれは夢と呼べるのかい？
-                    [01:12.05] 答えのない問いに縋って
-                    [01:14.516] 季節が移りゆくようで
-                    [01:16.933] 天地自然の理だと心に言い聞かせ
-                    [01:21.716] "どんな結末がお望みだい？"
-                    [01:26.70] このふたつの思いは共存出来ないものか
-                    [01:35.066] もしも 花束 に 費 を つけて しまったら
-                    [01:40.833] これまで積み上げたものはガラクタで
-                    [01:48.25] 願いも愛情も本当だって
-                    [01:51.80] 今までの夢を抱いて
-                    [01:54.133] 振り返ればたくさんの感謝に満ちて
-                    [01:59.233] 目と目で向かい合って
-                    [02:01.883] 育んだ絆だけはたったひとつ
-                    [02:06.233] 叶えたい夢になんて　名前を付けようか
-                    [02:11.25] 別れが伴うこれを夢と呼べるのかい？
-                    [02:16.533] 早々に行き詰まって 奇跡頼り 弱音吐いて
-                    [02:21.466] 天地自然の理には心も抗えず
-                    [02:26.65] "どんな結末がお望みだい？"
-                    [02:54.15] 叶えたい夢になんて　名前を付けようか
-                    [02:59.25] 痛みを乗り越えた先でなら笑えるかい？
-                    [03:04.266] 答えのない問いに背いて 季節はまた巡るようで
-                    [03:09.316] 天地自然の理すら覆す絆だと
-                    [03:14.383] きっと 結末は 幸せだ
-`
-            },
-            {
-                chapter: 3,
-                title: 'ハローセカイ', artist: 'DECO*27',
-                context: 'WASABISOCUTE Theme', desc: '',
-                date: 'JUN 2025', ytId: 't5U0rrj0dio', start: 0,
-                ig: 'https://www.instagram.com/reel/DZAkwnehpYn/',
-                lyrics: `
-                    [00:01.602] きっと届くはず　きっと見えるはず
-                    [00:10.818] そんな会ってみたい未来を　僕はひとりきりのセカイで
-                    [00:16.568] ずっとそう歌うたっていた
-                    [00:29.213] 今聞こえたよ　ほら少しだけ
-                    [00:35.218] 君を感じたよ　メロディーがリンクする
-                    [00:42.203] 今繋がるよ　今重なるよ
-                    [00:48.034] 伝えたかったこと　山ほどあるんだけどどうしよう
-                    [00:58.956] 見たこともない顔で　君は君をダメと言うけど
-                    [01:04.174] 未来にいる理想の君を　今の君に押し付け過ぎないで
-                    [01:11.771] 見たこともない景色　見せ合ういつかが来るまで
-                    [01:16.923] つらいこと　泣きたくなること　たまには預け合おう
-                    [01:23.104] ハロー、セカイ　僕の声はちゃんと届いてるかい
-                    [01:29.609] 思ったよりも大丈夫　君はひとりなんかじゃない
-                    [01:35.717] ハロー、セカイ　君の声もちゃんと届いてるよ
-                    [01:42.285] 思ったよりも最高だ　僕もひとりなんかじゃない
-                    [01:48.168] 行くよジャンプ　跳ねるダンス
-                    [01:51.398] いらない不安なんて踏んじゃってこう
-                    [01:54.875] ああでもこうでもないも　そんなのどうでもいいよ
-                    [01:58.072] やりたいようにやろう　ハローハロー
-                    [02:00.86] もう一回ジャンプ　回るダンス
-                    [02:03.989] 行きたい未来　きっともうすぐだよ
-                    [02:07.596] ああでもこうでもないも　そんなのどうでもいいよ
-                    [02:10.727] やりたいようにやろう
-                    [02:13.912] 飛び込んでいこう　僕らのセカイが
-                    [02:16.923] 正解か不正解かわからなくても
-                    [02:19.803] 僕にある想いも　君にある願いも
-                    [02:22.656] きっと消えないんだよ　ずっとセカイは終わらないよ
-                    [02:26.714] 今繋がるよ　今重なるよ
-                    [02:32.955] ほら聞こえるよ　ほら伝わるよ僕ら
-                    `
-            },
-            {
-                chapter: 3,
-                title: 'D/N/A', artist: '25時、ナイトコードで。',
-                context: '', desc: '',
-                date: 'JUN 2025', ytId: 'RyRfLSOewbU', start: 0,
-                ig: 'https://www.instagram.com/reel/DKgaRGWx-Ct',
-                lyrics: `
-                    [00:13.91] 小石を高く高く 積み上げては
-                    [00:17.32] 吹きさらす心は 夕暮れ
-                    [00:20.339] いつか見つかると まだ見つかると
-                    [00:23.67] 白く 甘く 淡く
-                    [00:26.71] 影踏み遊びばかりしてきました
-                    [00:30.14] 贖い足がかり 探して
-                    [00:33.119] いつか見つけると まだ見つけると
-                    [00:36.429] 永く 脆く 遠く
-                    [00:40.149] 鏡越し貴方と
-                    [00:43.25] 瞳の奥の私と
-                    [00:47.71] 誰かの 中の 貴方は
-                    [00:50.92] 欠片のままに 夢を見る
-                    [00:54.13] だって D/N/Aじゃ 騙れない
-                    [00:57.24] この心は私の中 紅く
-                    [01:03.71] 紅く
-                    [01:06.29] 眠れない迷子の無いものねだりじゃない
-                    [01:10.109] この細胞は愛憎 刻まれてる
-                    [01:13.31] まだ見つけるの まだ見つけるの
-                    [01:16.51] 言えなかった音は？
-                    [01:19.709] 誰かの 中の 貴方は
-                    [01:22.84] 繋がれたまま 夢を見る
-                    [01:26.129] だって D/N/Aじゃ 語れない
-                    [01:29.319] この痛みも私の中 紅く
-                    [01:35.68] 紅く
-                    [01:39.14] 鏡の 形と
-                    [01:42.219] 逆さまな D/N/A
-                    [01:45.51] 私の 証と
-                    [01:48.719] 暖かな D/N/A
-                    [01:51.939] 鏡の 形と
-                    [01:55.069] 逆さまな D/N/A
-                    [01:58.29] 私の 証と
-                    [02:01.53] 暖かな D/N/A
-`
-            },
-            {
-                chapter: 3,
-                title: 'Intergalactic Bound', artist: 'CircusP & Yunosuke',
-                context: 'FYSA School Anniversary', desc: '',
-                date: 'AUG 2025', ytId: 'jsQXgDZIIrY', start: 0,
-                ig: 'https://www.instagram.com/reel/DOJKuDikbD2/',
-                lyrics: `
-                    [00:13.509] C'mon, I feel like there's something about this song
-                    [00:17.728] It's like we knew how it'd go all along
-                    [00:21.35] So put down your worries and raise your cups
-                    [00:24.786] There's nowhere to go but up
-                    [00:27.167] Let's dance!
-                    [00:27.986] With a rhythm from New York to Japan
-                    [00:31.378] Know you'll never be alone
-                    [00:33.672] At first glance we're miles away
-                    [00:36.552] But our hearts are connected
-                    [00:38.28] Through these soundwaves
-                    [00:40.556] Nothing but up, up, up (yeah)
-                    [00:42.824] Cut through the clouds
-                    [00:43.999] Nothing but up, up, up (yeah)
-                    [00:46.013] We're never coming down
-                    [00:48.008] Jump, jump without a doubt
-                    [00:50.836] Nothing but up, up, up (yeah)
-                    [00:53.128] Intergalactic bound
-                    [00:55.048] Whoa Oh, Whoa Oh Oh (Hey! Hey!)
-                    [00:59.912] Intergalactic bound
-                    [01:01.704] Whoa Oh, Whoa Oh Oh (Hey! Hey!)
-                    [01:06.696] Intergalactic bound
-                    [01:10.513] If you're an oldie
-                    [01:11.978] Or fresh on the scene (uh huh)
-                    [01:13.905] Come put your lights up
-                    [01:15.347] We'll make a wave of green (woo!)
-                    [01:17.283] Bridge the beginning
-                    [01:18.622] To us all here and now (uh huh)
-                    [01:21.075] Just take a deep breath
-                    [01:22.208] And let me hear you shout!
-                    [01:25.848] Let's groove with the static in the air
-                    [01:28.676] A breakthrough that can bring us anywhere
-                    [01:31.976] It's your move so take the lead
-                    [01:34.664] From the crowd to the stage
-                    [01:36.372] What sights can we see?
-                    [01:38.663] Nothing but up, up, up (yeah)
-                    [01:41.01] Cut through the clouds
-                    [01:42.36] Nothing but up, up, up (yeah)
-                    [01:44.539] We're never coming down
-                    [01:46.331] Jump, jump without a doubt
-                    [01:48.981] Nothing but up, up, up (yeah)
-                    [01:51.378] Intergalactic bound
-                    [02:21.087] A thousand little voices sing
-                    [02:24.068] It's a fiesta from now on
-                    [02:27.611] With our playthings always by our side
-                    [02:31.045] To help us make this song
-                    [02:33.646] Through the dark of the night
-                    [02:35.764] I know we will be alright
-                    [02:37.422] There's a universe of positivity
-                    [02:39.375] Beyond the sky
-                    [02:40.855] Ten thousand of the stars
-                    [02:42.647] They will keep on burning bright
-                    [02:44.311] With this light held between you and I
-                    [02:47.501] Nothing but up, up, up (yeah)
-                    [02:49.611] Cut through the clouds
-                    [02:50.918] Nothing but up, up, up (yeah)
-                    [02:53.048] We're never coming down
-                    [02:54.995] Jump, jump without a doubt
-                    [02:57.592] Nothing but up, up, up (yeah)
-                    [03:00.00] Intergalactic bound
-                    [03:01.988] Whoa Oh, Whoa Oh Oh (Hey! Hey!)
-                    [03:06.501] Intergalactic bound
-                    [03:08.805] Whoa Oh, Whoa Oh Oh (Hey! Hey!)
-                    [03:13.512] Intergalactic bound
-`
-            },
-            {
-                chapter: 3,
-                title: 'STAGE OF SEKAI', artist: 'Leo/need',
-                context: 'Foon Yew Archive', desc: 'UEC 2025',
-                date: 'NOV 2025', ytId: 'Sloi-L5FHBY', start: 0,
-                lyrics: `
-                    [00:02.01]君が輝ける場所はここだよ
-                    [00:06.19]未来の自分を　忘れないで
-                    [00:09.30]きっと出来るから
-                    [00:13.22]
-                    [00:25.91]泣き虫が泣かなくなった帰り道
-                    [00:30.14]誰から見ても君は強くなってひとりぼっち
-                    [00:35.90]そんなことばかりあったから腑に落ちて
-                    [00:40.69]日に日につまらないことが増えて
-                    [00:43.92]たぶん　慣れちゃった
-                    [00:44.12]
-                    [00:45.89]今の自分を歌にして歌えるほど強くないね
-                    [00:50.84]だけど　それを知っている　声が歌うから
-                    [00:51.04]
-                    [00:56.89]君が輝ける場所はここだよ
-                    [01:00.90]悔しい涙　憶えたてのリズムとメロディー
-                    [01:06.58]一人の世界で生まれた歌は
-                    [01:11.75]ここにあるって　見つけてって　ずっと待っている
-                    [01:17.92]
-                    [01:21.07]暑くなって寒くなった時間の階段に
-                    [01:25.63]これからどうなるんだろうってばかりの頭の中
-                    [01:31.44]笑ってみた鏡の前でまたひとりぼっち
-                    [01:35.75]大切だって想いが溢れていた　くしゃくしゃの顔
-                    [01:35.83]
-                    [01:40.96]広く深く高く自由な音のステージへ
-                    [01:46.02]飛び上がる前に怖くなっちゃったけど
-                    [01:50.97]そんな自分を歌うこと君は出来るさ大丈夫
-                    [01:55.84]でもね　不安になったこと忘れないで　さあ
-                    [01:56.07]
-                    [02:01.92]光り輝いたこの世界から
-                    [02:05.96]誰のために届けるんだリズムとメロディー
-                    [02:11.95]今はまだ震えた指先をぎゅっと
-                    [02:16.49]握ってみようよ　怖いと知った　歌は強いはずさ
-                    [02:22.55]
-                    [02:31.54]君を信じられる　それは君だけだよ
-                    [02:36.30]鏡の前で笑ってた　違うね　泣いてた君だから
-                    [02:41.47]そんなこと分かってた　だめな自分も知っている
-                    [02:46.45]だから歌いたいこと　胸を締め付けていた言葉を
-                    [02:46.59]
-                    [02:54.69]特別な今がここにはあるよ
-                    [02:59.02]目を凝らしていて　隠さないで　君の場所だよ
-                    [03:04.87]今ほら大好きなステージの上
-                    [03:09.18]駆け上がろうよ　みんな一緒　この世界なら
-                    [03:15.70]
-                    [03:18.55]君が輝ける場所はここだよ
-                    [03:23.14]未来の自分はここにいる　君という未来に
-                    [03:28.67]全力　全力で歌を届けよう
-                    [03:33.25]世界中にずっと　自分にずっと　歌を届けよう
-                    [03:41.03]君に届けよう`
-            },
-            {
-                chapter: 3,
-                title: 'ラストラス', artist: '*Luna',
-                context: 'The End of Foon Yew Archive', desc: 'Graduation',
-                date: 'DEC 2025', ytId: 'gdmLEu5fVz4', start: 0,
-                lyrics: `
-                    [00:14.56]ゆっくり落ちる砂時計
-                    [00:17.88]揺らいだ夜の星たちも
-                    [00:21.24]気付けなくなっていたのは
-                    [00:25.82]
-                    [00:27.07]きっと　涙が止まない夕暮れも
-                    [00:30.87]動けそうにない朝明けも
-                    [00:34.27]隣に誰もいないから
-                    [00:38.38]
-                    [00:38.78]負けたくない今日の日を　精一杯走った
-                    [00:45.15]正しく生きることの　意味を知らないまま
-                    [00:52.53]でも　確かにそこに光はあったんだ
-                    [00:59.54]
-                    [00:59.67]ねぇ空の色は何色だっただろう
-                    [01:03.65]星はどんな音色だっただろう
-                    [01:07.55]WOW
-                    [01:10.38]君を知らない世界たちが
-                    [01:13.37]この歌を笑っていたんだろう
-                    [01:16.52]灰色の言葉もあっただろう
-                    [01:20.41]そんな日々を僕は　強さと呼びたい
-                    [01:29.31]君の星河よ
-                    [01:31.70]輝いて
-                    [01:45.71]
-                    [01:45.94]踏み出す足がすくんでも
-                    [01:49.44]未来の空が暗くても
-                    [01:52.95]隣に「音」があったから
-                    [01:57.05]
-                    [01:57.98]見えるもの全てが　真実じゃなくて
-                    [02:04.14]渦巻く人の声を　疑う僕でありたい
-                    [02:11.57]まだ　映らない　星座を探して
-                    [02:23.00]
-                    [02:46.48]今まで数えた星だって
-                    [02:49.55]きっと輝いていたのに
-                    [02:52.78]いつから忘れていたの
-                    [02:56.11]いつから消してしまったの
-                    [02:58.99]
-                    [02:59.14]この世界が美しく見えた
-                    [03:02.56]最後の日はいつだっけ
-                    [03:05.86]下を向いていた夜に
-                    [03:09.03]見落としたんだ　今なら
-                    [03:13.53]
-                    [03:19.15]光るから
-                    [03:20.23]僕の色は何色だっただろう
-                    [03:23.43]君はどんな音色だっただろう
-                    [03:27.46]WOW
-                    [03:30.05]少しだけ顔を上げて
-                    [03:32.92]広がる空が見えたなら
-                    [03:36.09]あの日の答えもあったなら
-                    [03:40.14]そんな明日を僕は　嫌わないでいたい
-                    [03:48.70]君の星河よ
-                    [03:51.67]輝いて
-                    [04:06.04]
-                    [04:19.13]あぁ空はこんな色だった`
-            },
-            {
-                chapter: 3,
-                title: '仮死化', artist: 'Vivid BAD SQUAD',
-                context: 'The End of Foon Yew Archive', desc: 'Graduation',
-                date: 'DEC 2025', ytId: 'Mj38FoEYVGA', start: 0,
-                lyrics: `
-                    [00:02.50]息が吸いたくて、産声を上げて
-                    [00:07.58]生き辛くなってまた泣いて喚いて
-                    [00:12.87]生きたくって？逝きたくって？
-                    [00:15.45]わけ分かんないなぁ、僕は
-                    [00:18.08]死にたくっても、詩に託して
-                    [00:20.58]歌詞/仮死になって歌う今日だ
-                    [00:23.54](ああ ああ ああ ああ...)
-                    [00:44.56]震わせた声を歌に吹き込んだ時
-                    [00:48.78]僕の息が初めて目に映って
-                    [00:51.87]気付いたんだよ
-                    [00:55.22]音楽の価値なんて所詮主観だと
-                    [00:59.21]なら、歌いたいように
-                    [01:02.53]伝えたい言葉を伝う
-                    [01:05.57]
-                    [01:07.44]間違いに怯えて
-                    [01:10.02]鬱ぐんじゃなくて
-                    [01:12.60]正しく在ろうって
-                    [01:15.15]足掻いていたいんだよ
-                    [01:17.88]「僕のせい」も、僕の生だ
-                    [01:20.51]馬鹿にされたって僕は
-                    [01:23.21]傷ついては傷つけて
-                    [01:25.67]瑕疵/貸しを作って生きる
-                    [01:27.82]
-                    [01:28.30]目に見えた今が全てだから
-                    [01:34.11]過去や未来に縋りたくないから
-                    [01:39.55]心の臓よ、動け、動け！
-                    [01:45.15]不確かだとしても僕の鼓動
-                    [01:50.14](ああ ああ ああ ああ...)
-                    [02:10.33]
-                    [02:31.76]いつか憎んだ、あの光も
-                    [02:36.94]僕の目を確かに照らしている
-                    [02:42.25]可視化していくんだ、この心を
-                    [02:47.53]でたらめな本音を抱えながら
-                    [02:52.41]
-                    [02:55.98]息が吸いたくて、産声を上げて
-                    [03:00.93]生き辛くなってまた泣いて喚いて
-                    [03:06.25]生きたくって？逝きたくって？
-                    [03:08.94]わけ分かんないなぁ、 僕は
-                    [03:11.58]死にたくっても、詩に託して
-                    [03:14.13]歌詞/仮死になって歌う
-                    [03:16.64]消えたくて生きた今日があるなら
-                    [03:22.44]どちらも嘘にはしなくていいから
-                    [03:27.85]心の臓を、歌え、歌え！
-                    [03:32.98]希望も希死も僕の鼓動
-                    [03:38.30](ああ ああ ああ ああ...)`
-            },
-            {
-                chapter: 3,
-                title: 'デビルじゃないもん', artist: 'DECO*27',
-                context: '2025', desc: 'Summary',
-                date: 'DEC 2025', ytId: 'lMEt3RdqB9Y', start: 0,
-                ig: 'https://www.instagram.com/reel/DSuHC_qEQOc/',
-                lyrics: `
-                    [00:03.92]堕
-                    [00:10.42]ながらの優等生　今宵も自分と密会です
-                    [00:12.96]しんどいわ　しんどいわ　あーつらつら合掌
-                    [00:16.47]ほんとは劣等生　あたしはあたしに説教です
-                    [00:19.12]しんどいわ　しんどいわ　もーいやいや絶交
-                    [00:22.70]心配無用　心配無用　これは笑えるジョークソング
-                    [00:25.76]新米も　老害も　みんな歌えるポップソング
-                    [00:28.86]まあまあ　それ噂っすよ　ただの紙切れっすよ
-                    [00:31.90]いいから　はやく　ハンコ押せや
-                    [00:35.19]デビルじゃない　デビルじゃないもん　悪魔ほどそう言うもん
-                    [00:38.01]あー死んじゃった　死んじゃった　愛してほしいじゃん（でも…）
-                    [00:41.49]それでもハマっちゃうなら　それでも恋しちゃうなら
-                    [00:44.25]あー死んじゃった　死んじゃった　天使エンジェル（HEY!!）天使エンジェル（HEY!!）
-                    [00:47.59]わー！【悲報】【悲報】【悲報】【悲報】（うっそー）
-                    [00:50.54]わー！　汚いね　わー！　飛べないね
-                    [00:53.85]デビルじゃない　デビルじゃないもん　あー死んじゃった　死んじゃった
-                    [00:56.93]本当の天使　スルーして　ご臨終
-                    [01:00.08]あくまで天使じゃん？　最強じゃん
-                    [01:04.76]堕
-                    [01:11.04]「君のため」って名言の悪意
-                    [01:14.82]「夢は叶う」で奪ったサラリー
-                    [01:17.56]はあ　中毒性の高いもんにゃ　罠があるんだな
-                    [01:20.42]魂抜かれちゃって　やあねえ　やあねえ
-                    [01:23.88]光り輝く輪っかでこの首が締まっていく
-                    [01:26.59]嘘をつけば緩んでいく　言えないSOS
-                    [01:30.01]白いペンキかぶりましょ　なりきって仕舞いましょ
-                    [01:32.76]嘘をつけば楽になる　ほらやっちゃって
-                    [01:36.33]デビルじゃない　デビルじゃないもん
-                    [01:39.31]あー死んじゃった　死んじゃった　あああ
-                    [01:42.67]それでもウガっちゃうけど　それでも嫌っちゃうけど
-                    [01:45.53]なりきって笑顔で　天使エンジェル天使エンジェル
-                    [01:48.85]デビルじゃない　デビルじゃないもん　悪魔ほどそう言うもん
-                    [01:51.64]あー死んじゃった　死んじゃった　愛してほしいじゃん（でも…）
-                    [01:55.08]それでもハマっちゃうなら　それでも恋しちゃうなら
-                    [01:57.92]あー死んじゃった　死んじゃった　天使エンジェル（HEY!!）天使エンジェル（HEY!!）
-                    [02:01.19]わー！【悲報】【悲報】【悲報】【悲報】（うっそー）
-                    [02:04.25]わー！　汚いね　わー！　飛べないね
-                    [02:07.51]デビルじゃない　デビルじゃないもん　あー死んじゃった　死んじゃった
-                    [02:10.52]本当の天使　スルーして　ご臨終
-                    [02:13.74]わー！【悲報】【悲報】【悲報】【悲報】（あっそー）
-                    [02:16.75]わー！　醜いね　わー！　映えないね
-                    [02:20.00]デビルじゃない　デビルじゃないもん　あー死んじゃった　死んじゃった
-                    [02:23.00]本当の悪魔になっても　ブレス・ユー
-                    [02:26.18]あくまで天使じゃん？　最強じゃん
-                    [02:29.93]堕〜`
-            },
-            {
-                chapter: 3,
-                title: 'VOIDS', artist: 'Pretty Patterns ft.vally.exe',
-                context: 'The End of 2025', Desc: '',
-                date: 'DEC 2025', ytId: 'B0uSLgW9o7E', start: 0,
-                ig: 'https://www.instagram.com/reel/DS7AsnWEdgg/',
-                lyrics: `
-                    [00:14.59]I want to be right where you are
-                    [00:21.69]I want to be right where you are
-                    [00:29.19]There's no beauty without ends
-                    [00:36.32]No creation with no mends
-                    [00:43.83]A new silent wish, will cast aside our pain
-                    [00:48.58]Distancing side by side in vain
-                    [00:56.95]Reflecting no more anguish by your side
-                    [01:00.44]A contradiction worthy to abide
-                    [01:04.10]Remnants of us ebb and flow
-                    [01:07.09]A glimpse of love just waiting
-                    [01:11.03]Oh, a never-ending hope to mend it all
-                    [01:18.18]Flow, let our time remain and wait for voids to fall
-                    [01:25.05]Ascending through the motions
-                    [01:28.12]It would seem as though they'd last
-                    [01:31.91]Admitting to our questions
-                    [01:35.72]And doubts thrown at the past
-                    [01:40.69]There's no rightness in pretend
-                    [01:47.57]Finding comfort once again
-                    [01:54.85]Wish the days would pass, just yearning for our fate
-                    [01:59.94]Yet there is solace to be found within dismay
-                    [02:08.01]Disowning feelings of grief through these tides
-                    [02:11.65]A complicated love I'd dare not hide
-                    [02:15.30]Turbulences come and go
-                    [02:18.18]But won't reject me whole
-                    [02:22.17]Oh, a bittersweet vision through me that befalls
-                    [02:28.98]Know that despite our voids I swear to hold it all
-                    [02:36.04]While sinking through this ocean
-                    [02:39.28]I would wonder why you'd ask
-                    [02:43.12]Accepting our affection
-                    [02:46.35]I just knew that it would last
-                    [02:51.16]I want to be right where you are
-                    [02:58.21]I want to be right where you are
-                    [03:05.35]I want to be right where you are
-                    [03:12.55]I want to be right where you are
-                    [03:18.93]I want to be right where you are (touch)
-                    [03:21.68](The heavens and the skies alight)
-                    [03:26.34]I want to be right where you are (breathe)
-                    [03:28.69](The entire universe shines bright)
-                    [03:33.52]I want to be right where you are
-                    [03:40.74]I want to be right where you are
-                    [03:47.58]`
-            },
-            // Chapter 4
-            {
-                chapter: 4,
-                title: 'リアライズ', artist: 'Vivid BAD SQUAD',
-                context: '2026 Opening', desc: '',
-                date: 'JAN 2026', ytId: 'uuFNVow4ciw', start: 0,
-                ig: 'https://www.instagram.com/reel/DT5YBLHkWky',
-                lyrics: ``
-            },
-            {
-                chapter: 4,
-                title: 'ぼかろころしあむ', artist: 'DIVELA',
-                context: '', desc: '',
-                date: 'MAR 2026', ytId: '5kIeUb5AE4s',
-                ig: 'https://www.instagram.com/reel/DWI1GGwkROR',
-                lyrics: ``
-            },
-            {
-                chapter: 4,
-                title: 'Ready Steady', artist: 'Giga',
-                context: 'Foon Yew Archive - the SUFFER accident', desc: 'Kamu satu orang make everyone SUFFER!!!',
-                date: 'APR 2026', ytId: 'XAg1jDDG49Y', start: 0,
-                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTYwNjA5MTY4NDI5OTEz?story_media_id=3872077968886066424_63008808258&igsh=MXJxOWgwODFmbmhpbA==',
-                lyrics: `
-                    [00:09.56]ローリスクじゃ物足りなくなっちゃったし
-                    [00:14.67]有り余って笑っちゃうくらい
-                    [00:18.17]なんも無いなんて言ったってしょうがないし
-                    [00:22.96]お手上げでHi-Five
-                    [00:25.66]
-                    [00:25.67]前ならえで後に続いたってつまんねえ
-                    [00:30.76]夢を語れ、追え！が　この街のStandard
-                    [00:35.10]ただ見てたいだけ　なんてのは嘘です
-                    [00:39.17]そろそろマイク頂戴
-                    [00:42.85]
-                    [00:42.86]どうせならもう後戻りもできないくらい　どうにかさせて
-                    [00:51.60]まだまだハマっていきたい
-                    [00:53.57]なんか、まるで恋してるみたい
-                    [00:55.95]好きになっちゃったぁ　つってさ
-                    [00:58.88]
-                    [00:58.89]ならこのまま キミを連れて
-                    [01:03.59]望むなら　どこまでも
-                    [01:08.11]＆ I Wanna　欲しがってばかりで結構 結構
-                    [01:15.27]もし叶うならこの先の世界を知りたい　行きたい
-                    [01:24.40]Ready Steady
-                    [01:25.45]
-                    [01:41.20]ちょっとだけなら無茶だってしちゃいたいし
-                    [01:46.00]この世の全て奪っちゃうくらい
-                    [01:49.52]とはいえ語ってばっかじゃどうしようもないし
-                    [01:54.40]語尾跳ねてHi-Fi
-                    [01:56.82]
-                    [01:56.83]ねえ少しはこっち向いたらどう
-                    [01:59.61]気まぐれにハマらせたいだけ？
-                    [02:02.13]でも奪いたい震わせたい　目、耳、キミの燃えるheart
-                    [02:06.14]誰もが羨む驚異のTrackとLyricで
-                    [02:10.12]魅せていくからRetakeはしないで
-                    [02:13.99]
-                    [02:14.00]だからこのまま キミを連れて
-                    [02:18.93]望むなら　どこへでも
-                    [02:22.91]＆ I Wanna　無いものねだるなら決行 決行
-                    [02:30.82]
-                    [02:30.83]早く夜よ明けて 朝焼けに誓え
-                    [02:36.83]重い想い、 熱量を叫べ
-                    [02:40.30]この声を聴け　音・音・音に、踊り狂え
-                    [02:47.50]
-                    [02:47.51]I want more.
-                    [02:51.98]“Are you Ready？”
-                    [02:56.13]
-                    [02:56.14]ならこのまま キミを連れて
-                    [03:00.81]望むなら　どこまでも
-                    [03:05.89]＆ I Wanna　欲しがってばかりで結構 結構
-                    [03:12.83]もし叶うならこの先の世界を知りたい　行きたい
-                    [03:21.99]Ready Steady`
-            },
-            {
-                chapter: 4,
-                title: 'Beyond the way', artist: 'Giga',
-                context: 'In-zone exploration', desc: 'Toppen ACG Fest 2026',
-                date: 'APR 2026', ytId: 'SJcgOWsDwi4', start: 0,
-                ig: '',
-                lyrics: `
-                    [00:01.65]息つまるばかりで 温ぬるい退屈な夜道で
-                    [00:07.83](mellow mellow mellow)
-                    [00:09.31]ルールは無視で行きたいね
-                    [00:14.80]So burn my burn my heart
-                    [00:16.98]
-                    [00:17.18](uh...) 悟られそう (uh...) 可か不可 Get down now
-                    [00:24.71](uh...) あーあ もうきっと優等ぶった
-                    [00:30.16]'I'じゃ居られないくらい どうしようもない
-                    [00:32.54]
-                    [00:32.72]yuh 無理目のクエスチョン ha 実存？ フィクション？
-                    [00:36.53]You make me サゲなの何で？ I know the way
-                    [00:39.88]願ってるばっかじゃ叶わない めちゃくちゃにされたって変わらない
-                    [00:43.59]まあね 喰らえ 覚醒 Find the way
-                    [00:46.89]
-                    [00:47.71]待ってライトあびる感覚 甘い罠
-                    [00:51.14]見当違い disも聞き飽きたわ
-                    [00:55.07]そりゃねいけるところまで Take me higher
-                    [00:58.84]どう？ Turning back 無理ってとっくに分かってんでしょ
-                    [01:02.83]
-                    [01:02.86](uh...) 悟られそう (uh...) 可か不可 Get down now
-                    [01:10.63](uh...) あーあ もうずっとしゃんと居られないや
-                    [01:16.27]それは誰のせい？
-                    [01:18.27]
-                    [01:18.41]終わらない夢を描こう描いて
-                    [01:21.87]願ったまま欲しがったその先へ
-                    [01:26.10]終わらない夜を超えていこう 超えていこう
-                    [01:29.41]このまま 焦がれた向こう側へ
-                    [01:33.88]
-                    [01:35.62]はあぶっちゃけ解せないや 勝算なくても行っちゃえ！ とか
-                    [01:39.55]運命感じる感受性は否めない ウチら負けない
-                    [01:43.28]跳べ 吠え 目で追って いつでもNO.1
-                    [01:46.77]そこどけ 速攻揺らせ 攻め 甘美な時 Ride on now
-                    [01:51.65]
-                    [01:54.44]Shake it up まだまだ Go beyond the way yuh
-                    [01:58.67]
-                    [01:59.33]行き詰まるばかりで ずるい言葉を探して
-                    [02:05.25](mellow mellow mellow)
-                    [02:06.58]I am me 研ぎ澄まし 本能に従って 行け
-                    [02:12.18]Holla "We are the winners!"
-                    [02:13.92]So burn my burn my heart
-                    [02:14.92]
-                    [02:23.62]終わらない夢を描こう描いて
-                    [02:27.81]願ったまま欲しがったその先へ
-                    [02:32.13]終わらない夜を超えていこう 超えていこう
-                    [02:35.40]このまま 焦がれた向こう側へ
-                    [02:39.30]
-                    [02:39.90](uh...) 張り裂けそう 追いかけて合わせた 背が熱くて
-                    [02:48.47](uh...) 張り裂けそう もう一生鳴り止まない
-                    [02:52.60]限界の向こう側へ
-                    [02:54.71]
-                    [02:55.27]Ready Steady? Get out the way.
-`
-            },
-            {
-                chapter: 4,
-                title: 'アリア', artist: 'ナナツカゼ',
-                context: 'In-zone exploration - Genting Highlands', desc: 'Resorts World Genting',
-                date: 'JUN 2026', ytId: 'P7ueDJG9IO4', start: 0,
-                ig: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTE5NDk0MzU3NzUyODk0?story_media_id=3922679128558534096_63008808258&igsh=MWFhNTVpN2hzZmRjMw==',
-                lyrics: `
-                    [00:11.04]眠れない夜
-                    [00:12.03]僕らは初めて繋がり合った気がした
-                    [00:16.08]どうしようもない
-                    [00:17.36]そんな日々を抱える僕らはどこか似ていた
-                    [00:21.16]
-                    [00:21.50]量産される音楽と命が
-                    [00:24.51]重なりあっても
-                    [00:25.75]時既に遅くて
-                    [00:27.13]不確かな音や言葉や数字に苛まれる
-                    [00:30.59]世界は傷だらけ
-                    [00:31.52]
-                    [00:31.67]誰だって
-                    [00:33.11]言葉にできない痛みを抱えてる
-                    [00:37.11]僕だって
-                    [00:38.31]痛い程知ってるよそんなこと
-                    [00:41.86]
-                    [00:42.11]だから
-                    [00:43.48]この歌は僕と君の
-                    [00:47.21]息を繋ぐため歌うアリア
-                    [00:53.45]
-                    [01:14.15]僕らいつの時代も
-                    [01:16.95]サヨナラに怯えて
-                    [01:19.21]命を持て余している
-                    [01:22.25]知る由もないのに
-                    [01:24.62]
-                    [01:25.03]僕らいつの未来も
-                    [01:27.59]普通を恐れて
-                    [01:29.79]天才に成りたがる
-                    [01:32.44]成る意味もないのに
-                    [01:36.32]
-                    [01:46.80]忘れられないんだ
-                    [01:49.52]淘汰された表情
-                    [01:51.94]それは嬉しい方じゃない
-                    [01:55.30]悲しい方の
-                    [01:57.06]
-                    [01:57.44]子どもの頃は
-                    [01:59.81]誰かを救いたいと
-                    [02:01.92]夢を綴ったはずなのに
-                    [02:07.94]
-                    [02:07.94]僕達は、最期を求めて生まれてきたんだ
-                    [02:13.22]今春もこの夏も死にがいを探している
-                    [02:18.45]この世界を作った神様に
-                    [02:23.91]バレない場所でこの歌を
-                    [02:28.79]歌わせて
-                    [02:30.29]
-                    [03:01.94]僕らいつの時代も
-                    [03:04.52]平和を保つため
-                    [03:06.89]兵器を買い安堵している
-                    [03:10.03]必要もないのに
-                    [03:11.88]
-                    [03:12.51]僕らいつの終いも
-                    [03:15.22]失くして気づいて
-                    [03:17.37]初めて大切にされる
-                    [03:20.07]それじゃもう遅いのに
-`
-            }
+        const defaultChapters = [
+            { id: -1, title: 'Chapter -01', subtitle: '< 2020 • Demo' },
+            { id: 0, title: 'Chapter 00', subtitle: '> 2020 • Tutorial' },
+            { id: 1, title: 'Chapter 01', subtitle: '2023 • Getting Started' },
+            { id: 2, title: 'Chapter 02', subtitle: '2024 • Deepening Dive' },
+            { id: 3, title: 'Chapter 03', subtitle: '2025' },
+            { id: 4, title: 'Chapter 04', subtitle: '2026 • In Progress' }
         ];
 
+        let isSecretMode = false;
+        let activeTracks = tracks;
+        let activeConfig = (typeof config !== 'undefined') ? config : {};
+        let activeChapters = defaultChapters;
+        let isConsoleOpen = false;
+        let isTransitioning = false;
+        const SECRET_PINS = ['100601'];
+
         function renderGrid() {
-            tracks.forEach((track, index) => {
-                const targetGrid = document.getElementById(`grid-ch${track.chapter}`);
-                if (!targetGrid) return;
+            const mainContainer = document.getElementById('main-content') || document.querySelector('main');
+            if (!mainContainer) return;
+            mainContainer.innerHTML = '';
+
+            activeChapters.forEach(ch => {
+                const section = document.createElement('div');
+                section.className = 'chapter-section';
+                section.id = `section-ch${ch.id}`;
+                section.innerHTML = `
+                    <h2 class="chapter-title">${ch.title}</h2>
+                    <div class="chapter-subtitle">${ch.subtitle}</div>
+                    <div class="track-grid" id="grid-ch${ch.id}"></div>
+                `;
+                mainContainer.appendChild(section);
+            });
+
+            activeTracks.forEach((track, index) => {
+                let targetGrid = document.getElementById(`grid-ch${track.chapter}`);
+                if (!targetGrid) {
+                    const section = document.createElement('div');
+                    section.className = 'chapter-section';
+                    section.id = `section-ch${track.chapter}`;
+                    section.innerHTML = `
+                        <h2 class="chapter-title">Chapter ${track.chapter}</h2>
+                        <div class="chapter-subtitle">Collection</div>
+                        <div class="track-grid" id="grid-ch${track.chapter}"></div>
+                    `;
+                    mainContainer.appendChild(section);
+                    targetGrid = document.getElementById(`grid-ch${track.chapter}`);
+                }
 
                 const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
-                const badgeHTML = track.context ? `<span class="badge">${track.context}</span>` : '';
-                const dateHTML = track.date ? `<span>${track.date}</span>` : '';
+                const badgeHTML = (activeConfig.showContext && track.context) ? `<span class="badge"><span class="badge-text marquee-target">${track.context}</span></span>` : '';
+                const dateHTML = (activeConfig.showDate && track.date) ? `<span>${track.date}</span>` : '';
 
                 const cardHTML = `
                     <div class="track-card" onclick="openPlayer(${index})">
                         <div class="track-cover-wrapper">
-                            <img src="${coverUrl}" class="track-cover" alt="Cover">
+                            <img src="${coverUrl}" class="track-cover">
                             <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
                         </div>
                         <div class="track-info">
-                            <div class="track-title">${track.title}</div>
-                            <div class="track-artist">${track.artist}</div>
+                            <div class="track-title marquee-target">${track.title}</div>
+                            <div class="track-artist marquee-target">${track.artist}</div>
                             <div class="track-meta">
-                                ${badgeHTML}
-                                ${dateHTML}
+                                <div class="track-meta-left">
+                                    ${badgeHTML}
+                                </div>
+                                <div class="track-date">
+                                    ${dateHTML}
+                                </div>
                             </div>
                         </div>
                     </div>
                 `;
                 targetGrid.innerHTML += cardHTML;
             });
+
+            if (activeConfig && !activeConfig.showChapterTitle) {
+                document.querySelectorAll('.chapter-title, .chapter-subtitle').forEach(el => el.style.display = 'none');
+            }
         }
         renderGrid();
-        //MV Player
+
+        function updateAllGridMarquees() {
+            document.querySelectorAll('.marquee-target').forEach(updateMarquee);
+        }
+        setTimeout(updateAllGridMarquees, 100);
         let player;
         let isPlayerReady = false;
         let progressInterval;
         let currentTrackId = 0;
         let playerTimeout;
+        let loopMode = 0; // 0: Stop After Current, 1: Sequence, 2: Loop One, 3: Loop All
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
@@ -2284,6 +373,296 @@
                 }
             });
         }
+        const visualizer = document.getElementById("visualizer");
+
+        for (let i = 0; i < 10; i++) {
+            const bar = document.createElement("div");
+            bar.className = "bar";
+            visualizer.appendChild(bar);
+        }
+
+        let realVisualizerStream = null;
+        let realAudioCtx = null;
+        let realAnalyser = null;
+        let realSourceNode = null;
+        let realVisualizerRafId = null;
+        let isRealVisualizerActive = false;
+
+        const VIS_BAR_COUNT = 16;
+        const peakHeights = new Array(VIS_BAR_COUNT).fill(0);
+        const peakDropSpeeds = new Array(VIS_BAR_COUNT).fill(0);
+        const currentBarHeights = new Array(VIS_BAR_COUNT).fill(0);
+
+        const binRanges = [];
+        const minBin = 1;
+        const maxBin = 1000;
+        const logMin = Math.log(minBin);
+        const logMax = Math.log(maxBin);
+        for (let i = 0; i < VIS_BAR_COUNT; i++) {
+            const start = Math.exp(logMin + (i / VIS_BAR_COUNT) * (logMax - logMin));
+            const end = Math.exp(logMin + ((i + 1) / VIS_BAR_COUNT) * (logMax - logMin));
+            binRanges.push([Math.floor(start), Math.max(Math.floor(start) + 1, Math.ceil(end))]);
+        }
+
+        function resizeVisualizerCanvas() {
+            const canvas = document.getElementById('real-visualizer-canvas');
+            if (!canvas) return;
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            const w = rect.width || 100;
+            const h = rect.height || 40;
+            if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+                canvas.width = Math.round(w * dpr);
+                canvas.height = Math.round(h * dpr);
+            }
+        }
+
+        window.addEventListener('resize', resizeVisualizerCanvas);
+
+        function drawVisualizerFrame() {
+            if (!isRealVisualizerActive) return;
+
+            const canvas = document.getElementById('real-visualizer-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            resizeVisualizerCanvas();
+
+            const dpr = window.devicePixelRatio || 1;
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            let freqData = null;
+            let isAudioPlaying = false;
+
+            if (realAnalyser) {
+                const bufferLength = realAnalyser.frequencyBinCount;
+                freqData = new Uint8Array(bufferLength);
+                realAnalyser.getByteFrequencyData(freqData);
+
+                if (player && typeof player.getPlayerState === 'function') {
+                    isAudioPlaying = (player.getPlayerState() === YT.PlayerState.PLAYING);
+                } else {
+                    let sum = 0;
+                    for (let i = 0; i < bufferLength; i++) sum += freqData[i];
+                    isAudioPlaying = sum > 10;
+                }
+            }
+
+            const barCount = VIS_BAR_COUNT;
+            const gap = 3 * dpr;
+            const totalGap = gap * (barCount - 1);
+            const barWidth = Math.min(3 * dpr, Math.max(1 * dpr, (width - totalGap) / barCount));
+            const minHeight = Math.max(3 * dpr, height * 0.08);
+            const maxHeight = height - 4 * dpr;
+
+            const isSecret = document.body.classList.contains('secret-mode');
+
+            for (let i = 0; i < barCount; i++) {
+                let targetNorm = 0;
+
+                if (freqData && isAudioPlaying) {
+                    const range = binRanges[i] || [i, i + 1];
+                    const startBin = range[0];
+                    const endBin = range[1];
+
+                    let sum = 0;
+                    let maxVal = 0;
+                    for (let j = startBin; j < endBin; j++) {
+                        const val = freqData[j] || 0;
+                        sum += val;
+                        if (val > maxVal) maxVal = val;
+                    }
+                    const avg = sum / (endBin - startBin);
+                    let rawEnergy = (avg * 0.7 + maxVal * 0.3);
+                    rawEnergy = Math.max(0, rawEnergy - 12);
+                    const trebleBoost = 1 + (i / barCount) * 0.6;
+                    let norm = (rawEnergy / 243) * trebleBoost;
+
+                    norm = Math.pow(norm, 1.3);
+
+                    targetNorm = Math.min(1, norm);
+                }
+
+                const attack = (i < 2) ? 0.45 : 0.35;
+                const release = (i < 2) ? 0.12 : 0.15;
+
+                if (targetNorm > currentBarHeights[i]) {
+                    currentBarHeights[i] += (targetNorm - currentBarHeights[i]) * attack;
+                } else {
+                    currentBarHeights[i] += (targetNorm - currentBarHeights[i]) * release;
+                }
+
+                if (currentBarHeights[i] < 0.001) currentBarHeights[i] = 0;
+
+                const barH = minHeight + currentBarHeights[i] * (maxHeight - minHeight);
+                const x = i * (barWidth + gap);
+                const y = height - barH;
+
+                // Peak Caps
+                if (barH >= peakHeights[i]) {
+                    peakHeights[i] = barH;
+                    peakDropSpeeds[i] = 0.0;
+                } else {
+                    peakHeights[i] -= peakDropSpeeds[i];
+                    peakDropSpeeds[i] += 0.15 * dpr;
+                    if (peakHeights[i] < minHeight) {
+                        peakHeights[i] = minHeight;
+                    }
+                }
+
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 255, 255, 1.0)';
+
+                const radius = Math.min(barWidth / 2, 2 * dpr);
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(x, y, barWidth, barH, [radius, radius, 0, 0]);
+                } else {
+                    ctx.moveTo(x, height);
+                    ctx.lineTo(x, y + radius);
+                    ctx.quadraticCurveTo(x, y, x + radius, y);
+                    ctx.lineTo(x + barWidth - radius, y);
+                    ctx.quadraticCurveTo(x + barWidth, y, x + barWidth, y + radius);
+                    ctx.lineTo(x + barWidth, height);
+                    ctx.closePath();
+                }
+                ctx.fill();
+                ctx.restore();
+
+                // Draw Peak Cap
+                const peakY = height - peakHeights[i];
+                const peakCapH = Math.max(2 * dpr, 2.5 * dpr);
+                ctx.save();
+                ctx.fillStyle = 'rgba(255, 255, 255, 1.0)';
+
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(x, Math.max(0, peakY - peakCapH - 1 * dpr), barWidth, peakCapH, radius);
+                } else {
+                    ctx.rect(x, Math.max(0, peakY - peakCapH - 1 * dpr), barWidth, peakCapH);
+                }
+                ctx.fill();
+                ctx.restore();
+            }
+
+            realVisualizerRafId = requestAnimationFrame(drawVisualizerFrame);
+        }
+
+        async function enableRealAudioVisualizer() {
+            if (isRealVisualizerActive) return true;
+
+            try {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+                    alert('当前浏览器不支持屏幕/标签页音频捕获 (getDisplayMedia API)。\n请使用 Chrome / Edge / Firefox 等现代桌面浏览器。');
+                    return false;
+                }
+
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        displaySurface: 'browser'
+                    },
+                    audio: {
+                        echoCancellation: false,
+                        noiseSuppression: false,
+                        autoGainControl: false
+                    },
+                    preferCurrentTab: true,
+                    selfBrowserSurface: 'include',
+                    systemAudio: 'include'
+                });
+
+                const audioTracks = stream.getAudioTracks();
+                if (!audioTracks || audioTracks.length === 0) {
+                    stream.getTracks().forEach(t => t.stop());
+                    alert('【未检测到音频轨道】\n请重新开启开关，并在浏览器共享弹窗中确保选择【此标签页】并勾选【同时共享标签页音频】(Share tab audio)。');
+                    const settingCheckbox = document.getElementById('setting-real-visualizer');
+                    if (settingCheckbox) settingCheckbox.checked = false;
+                    localStorage.setItem('setting-real-visualizer', 'false');
+                    disableRealAudioVisualizer();
+                    return false;
+                }
+
+                realVisualizerStream = stream;
+
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!realAudioCtx || realAudioCtx.state === 'closed') {
+                    realAudioCtx = new AudioContextClass();
+                }
+                if (realAudioCtx.state === 'suspended') {
+                    await realAudioCtx.resume();
+                }
+
+                realAnalyser = realAudioCtx.createAnalyser();
+                realAnalyser.fftSize = 2048; // Higher resolution for better frequency mapping
+                realAnalyser.smoothingTimeConstant = 0.8;
+
+                realSourceNode = realAudioCtx.createMediaStreamSource(stream);
+                realSourceNode.connect(realAnalyser);
+                // DO NOT connect to realAudioCtx.destination to prevent echo
+
+                stream.getTracks().forEach(track => {
+                    track.addEventListener('ended', () => {
+                        console.log('[RealVisualizer] MediaStream track ended');
+                        const settingCheckbox = document.getElementById('setting-real-visualizer');
+                        if (settingCheckbox) settingCheckbox.checked = false;
+                        localStorage.setItem('setting-real-visualizer', 'false');
+                        disableRealAudioVisualizer();
+                    });
+                });
+
+                isRealVisualizerActive = true;
+                const visualizerEl = document.getElementById('visualizer');
+                if (visualizerEl) visualizerEl.classList.add('real-mode');
+
+                cancelAnimationFrame(realVisualizerRafId);
+                drawVisualizerFrame();
+                return true;
+            } catch (err) {
+                console.warn('[RealVisualizer] Access cancelled or failed:', err);
+                const settingCheckbox = document.getElementById('setting-real-visualizer');
+                if (settingCheckbox) settingCheckbox.checked = false;
+                localStorage.setItem('setting-real-visualizer', 'false');
+                disableRealAudioVisualizer();
+                return false;
+            }
+        }
+
+        function disableRealAudioVisualizer() {
+            isRealVisualizerActive = false;
+            if (realVisualizerRafId) {
+                cancelAnimationFrame(realVisualizerRafId);
+                realVisualizerRafId = null;
+            }
+            if (realVisualizerStream) {
+                realVisualizerStream.getTracks().forEach(t => t.stop());
+                realVisualizerStream = null;
+            }
+            if (realSourceNode) {
+                try { realSourceNode.disconnect(); } catch (e) { }
+                realSourceNode = null;
+            }
+            if (realAnalyser) {
+                try { realAnalyser.disconnect(); } catch (e) { }
+                realAnalyser = null;
+            }
+            if (realAudioCtx) {
+                try { realAudioCtx.close(); } catch (e) { }
+                realAudioCtx = null;
+            }
+
+            const visualizerEl = document.getElementById('visualizer');
+            if (visualizerEl) visualizerEl.classList.remove('real-mode');
+
+            const canvas = document.getElementById('real-visualizer-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
 
         function onPlayerReady(event) {
             isPlayerReady = true;
@@ -2298,10 +677,10 @@
                 const toastBtn = document.getElementById('toast-play-pause-btn');
                 if (toastBtn) toastBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                 playBtn.classList.add('is-playing');
-                visualizer.querySelectorAll('.bar').forEach(bar => {
-                    bar.style.height = '';
-                });
                 visualizer.classList.add('playing');
+                if (realAudioCtx && realAudioCtx.state === 'suspended') {
+                    realAudioCtx.resume();
+                }
                 startProgressTracker();
             } else {
                 playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
@@ -2320,107 +699,227 @@
                 });
                 stopProgressTracker();
             }
+
+            if (event.data == YT.PlayerState.ENDED) {
+                if (loopMode === 2) {
+                    player.seekTo(activeTracks[currentTrackId].start || 0, true);
+                    player.playVideo();
+                } else if (loopMode === 3) {
+                    if (currentTrackId < activeTracks.length - 1) {
+                        playNext();
+                    } else {
+                        openPlayer(0);
+                    }
+                } else if (loopMode === 1) {
+                    // loopMode === 1 (Sequence)
+                    if (currentTrackId < activeTracks.length - 1) {
+                        playNext();
+                    }
+                } else if (loopMode === 0) {
+                    // loopMode === 0 (Stop After Current)
+                    // Do nothing, just let it stop
+                }
+            }
+
             try {
                 player.unloadModule("captions");
                 player.unloadModule("cc");
             } catch (exception) { }
         }
 
-        // Overlay Controls
-        function openPlayer(trackId, keepHidden = false) {
-            clearTimeout(playerTimeout);
-            const toast = document.getElementById('np-toast');
-            if (toast && !keepHidden) toast.classList.remove('active');
+        // Controls （overlay)
+        function updateMarquee(element) {
+            if (!element) return;
 
-            const isReopening = (currentTrackId === trackId && isPlayerReady);
-            currentTrackId = trackId;
-            const track = tracks[trackId];
+            const existingAttr = element.getAttribute('data-original-html') || element.getAttribute('data-original-text');
+            if (!existingAttr) {
+                element.setAttribute('data-original-html', element.innerHTML.trim());
+            }
+            const contentHtml = element.getAttribute('data-original-html') || element.getAttribute('data-original-text') || element.innerHTML.trim();
 
-            if (!keepHidden) {
-                document.getElementById('np-overlay').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            } else {
-                if (toast) {
-                    document.getElementById('toast-title').innerText = track.title;
-                    document.getElementById('toast-artist').innerText = track.artist;
-                    document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+            element.classList.remove('marquee');
+            element.style.removeProperty('--marquee-distance');
+            element.style.removeProperty('--marquee-duration');
+            element.innerHTML = '';
+
+            const content = document.createElement('div');
+            content.className = 'marquee-content';
+
+            const textSpan = document.createElement('span');
+            textSpan.className = 'marquee-text';
+            textSpan.innerHTML = contentHtml;
+            content.appendChild(textSpan);
+
+            element.appendChild(content);
+
+            requestAnimationFrame(() => {
+                if (textSpan.scrollWidth > element.clientWidth + 1) {
+                    const spacer = document.createElement('span');
+                    spacer.className = 'marquee-spacer';
+                    spacer.style.display = 'inline-block';
+                    spacer.style.width = '48px';
+                    content.appendChild(spacer);
+
+                    const textSpan2 = document.createElement('span');
+                    textSpan2.className = 'marquee-text';
+                    textSpan2.innerHTML = contentHtml;
+                    content.appendChild(textSpan2);
+
+                    const distance = Math.ceil(textSpan.getBoundingClientRect().width) + 48;
+
+                    const speed = 36;
+                    const duration = (distance / speed) + 4;
+
+                    element.style.setProperty('--marquee-distance', `-${distance}px`);
+                    element.style.setProperty('--marquee-duration', `${duration}s`);
+                    element.classList.add('marquee');
+                }
+            });
+        }
+
+        function updateNowPlayingMarquees() {
+            updateMarquee(document.getElementById('np-title'));
+            updateMarquee(document.getElementById('np-artist'));
+        }
+
+        let marqueeResizeDebounceTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(marqueeResizeDebounceTimer);
+            marqueeResizeDebounceTimer = setTimeout(() => {
+                updateAllGridMarquees();
+                updateNowPlayingMarquees();
+                const toastTitle = document.getElementById('toast-title');
+                const toastArtist = document.getElementById('toast-artist');
+                if (toastTitle) updateMarquee(toastTitle);
+                if (toastArtist) updateMarquee(toastArtist);
+            }, 150);
+        });
+
+        function getTrackIndexFromHash() {
+            const hash = window.location.hash.replace(/^#\/?/, '').trim();
+            if (!hash) return -1;
+
+            // 1. Search by track.id in activeTracks (string or number comparison)
+            const matchById = activeTracks.findIndex(t => t.id !== undefined && t.id !== null && String(t.id) === hash);
+            if (matchById !== -1) return matchById;
+
+            // 2. Fallback: Check if hash is a valid numeric array index within bounds
+            if (/^-?\d+$/.test(hash)) {
+                const idx = parseInt(hash, 10);
+                if (idx >= 0 && idx < activeTracks.length) {
+                    return idx;
                 }
             }
 
+            return -1;
+        }
+
+        function handleHashChangeOnLoad() {
+            const trackIndex = getTrackIndexFromHash();
+            if (trackIndex !== -1) {
+                openPlayer(trackIndex);
+            }
+        }
+
+        window.addEventListener('hashchange', () => {
+            const trackIndex = getTrackIndexFromHash();
+            if (trackIndex !== -1 && trackIndex !== currentTrackId) {
+                openPlayer(trackIndex);
+            }
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', handleHashChangeOnLoad);
+        } else {
+            setTimeout(handleHashChangeOnLoad, 50);
+        }
+
+        function openPlayer(trackId, keepHidden = false) {
+            clearTimeout(playerTimeout);
+            const track = activeTracks[trackId];
+            if (!track) return;
+
+            const trackHash = (track.id !== undefined && track.id !== null) ? track.id : trackId;
+            if (window.location.hash !== '#' + trackHash) {
+                history.replaceState(null, '', '#' + trackHash);
+            }
+
+            const toast = document.getElementById('np-toast');
+            const toastTitle = document.getElementById('toast-title');
+            const toastArtist = document.getElementById('toast-artist');
+            const isReopening = (currentTrackId === trackId && isPlayerReady);
+            currentTrackId = trackId;
+
+            toastTitle.setAttribute('data-original-html', track.title);
+            toastTitle.innerText = track.title;
+            toastArtist.setAttribute('data-original-html', track.artist);
+            toastArtist.innerText = track.artist;
+
+            updateMarquee(toastTitle);
+            updateMarquee(toastArtist);
+            toastArtist.setAttribute('data-original-text', track.artist);
+            document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
+            if (!keepHidden) {
+                if (toast) toast.classList.remove('active');
+                document.getElementById('np-overlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                if (toast) toast.classList.add('active');
+            }
             const coverUrl = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
             document.getElementById('np-bg').style.backgroundImage = `url(${coverUrl})`;
-
-            document.getElementById('np-title').innerText = track.title;
-            document.getElementById('np-artist').innerText = track.artist;
+            const npTitle = document.getElementById('np-title');
+            npTitle.innerText = track.title;
+            npTitle.setAttribute('data-original-html', track.title);
+            const npArtist = document.getElementById('np-artist');
+            npArtist.setAttribute('data-original-text', track.artist);
+            npArtist.setAttribute('data-original-html', track.artist);
+            npArtist.innerText = track.artist;
+            updateNowPlayingMarquees();
             document.getElementById('menu-title').innerText = track.title;
             document.getElementById('menu-artist').innerText = track.artist;
-            const infoText = [track.context, track.desc].filter(Boolean).join(' • ');
-            document.getElementById('menu-info').innerText = infoText || 'Memory Track';
-            document.getElementById('menu-date').innerText = track.date ? ("Memory Date: " + track.date) : "Memory Date: N/A";
+            let infoParts = [];
+            if (activeConfig.showContext && track.context) infoParts.push(track.context);
+            if (activeConfig.showDesc && track.desc) infoParts.push(track.desc);
+            const infoText = infoParts.join(' • ');
+            const menuInfoElem = document.getElementById('menu-info');
+            if (infoParts.length > 0) {
+                menuInfoElem.style.display = 'block';
+                menuInfoElem.innerText = infoText;
+            } else {
+                menuInfoElem.style.display = 'none';
+            }
+
+            const menuDateElem = document.getElementById('menu-date');
+            if (activeConfig.showDate) {
+                menuDateElem.style.display = 'block';
+                menuDateElem.innerText = track.date ? ("Memory Date: " + track.date) : "Memory Date: N/A";
+            } else {
+                menuDateElem.style.display = 'none';
+            }
+
             const igLinkElem = document.getElementById('menu-ig');
-            if (track.ig) {
+            if (activeConfig.showIg && track.ig) {
                 igLinkElem.href = track.ig;
                 igLinkElem.style.display = 'flex';
             } else {
                 igLinkElem.style.display = 'none';
             }
             if (!isReopening) {
-                const lyricsContainer = document.getElementById('lyrics-container');
-                lyricsContainer.innerHTML = '';
-
-                let renderLyrics = [];
-
-                if (typeof track.lyrics === 'string') {
-                    renderLyrics = track.lyrics.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-                } else if (track.lyrics && track.lyrics.length > 0) {
-                    renderLyrics = track.lyrics;
-                } else {
-                    renderLyrics = [
-                        "Lyrics not available",
-                    ];
-                }
-
-                renderLyrics.forEach((line, index) => {
-                    const div = document.createElement('div');
-                    div.className = 'lyric-line';
-
-                    if (typeof line === 'string') {
-                        const lrcMatch = line.match(/^\[(\d{2,}):(\d{2}(?:\.\d{1,3})?)\](.*)/);
-                        if (lrcMatch) {
-                            const minutes = parseInt(lrcMatch[1], 10);
-                            const seconds = parseFloat(lrcMatch[2]);
-                            div.dataset.time = (minutes * 60) + seconds;
-                            div.innerText = lrcMatch[3].trim();
-                        } else {
-                            div.innerText = line;
-                        }
-                    } else if (typeof line === 'object') {
-                        div.innerText = line.text;
-                        if (line.time !== undefined) {
-                            div.dataset.time = line.time;
-                        }
-                    }
-
-                    if (index === 1 && (!track.lyrics || track.lyrics.length === 0)) div.classList.add('active');
-                    div.onclick = () => {
-                        if (div.dataset.time && isPlayerReady) {
-                            player.seekTo(parseFloat(div.dataset.time), true);
-                        } else {
-                            document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active'));
-                            div.classList.add('active');
-                        }
-                    };
-                    lyricsContainer.appendChild(div);
-                });
+                renderLyrics(trackId);
             }
 
             //Video Load
             if (isPlayerReady) {
                 if (!isReopening) {
-                    player.loadVideoById({
+                    const loadOptions = {
                         videoId: track.ytId,
-                        startSeconds: track.start
-                    });
+                        startSeconds: track.start || 0
+                    };
+                    if (track.end) {
+                        loadOptions.endSeconds = track.end;
+                    }
+                    player.loadVideoById(loadOptions);
                 }
             } else {
                 playerTimeout = setTimeout(() => openPlayer(trackId, keepHidden), 500);
@@ -2432,11 +931,23 @@
             document.getElementById('np-overlay').classList.remove('active');
             document.body.style.overflow = 'auto';
             document.getElementById('np-options-menu').classList.remove('active'); // ensure menu closes
+            document.getElementById('np-trans-menu').classList.remove('active'); // ensure menu closes
 
             if (currentTrackId !== undefined && isPlayerReady) {
-                const track = tracks[currentTrackId];
-                document.getElementById('toast-title').innerText = track.title;
-                document.getElementById('toast-artist').innerText = track.artist;
+                const track = activeTracks[currentTrackId];
+                const toastTitle = document.getElementById('toast-title');
+                toastTitle.setAttribute('data-original-html', track.title);
+                toastTitle.setAttribute('data-original-text', track.title);
+                toastTitle.innerText = track.title;
+
+                const toastArtist = document.getElementById('toast-artist');
+                toastArtist.setAttribute('data-original-html', track.artist);
+                toastArtist.setAttribute('data-original-text', track.artist);
+                toastArtist.innerText = track.artist;
+
+                updateMarquee(toastTitle);
+                updateMarquee(toastArtist);
+
                 document.getElementById('toast-cover').src = `https://img.youtube.com/vi/${track.ytId}/hqdefault.jpg`;
 
                 document.getElementById('np-toast').classList.add('active');
@@ -2447,16 +958,450 @@
             event.stopPropagation();
             const menu = document.getElementById('np-options-menu');
             menu.classList.toggle('active');
+            document.getElementById('np-trans-menu').classList.remove('active');
         }
+
+        function toggleTransMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('np-trans-menu');
+            menu.classList.toggle('active');
+            document.getElementById('np-options-menu').classList.remove('active');
+        }
+
+        function togglePronunciationSetting(event) {
+            if (event) event.stopPropagation();
+            const pronunciationInput = document.getElementById('setting-pronunciation');
+            if (pronunciationInput) {
+                pronunciationInput.checked = !pronunciationInput.checked;
+                localStorage.setItem('setting-pronunciation', pronunciationInput.checked);
+                if (document.getElementById('np-overlay').classList.contains('active')) {
+                    renderLyrics(currentTrackId);
+                }
+            }
+        }
+
         document.addEventListener('click', (event) => {
             const menu = document.getElementById('np-options-menu');
-            const btn = document.querySelector('.btn-options');
+            const btn = document.getElementById('btn-options');
             if (menu && menu.classList.contains('active')) {
-                if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                if (!menu.contains(event.target) && (!btn || !btn.contains(event.target))) {
                     menu.classList.remove('active');
                 }
             }
+
+            const transMenu = document.getElementById('np-trans-menu');
+            const transBtn = document.getElementById('btn-trans');
+            if (transMenu && transMenu.classList.contains('active')) {
+                if (!transMenu.contains(event.target) && (!transBtn || !transBtn.contains(event.target))) {
+                    transMenu.classList.remove('active');
+                }
+            }
+
+            const helpPopup = document.getElementById('help-popup');
+            const helpBtn = document.getElementById('help-btn');
+            if (helpPopup && helpPopup.classList.contains('active')) {
+                if (!helpPopup.contains(event.target) && !helpBtn.contains(event.target)) {
+                    helpPopup.classList.remove('active');
+                }
+            }
+
+            const settingsPopup = document.getElementById('settings-popup');
+            const settingsBtn = document.getElementById('settings-btn');
+            if (settingsPopup && settingsPopup.classList.contains('active')) {
+                if (!settingsPopup.contains(event.target) && !settingsBtn.contains(event.target)) {
+                    settingsPopup.classList.remove('active');
+                }
+            }
         });
+
+        function toggleHelp(event) {
+            event.stopPropagation();
+            document.getElementById('settings-popup').classList.remove('active');
+            document.getElementById('help-popup').classList.toggle('active');
+        }
+
+        function toggleSettings(event) {
+            event.stopPropagation();
+            document.getElementById('help-popup').classList.remove('active');
+            document.getElementById('settings-popup').classList.toggle('active');
+        }
+
+        // Initialize Settings from localStorage
+        const savedPronunciation = localStorage.getItem('setting-pronunciation') === 'true';
+        const savedTranslation = localStorage.getItem('setting-translation') !== 'false';
+        let translationMode = localStorage.getItem('setting-trans-lang') || 'cn';
+
+        const pronunciationInput = document.getElementById('setting-pronunciation');
+        const translationInput = document.getElementById('setting-translation');
+        const fullscreenInput = document.getElementById('setting-fullscreen');
+
+        if (pronunciationInput) pronunciationInput.checked = savedPronunciation;
+        if (translationInput) translationInput.checked = savedTranslation;
+
+        if (pronunciationInput) {
+            pronunciationInput.addEventListener('change', (e) => {
+                localStorage.setItem('setting-pronunciation', e.target.checked);
+                if (document.getElementById('np-overlay').classList.contains('active')) {
+                    renderLyrics(currentTrackId);
+                }
+            });
+        }
+
+        if (translationInput) {
+            translationInput.addEventListener('change', (e) => {
+                localStorage.setItem('setting-translation', e.target.checked);
+                if (document.getElementById('np-overlay').classList.contains('active')) {
+                    renderLyrics(currentTrackId);
+                }
+            });
+        }
+
+        if (fullscreenInput) {
+            fullscreenInput.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                            e.target.checked = false;
+                        });
+                    }
+                } else {
+                    if (document.fullscreenElement) {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                if (fullscreenInput) {
+                    fullscreenInput.checked = false;
+                }
+            } else {
+                if (fullscreenInput) {
+                    fullscreenInput.checked = true;
+                }
+            }
+        });
+
+        const realVisualizerInput = document.getElementById('setting-real-visualizer');
+        if (realVisualizerInput) {
+            realVisualizerInput.addEventListener('change', async (e) => {
+                if (e.target.checked) {
+                    const success = await enableRealAudioVisualizer();
+                    if (success) {
+                        localStorage.setItem('setting-real-visualizer', 'true');
+                    }
+                } else {
+                    localStorage.setItem('setting-real-visualizer', 'false');
+                    disableRealAudioVisualizer();
+                }
+            });
+        }
+
+        function setTransMode(lang) {
+            translationMode = lang;
+            localStorage.setItem('setting-trans-lang', lang);
+            document.querySelectorAll('.menu-trans-item').forEach(el => {
+                if (el.dataset.lang === lang) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+            if (document.getElementById('np-overlay').classList.contains('active')) {
+                renderLyrics(currentTrackId);
+            }
+        }
+
+        document.querySelectorAll('.menu-trans-item').forEach(el => {
+            if (el.dataset.lang === translationMode) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('active');
+            }
+        });
+
+        function renderLyrics(trackId) {
+            const track = activeTracks[trackId];
+            const lyricsContainer = document.getElementById('lyrics-container');
+            lyricsContainer.innerHTML = '';
+
+            let renderLyricsData = [];
+
+            if (typeof track.lyrics === 'string') {
+                renderLyricsData = track.lyrics.trim().split('\n').map(l => l.trim());
+            } else if (track.lyrics && track.lyrics.length > 0) {
+                renderLyricsData = track.lyrics;
+            } else {
+                renderLyricsData = [
+                    "Lyrics currently not available",
+                ];
+            }
+
+            const romajiByTime = {};
+            const plainRomajiList = [];
+
+            if (track.lyrics_rom) {
+                let rawRomajiLines = [];
+                if (typeof track.lyrics_rom === 'string') {
+                    rawRomajiLines = track.lyrics_rom.trim().split('\n').map(l => l.trim());
+                } else if (Array.isArray(track.lyrics_rom)) {
+                    rawRomajiLines = track.lyrics_rom;
+                }
+
+                rawRomajiLines.forEach((rLine) => {
+                    let rText = '';
+                    let rTime = undefined;
+
+                    if (typeof rLine === 'string') {
+                        const lrcMatch = rLine.match(/^\[(\d{2,}):(\d{2}(?:\.\d{1,3})?)\](.*)/);
+                        if (lrcMatch) {
+                            const minutes = parseInt(lrcMatch[1], 10);
+                            const seconds = parseFloat(lrcMatch[2]);
+                            rTime = (minutes * 60) + seconds;
+                            rText = lrcMatch[3].trim();
+                        } else {
+                            rText = rLine.trim();
+                        }
+                    } else if (typeof rLine === 'object') {
+                        rText = rLine.text || '';
+                        rTime = rLine.time;
+                    }
+
+                    if (rTime !== undefined) {
+                        const key = rTime.toFixed(1);
+                        romajiByTime[key] = rText;
+                    }
+                    plainRomajiList.push(rText);
+                });
+            }
+
+            let hasCn = !!track.lyrics_cn;
+            let hasEn = !!track.lyrics_en;
+            if (Array.isArray(track.lyrics)) {
+                if (!hasCn) hasCn = track.lyrics.some(l => typeof l === 'object' && l.cn);
+                if (!hasEn) hasEn = track.lyrics.some(l => typeof l === 'object' && l.en);
+            }
+
+            const btnCn = document.querySelector('.menu-trans-item[data-lang="cn"]');
+            const btnEn = document.querySelector('.menu-trans-item[data-lang="en"]');
+
+            if (btnCn) {
+                if (hasCn) btnCn.classList.remove('disabled');
+                else btnCn.classList.add('disabled');
+            }
+            if (btnEn) {
+                if (hasEn) btnEn.classList.remove('disabled');
+                else btnEn.classList.add('disabled');
+            }
+
+            const mainTransBtn = document.getElementById('btn-trans');
+            if (mainTransBtn) {
+                if (!hasCn && !hasEn) {
+                    mainTransBtn.classList.add('disabled');
+                } else {
+                    mainTransBtn.classList.remove('disabled');
+                }
+            }
+
+            const showPronunciation = document.getElementById('setting-pronunciation') ? document.getElementById('setting-pronunciation').checked : false;
+            const isTranslationEnabled = document.getElementById('setting-translation') ? document.getElementById('setting-translation').checked : true;
+
+            // Check if track has pronunciation lyrics
+            let hasPronunciation = !!track.lyrics_rom;
+            if (typeof track.lyrics_rom === 'string') {
+                hasPronunciation = track.lyrics_rom.trim().length > 0;
+            } else if (Array.isArray(track.lyrics_rom)) {
+                hasPronunciation = track.lyrics_rom.length > 0;
+            }
+            if (!hasPronunciation && typeof track.lyrics === 'string' && track.lyrics.includes('|')) {
+                hasPronunciation = true;
+            }
+
+            // Update toggle pronunciation button visual state
+            const togglePronBtn = document.getElementById('btn-toggle-pron');
+            if (togglePronBtn) {
+                if (!hasPronunciation) {
+                    togglePronBtn.style.opacity = '0.3';
+                    togglePronBtn.style.color = 'rgba(255,255,255,0.3)';
+                    togglePronBtn.title = '暂无歌词发音 / No Pronunciation Available';
+                } else if (showPronunciation) {
+                    togglePronBtn.style.opacity = '1';
+                    togglePronBtn.style.color = '#fff';
+                    togglePronBtn.title = '关闭歌词发音 / Turn Off Pronunciation';
+                } else {
+                    togglePronBtn.style.opacity = '0.4';
+                    togglePronBtn.style.color = 'rgba(255,255,255,0.5)';
+                    togglePronBtn.title = '开启歌词发音 / Turn On Pronunciation';
+                }
+            }
+
+            // Hide/show translation language dropdown button according to the setting
+            const transBtn = document.getElementById('btn-trans');
+            if (transBtn) {
+                transBtn.style.display = isTranslationEnabled ? 'flex' : 'none';
+            }
+
+            let effectiveTransMode = translationMode;
+            if (effectiveTransMode === 'cn' && !hasCn) {
+                if (hasEn) effectiveTransMode = 'en';
+                else effectiveTransMode = 'none';
+            }
+            if (effectiveTransMode === 'en' && !hasEn) {
+                if (hasCn) effectiveTransMode = 'cn';
+                else effectiveTransMode = 'none';
+            }
+
+            const transByTime = {};
+            const plainTransList = [];
+
+            let targetLyricsTrans = null;
+            if (isTranslationEnabled && effectiveTransMode === 'cn') {
+                targetLyricsTrans = track.lyrics_cn;
+            } else if (isTranslationEnabled && effectiveTransMode === 'en') {
+                targetLyricsTrans = track.lyrics_en;
+            }
+
+            if (targetLyricsTrans) {
+                let rawTransLines = [];
+                if (typeof targetLyricsTrans === 'string') {
+                    rawTransLines = targetLyricsTrans.trim().split('\n').map(l => l.trim());
+                } else if (Array.isArray(targetLyricsTrans)) {
+                    rawTransLines = targetLyricsTrans;
+                }
+
+                rawTransLines.forEach((rLine) => {
+                    let rText = '';
+
+                    if (typeof rLine === 'string') {
+                        const lrcMatch = rLine.match(/^\[(?:\d{2,}):(?:\d{2}(?:\.\d{1,3})?)\](.*)/);
+                        if (lrcMatch) {
+                            rText = lrcMatch[1].trim();
+                        } else {
+                            rText = rLine.trim();
+                        }
+                    } else if (typeof rLine === 'object') {
+                        rText = rLine.text || '';
+                    }
+
+                    plainTransList.push(rText);
+                });
+            }
+
+            renderLyricsData.forEach((line, index) => {
+                const div = document.createElement('div');
+                div.className = 'lyric-line';
+
+                let time = undefined;
+                let text = '';
+                let romaji = '';
+                let trans = '';
+
+                if (typeof line === 'string') {
+                    const lrcMatch = line.match(/^\[(\d{2,}):(\d{2}(?:\.\d{1,3})?)\](.*)/);
+                    if (lrcMatch) {
+                        const minutes = parseInt(lrcMatch[1], 10);
+                        const seconds = parseFloat(lrcMatch[2]);
+                        time = (minutes * 60) + seconds;
+                        text = lrcMatch[3].trim();
+                    } else {
+                        text = line;
+                    }
+
+                    // Check if string contains inline romaji separated by "|" (for backwards compatibility/flexibility)
+                    if (text.includes('|')) {
+                        const parts = text.split('|');
+                        text = parts[0].trim();
+                        romaji = parts[1].trim();
+                    }
+                } else if (typeof line === 'object') {
+                    text = line.text || '';
+                    romaji = line.romaji || '';
+                    if (effectiveTransMode === 'cn' && line.cn) trans = line.cn;
+                    else if (effectiveTransMode === 'en' && line.en) trans = line.en;
+                    if (line.time !== undefined) {
+                        time = line.time;
+                    }
+                }
+
+                // Resolve separate track.lyrics_rom if not already resolved inline/object
+                if (!romaji && track.lyrics_rom) {
+                    if (time !== undefined) {
+                        const key = time.toFixed(1);
+                        if (romajiByTime[key] !== undefined) {
+                            romaji = romajiByTime[key];
+                        }
+                    }
+                    // Fallback to index-based matching
+                    if (!romaji && index < plainRomajiList.length) {
+                        romaji = plainRomajiList[index];
+                    }
+                }
+
+                // Resolve translation
+                if (!trans && targetLyricsTrans) {
+                    if (index < plainTransList.length) {
+                        trans = plainTransList[index];
+                    }
+                }
+
+                if (time !== undefined) {
+                    div.dataset.time = time;
+                }
+
+                // Render logic
+                if ((showPronunciation && romaji) || (isTranslationEnabled && effectiveTransMode !== 'none' && trans)) {
+                    if (showPronunciation && romaji) {
+                        const romajiDiv = document.createElement('div');
+                        romajiDiv.className = 'lyric-romaji';
+                        romajiDiv.innerText = romaji;
+                        div.appendChild(romajiDiv);
+                    }
+
+                    const textDiv = document.createElement('div');
+                    textDiv.className = 'lyric-text';
+                    textDiv.innerText = text;
+                    div.appendChild(textDiv);
+
+                    if (isTranslationEnabled && effectiveTransMode !== 'none' && trans) {
+                        const transDiv = document.createElement('div');
+                        transDiv.className = 'lyric-trans';
+                        transDiv.innerText = trans;
+                        div.appendChild(transDiv);
+                    }
+                } else {
+                    div.innerText = text;
+                }
+
+                if (index === 1 && (!track.lyrics || track.lyrics.length === 0)) div.classList.add('active');
+                div.onclick = () => {
+                    if (div.dataset.time && isPlayerReady) {
+                        player.seekTo(parseFloat(div.dataset.time), true);
+                    } else {
+                        document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active'));
+                        div.classList.add('active');
+                    }
+                };
+                lyricsContainer.appendChild(div);
+            });
+
+            if (isTranslationEnabled && effectiveTransMode !== 'none') {
+                let sourceText = '';
+                if (effectiveTransMode === 'cn') sourceText = track.trans_source_cn || track.trans_source;
+                if (effectiveTransMode === 'en') sourceText = track.trans_source_en || track.trans_source;
+
+                if (sourceText) {
+                    const sourceDiv = document.createElement('div');
+                    sourceDiv.className = 'lyric-source';
+                    sourceDiv.innerText = `Lyrics Translation: ${sourceText}`;
+                    lyricsContainer.appendChild(sourceDiv);
+                }
+            }
+        }
 
         function togglePlay() {
             if (!isPlayerReady) return;
@@ -2475,8 +1420,61 @@
         }
 
         function playNext(keepHidden = false) {
-            if (currentTrackId < tracks.length - 1) {
+            if (currentTrackId < activeTracks.length - 1) {
                 openPlayer(currentTrackId + 1, keepHidden);
+            } else if (loopMode === 3) {
+                openPlayer(0, keepHidden);
+            }
+        }
+
+        function toggleLoopMode() {
+            loopMode = (loopMode + 1) % 4;
+            const btn = document.getElementById('loop-mode-btn');
+            if (loopMode === 0) {
+                btn.innerHTML = '<i class="fa-solid fa-ban"></i>';
+                btn.title = "Stop After Current";
+            } else if (loopMode === 1) {
+                btn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+                btn.title = "Sequence Play";
+            } else if (loopMode === 2) {
+                btn.innerHTML = '<span style="position:relative;"><i class="fa-solid fa-repeat"></i><span style="position:absolute;font-size:0.5em;top:50%;left:50%;transform:translate(-50%,-50%);font-family:sans-serif;font-weight:bold;">1</span></span>';
+                btn.title = "Loop One";
+            } else if (loopMode === 3) {
+                btn.innerHTML = '<i class="fa-solid fa-repeat"></i>';
+                btn.title = "Loop All";
+            }
+        }
+
+        let previousVolume = 100;
+        let isMuted = false;
+
+        function changeVolume(value) {
+            if (player && isPlayerReady) {
+                player.setVolume(value);
+            }
+            const volumeBtnIcon = document.querySelector('#volume-btn i');
+            if (value == 0) {
+                volumeBtnIcon.className = 'fa-solid fa-volume-xmark';
+                isMuted = true;
+            } else if (value < 50) {
+                volumeBtnIcon.className = 'fa-solid fa-volume-low';
+                isMuted = false;
+                previousVolume = value;
+            } else {
+                volumeBtnIcon.className = 'fa-solid fa-volume-high';
+                isMuted = false;
+                previousVolume = value;
+            }
+        }
+
+        function toggleMute() {
+            const slider = document.getElementById('volume-slider');
+            if (isMuted) {
+                changeVolume(previousVolume);
+                slider.value = previousVolume;
+            } else {
+                changeVolume(0);
+                slider.value = 0;
             }
         }
 
@@ -2485,7 +1483,6 @@
             if (isPlayerReady) player.pauseVideo();
         }
 
-        // Progress Bar
         function formatTime(seconds) {
             if (!seconds || isNaN(seconds)) return "0:00";
             const m = Math.floor(seconds / 60);
@@ -2498,16 +1495,27 @@
                 if (player && player.getCurrentTime) {
                     const current = player.getCurrentTime();
                     const total = player.getDuration();
+                    const track = activeTracks[currentTrackId];
+                    const start = track.start || 0;
+                    const effectiveEnd = track.end || total;
+                    const duration = effectiveEnd - start;
 
-                    document.getElementById('time-current').innerText = formatTime(current);
-                    document.getElementById('time-total').innerText = formatTime(total);
+                    let currentAdjusted = current - start;
+                    if (currentAdjusted < 0) currentAdjusted = 0;
 
-                    if (total > 0) {
-                        const pct = (current / total) * 100;
-                        document.getElementById('progress-fill').style.width = pct + '%';
+                    document.getElementById('time-total').innerText = formatTime(duration);
+                    if (!isSeeking) {
+                        document.getElementById('time-current').innerText = formatTime(currentAdjusted);
                     }
 
-                    // Auto-sync lyrics
+                    if (duration > 0) {
+                        const pct = Math.max(0, Math.min(100, (currentAdjusted / duration) * 100));
+                        if (!isSeeking) {
+                            document.getElementById('progress-fill').style.width = pct + '%';
+                            document.getElementById('progress-thumb').style.left = pct + '%';
+                        }
+                    }
+
                     const lyrics = document.querySelectorAll('.lyric-line[data-time]');
                     if (lyrics.length > 0) {
                         let activeIndex = -1;
@@ -2538,20 +1546,356 @@
             clearInterval(progressInterval);
         }
 
-        function seekVideo(e) {
-            if (!isPlayerReady) return;
+        let isSeeking = false;
+
+        function getSeekPct(clientX) {
             const bg = document.getElementById('progress-bg');
             const rect = bg.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const width = rect.width;
-            const pct = clickX / width;
+            return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        }
 
-            const total = player.getDuration();
-            if (total > 0) {
-                const seekTo = total * pct;
-                player.seekTo(seekTo, true);
+        function applySeekPct(pct, commit) {
+            document.getElementById('progress-fill').style.width = (pct * 100) + '%';
+            document.getElementById('progress-thumb').style.left = (pct * 100) + '%';
+
+            if (isPlayerReady) {
+                const track = activeTracks[currentTrackId];
+                const start = track.start || 0;
+                const total = player.getDuration();
+                const effectiveEnd = track.end || total;
+                const duration = effectiveEnd - start;
+                if (duration > 0) {
+                    document.getElementById('time-current').innerText = formatTime(duration * pct);
+                }
+            }
+
+            if (commit && isPlayerReady) {
+                const track = activeTracks[currentTrackId];
+                const start = track.start || 0;
+                const total = player.getDuration();
+                const effectiveEnd = track.end || total;
+                const duration = effectiveEnd - start;
+                if (duration > 0) {
+                    const seekTo = start + (duration * pct);
+                    player.seekTo(seekTo, true);
+                }
             }
         }
+
+        document.getElementById('progress-bg').addEventListener('mousedown', (e) => {
+            if (!isPlayerReady) return;
+            isSeeking = true;
+            document.getElementById('progress-bg').classList.add('seeking');
+            applySeekPct(getSeekPct(e.clientX), false);
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isSeeking) return;
+            applySeekPct(getSeekPct(e.clientX), false);
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isSeeking) return;
+            isSeeking = false;
+            document.getElementById('progress-bg').classList.remove('seeking');
+            applySeekPct(getSeekPct(e.clientX), true);
+        });
+
+        document.getElementById('progress-bg').addEventListener('touchstart', (e) => {
+            if (!isPlayerReady) return;
+            isSeeking = true;
+            document.getElementById('progress-bg').classList.add('seeking');
+            applySeekPct(getSeekPct(e.touches[0].clientX), false);
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isSeeking) return;
+            applySeekPct(getSeekPct(e.touches[0].clientX), false);
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (!isSeeking) return;
+            isSeeking = false;
+            document.getElementById('progress-bg').classList.remove('seeking');
+            const touch = e.changedTouches[0];
+            applySeekPct(getSeekPct(touch.clientX), true);
+        });
+
+        window.addEventListener('resize', () => {
+            updateNowPlayingMarquees();
+            updateAllGridMarquees();
+        });
+
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function focusConsoleInput() {
+            const input = document.getElementById('console-input');
+            if (input) input.focus();
+        }
+
+        function handleConsoleOverlayClick(e) {
+            if (e.target.id === 'secret-console-overlay') {
+                closeConsole();
+            }
+        }
+
+        function appendConsoleLog(text, className = '') {
+            const log = document.getElementById('console-log');
+            if (!log) return;
+            const line = document.createElement('div');
+            line.className = `console-line ${className}`;
+            line.innerText = text;
+            log.appendChild(line);
+            const screen = document.getElementById('console-screen');
+            if (screen) screen.scrollTop = screen.scrollHeight;
+        }
+
+        function openConsole() {
+            if (isTransitioning) return;
+            isConsoleOpen = true;
+            const overlay = document.getElementById('secret-console-overlay');
+            overlay.classList.add('active');
+
+            const log = document.getElementById('console-log');
+            log.innerHTML = '';
+
+            const input = document.getElementById('console-input');
+            input.value = '';
+            input.disabled = false;
+
+            if (!isSecretMode) {
+                document.getElementById('console-titlebar-text').innerText = 'SYSTEM TERMINAL // USER LOGIN';
+                appendConsoleLog('[SYSTEM] RESTRICTED ACCESS PROTOCOL INITIALIZED.', 'cmd-system');
+                appendConsoleLog('[SYSTEM] PLEASE ENTER AUTHORIZATION TO PROCEED.', 'cmd-system');
+                document.getElementById('console-prompt-label').innerText = 'Login PIN:';
+                input.type = 'password';
+                input.maxLength = 16;
+            } else {
+                document.getElementById('console-titlebar-text').innerText = 'SYSTEM TERMINAL // SESSION_ACTIVE_DATA';
+                appendConsoleLog('[SYSTEM] CURRENT ACCESS LEVEL: CLASSIFIED_ARCHIVE.', 'cmd-system');
+                appendConsoleLog('[SYSTEM] DISCONNECT FROM SECRET REPOSITORY?', 'cmd-system');
+                document.getElementById('console-prompt-label').innerText = 'Logout? [Y/N]:';
+                input.type = 'text';
+                input.maxLength = 1;
+            }
+
+            setTimeout(() => input.focus(), 60);
+        }
+
+        function closeConsole() {
+            isConsoleOpen = false;
+            const overlay = document.getElementById('secret-console-overlay');
+            if (overlay) overlay.classList.remove('active');
+            const input = document.getElementById('console-input');
+            if (input) {
+                input.value = '';
+                input.blur();
+            }
+        }
+
+        function handleConsoleInputKey(e) {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeConsole();
+                return;
+            }
+
+            const input = document.getElementById('console-input');
+            if (!input) return;
+
+            if (!isSecretMode) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const enteredPin = input.value.trim().toLowerCase();
+                    if (SECRET_PINS.includes(enteredPin)) {
+                        appendConsoleLog(`> ${'•'.repeat(input.value.length || 6)}`, 'cmd-user');
+                        appendConsoleLog('[AUTH] Access Granted. Decrypting secret data...', 'cmd-success');
+                        input.disabled = true;
+                        setTimeout(() => {
+                            closeConsole();
+                            executeGatewayTransition(true);
+                        }, 700);
+                    } else {
+                        appendConsoleLog(`> ${'•'.repeat(input.value.length || 4)}`, 'cmd-user');
+                        appendConsoleLog('[AUTH] Access Denied: Invalid PIN. Try again.', 'cmd-error');
+                        input.value = '';
+                    }
+                }
+            } else {
+                // Secret Mode Logout Handler
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const resp = input.value.trim().toUpperCase();
+                    if (resp === 'Y' || resp === 'YES') {
+                        appendConsoleLog(`> ${resp}`, 'cmd-user');
+                        appendConsoleLog('[SESSION] Logout confirmed. Reverting to public data...', 'cmd-warn');
+                        input.disabled = true;
+                        setTimeout(() => {
+                            closeConsole();
+                            executeGatewayTransition(false);
+                        }, 600);
+                    } else if (resp === 'N' || resp === 'NO') {
+                        appendConsoleLog(`> ${resp}`, 'cmd-user');
+                        appendConsoleLog('[SESSION] Logout cancelled. Session preserved.', 'cmd-system');
+                        setTimeout(() => {
+                            closeConsole();
+                        }, 400);
+                    } else if (resp !== '') {
+                        appendConsoleLog('[ERROR] Invalid command.', 'cmd-error');
+                        input.value = '';
+                    }
+                } else if (e.key === 'y' || e.key === 'Y') {
+                    e.preventDefault();
+                    input.value = 'Y';
+                    appendConsoleLog('> Y', 'cmd-user');
+                    appendConsoleLog('[SESSION] Logout confirmed. Reverting to public data...', 'cmd-warn');
+                    input.disabled = true;
+                    setTimeout(() => {
+                        closeConsole();
+                        executeGatewayTransition(false);
+                    }, 600);
+                } else if (e.key === 'n' || e.key === 'N') {
+                    e.preventDefault();
+                    input.value = 'N';
+                    appendConsoleLog('> N', 'cmd-user');
+                    appendConsoleLog('[SESSION] Logout cancelled. Session preserved.', 'cmd-system');
+                    setTimeout(() => {
+                        closeConsole();
+                    }, 400);
+                }
+            }
+        }
+
+        function executeGatewayTransition(toSecret) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            if (player && isPlayerReady) player.pauseVideo();
+            closeToast();
+            const npOverlay = document.getElementById('np-overlay');
+            if (npOverlay) npOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            const glitchElem = document.getElementById('transition-glitch-text');
+            const statusBadge = document.getElementById('hud-status-badge');
+            const subtextElem = document.getElementById('transition-subtext');
+            const percentageElem = document.getElementById('transition-percentage');
+            const progressFill = document.getElementById('transition-progress-fill');
+
+            const mainText = toSecret ? "ACCESS GRANTED // SECRET DATA" : "LOGGING OUT // PUBLIC DATA";
+            if (glitchElem) {
+                glitchElem.innerText = mainText;
+                glitchElem.setAttribute('data-text', mainText);
+            }
+
+            if (statusBadge) statusBadge.innerText = toSecret ? "CLASSIFIED" : "PUBLIC";
+            if (subtextElem) subtextElem.innerText = toSecret ? "DECRYPTING CLASSIFIED DATA..." : "RESTORING PUBLIC DATA...";
+
+            const transitionOverlay = document.getElementById('screen-transition-overlay');
+            if (transitionOverlay) transitionOverlay.classList.add('active');
+
+            let pct = 0;
+            if (progressFill) progressFill.style.width = '0%';
+            if (percentageElem) percentageElem.innerText = '00%';
+
+            const progressInterval = setInterval(() => {
+                pct += 4;
+                if (pct > 100) pct = 100;
+                if (progressFill) progressFill.style.width = pct + '%';
+                if (percentageElem) percentageElem.innerText = (pct < 10 ? '0' : '') + pct + '%';
+                if (pct >= 100) clearInterval(progressInterval);
+            }, 30);
+
+            setTimeout(() => {
+                // Midpoint transition: Switch dataset and re-render
+                isSecretMode = toSecret;
+                activeTracks = isSecretMode ? (window.tracks2 || tracks2) : tracks;
+                activeConfig = isSecretMode ? (window.config2 || config2 || config) : config;
+                activeChapters = isSecretMode ? (window.chapters2 || chapters2) : defaultChapters;
+
+                document.body.classList.toggle('secret-mode', isSecretMode);
+
+                const logoElem = document.querySelector('header .logo');
+                if (logoElem) {
+                    if (isSecretMode) {
+                        logoElem.innerHTML = '<i class="fa-solid fa-user-secret"></i> WASABISOCUTE Music Collection <span class="secret-badge">CLASSIFIED</span>';
+                    } else {
+                        logoElem.innerHTML = '<i class="fa-solid fa-compact-disc"></i> WASABISOCUTE Music Collection';
+                    }
+                }
+
+                currentTrackId = 0;
+                renderGrid();
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }, 550);
+
+            setTimeout(() => {
+                if (transitionOverlay) transitionOverlay.classList.remove('active');
+                isTransitioning = false;
+                clearInterval(progressInterval);
+            }, 1200);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (isConsoleOpen) {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeConsole();
+                }
+                return;
+            }
+
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.key === '/') {
+                e.preventDefault();
+                openConsole();
+                return;
+            }
+
+            switch (e.key) {
+                case ' ':
+                    e.preventDefault();
+                    togglePlay();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    playPrevious();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    playNext();
+                    break;
+                case 'ArrowUp': {
+                    e.preventDefault();
+                    const slider = document.getElementById('volume-slider');
+                    const newVol = Math.min(100, parseInt(slider.value) + 5);
+                    slider.value = newVol;
+                    changeVolume(newVol);
+                    break;
+                }
+                case 'ArrowDown': {
+                    e.preventDefault();
+                    const slider = document.getElementById('volume-slider');
+                    const newVol = Math.max(0, parseInt(slider.value) - 5);
+                    slider.value = newVol;
+                    changeVolume(newVol);
+                    break;
+                }
+                case 'Escape':
+                    closePlayer();
+                    break;
+            }
+        });
     </script>
 </body>
 
