@@ -34,7 +34,7 @@ const games = [
         server: "Asia",
         platform: "Mobile / PC / PS5",
         dateJoined: "2023/11/26",
-        installed: false,
+        installed: true,
         web: "https://hsr.hoyoverse.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=com.HoYoverse.hkrpgoversea&pcampaignid=web_share",
@@ -708,7 +708,7 @@ const games = [
         platform: "Mobile / PC",
         genre: "rhythm",
         dateJoined: "2026/07/23",
-        installed: "idle",
+        installed: "false",
         web: "https://www.hololive-dreams.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=game.qualiarts.hololive.dreams.com",
@@ -754,7 +754,7 @@ const games = [
         platform: "Mobile",
         genre: "rhythm",
         dateJoined: "2026/09/24",
-        installed: true,
+        installed: false,
         web: "https://bdon.biligames.com/",
         download: {
             android: "https://play.google.com/store/apps/details?id=com.bilibili.sirius",
@@ -800,7 +800,7 @@ const games = [
         platform: "Mobile / PC / PS5",
         genre: "rpg",
         dateJoined: "2026/09/29",
-        installed: true,
+        installed: false,
         web: "https://ys.mihoyo.com/",
         download: {
             android: "https://app.biligame.com/page/detail_share.html?id=103496",
